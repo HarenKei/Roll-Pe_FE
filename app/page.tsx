@@ -1,24 +1,21 @@
 "use client";
 import * as S from "@/public/styles/styled-components/main/main.style";
 import Image from "next/image";
-import { StyledButton } from "./_components/ui/button/StyledButton";
+import MainIntroSection from "./_components/sections/main/MainIntroSection";
+import MainRollpeGuideSection01 from "./_components/sections/main/MainRollpeGuideSection01";
+import MainRollpeGuideSection02 from "./_components/sections/main/MainRollpeGuideSection02";
+import MainRollpeGuideSection03 from "./_components/sections/main/MainRollpeGuidSection03";
+import Footer from "./_components/ui/layouts/Footer";
 
 const Home: React.FC = () => {
   return (
     <S.MainPageContainer>
       <S.MainPageContentsContainer>
-        <Image
-          src={"/images/logos/logo.korean.svg"}
-          alt={"롤페 로고"}
-          width={168}
-          height={84}
-        />
-        <p className={"intro"}>
-          다같이 한 마음으로
-          <br />
-          사랑하는 사람에게 전달해보세요
-        </p>
-        <StyledButton>롤페 시작하기</StyledButton>
+        <MainIntroSection />
+        <MainRollpeGuideSection01 />
+        <MainRollpeGuideSection02 />
+        <MainRollpeGuideSection03 />
+        <Footer />
       </S.MainPageContentsContainer>
     </S.MainPageContainer>
   );

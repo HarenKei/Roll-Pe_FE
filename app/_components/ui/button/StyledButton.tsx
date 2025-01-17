@@ -16,6 +16,7 @@ export const StyledButton = styled.button`
   font-size: 1rem;
   font-style: normal;
   font-weight: 600;
+  font-family: var(--font-pretendard);
   line-height: 1.5rem;
 
   cursor: pointer;

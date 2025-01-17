@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { COLORS } from "@/public/styles/colors";
 import StyledComponentsRegistry from "@/public/lib/registry";
-import { pretendard, hakgyoansim } from "@/public/fonts/fonts";
-
-export const MobileMinWidth: number = 320;
-export const MobileMaxWidth: number = 600;
+import { pretendard, hakgyoansim, dunggeunmo } from "@/public/fonts/fonts";
 
 export const metadata: Metadata = {
   title: "롤페 | Roll-Pe",
@@ -18,16 +15,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={hakgyoansim.className}>
-      <body className={pretendard.variable}>
+    <html
+      lang="ko"
+      className={`${hakgyoansim.variable} ${pretendard.variable} ${dunggeunmo.variable}`}
+    >
+      <body>
         <StyledComponentsRegistry>
           <main
             style={{
-              // minWidth: "320px",
-              position: "fixed",
-              width: "390px",
+              position: "relative",
+              minWidth: "390px",
+              maxWidth: "600px",
               height: "100svh",
-              border: `2px solid ${COLORS.ROLLPE_GRAY}`,
+              border: `1px solid ${COLORS.ROLLPE_GRAY}`,
+              overflowY: "auto",
+              scrollbarWidth: "none", // For Firefox
+              msOverflowStyle: "none", // For Internet Explorer and Edge
             }}
           >
             {children}
