@@ -23,7 +23,7 @@ export default function RootLayout({
         <StyledComponentsRegistry>
           <main
             style={{
-              position: "relative",
+              position: "fixed",
               minWidth: "390px",
               maxWidth: "600px",
               height: "100svh",
