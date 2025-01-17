@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { COLORS } from "@/public/styles/colors";
 import StyledComponentsRegistry from "@/public/lib/registry";
+import { pretendard, hakgyoansim } from "@/public/fonts/fonts";
 
 export const MobileMinWidth: number = 320;
 export const MobileMaxWidth: number = 600;
@@ -17,16 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body>
+    <html lang="ko" className={hakgyoansim.className}>
+      <body className={pretendard.variable}>
         <StyledComponentsRegistry>
           <main
             style={{
               // minWidth: "320px",
               position: "fixed",
-              width: "600px",
+              width: "390px",
               height: "100svh",
-              border: `1px solid ${COLORS.ROLLPE_GRAY}`,
+              border: `2px solid ${COLORS.ROLLPE_GRAY}`,
             }}
           >
             {children}
