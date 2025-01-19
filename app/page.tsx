@@ -5,20 +5,30 @@ import MainIntroSection from "./_components/sections/main/MainIntroSection";
 import MainRollpeGuideSection01 from "./_components/sections/main/MainRollpeGuideSection01";
 import MainRollpeGuideSection02 from "./_components/sections/main/MainRollpeGuideSection02";
 import MainRollpeGuideSection03 from "./_components/sections/main/MainRollpeGuidSection03";
-import Footer from "./_components/ui/layouts/Footer";
+import styled from "styled-components";
+import { COLORS } from "@/public/styles/colors";
 
 const Home: React.FC = () => {
   return (
-    <S.MainPageContainer>
-      <S.MainPageContentsContainer>
-        <MainIntroSection />
-        <MainRollpeGuideSection01 />
-        <MainRollpeGuideSection02 />
-        <MainRollpeGuideSection03 />
-        <Footer />
-      </S.MainPageContentsContainer>
-    </S.MainPageContainer>
+    <MainPageContentsContainer>
+      <MainIntroSection />
+      <MainRollpeGuideSection01 />
+      <MainRollpeGuideSection02 />
+      <MainRollpeGuideSection03 />
+    </MainPageContentsContainer>
   );
 };
+
+const MainPageContentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 74px;
+
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+`;
 
 export default Home;

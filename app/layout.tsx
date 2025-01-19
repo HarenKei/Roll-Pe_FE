@@ -3,6 +3,7 @@ import "./globals.css";
 import { COLORS } from "@/public/styles/colors";
 import StyledComponentsRegistry from "@/public/lib/registry";
 import { pretendard, hakgyoansim, dunggeunmo } from "@/public/fonts/fonts";
+import Footer from "./_components/ui/layouts/Footer";
 
 export const metadata: Metadata = {
   title: "롤페 | Roll-Pe",
@@ -21,20 +22,24 @@ export default function RootLayout({
     >
       <body>
         <StyledComponentsRegistry>
-          <main
+          <div
             style={{
               position: "fixed",
+              display: "flex",
+              flexDirection: "column",
+              alignContent: "center",
               minWidth: "390px",
               maxWidth: "600px",
               height: "100svh",
               border: `1px solid ${COLORS.ROLLPE_GRAY}`,
               overflowY: "auto",
-              scrollbarWidth: "none", // For Firefox
-              msOverflowStyle: "none", // For Internet Explorer and Edge
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
             }}
           >
-            {children}
-          </main>
+            <main style={{ flex: "1" }}>{children}</main>
+            <Footer />
+          </div>
         </StyledComponentsRegistry>
       </body>
     </html>

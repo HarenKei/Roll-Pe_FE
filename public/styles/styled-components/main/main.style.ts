@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../colors";
 
-export const MainPageContainer = styled.div`
+export const MainPageContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;

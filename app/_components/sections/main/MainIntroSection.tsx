@@ -42,8 +42,6 @@ const MainIntroSectionWrapper = styled(MainContentSectionWrapper)`
 
   padding: 160px 20px 40px 20px;
 
-  height: calc(600px + 240px);
-
   background: url("images/image/image_background.png") no-repeat center center;
   background-size: cover;
   position: relative;
