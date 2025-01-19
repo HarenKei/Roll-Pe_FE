@@ -4,17 +4,22 @@ import styled from "styled-components";
 import { StyledButton } from "../../ui/button/StyledButton";
 import { MainContentSectionWrapper } from "../../ui/sections/MainSection";
 import { COLORS } from "@/public/styles/colors";
+import logo from "@/public/images/logos/logo.korean.png";
+import arrowDown from "@/public/images/icons/icon_arrow_down.svg";
 
 const MainIntroSection: React.FC = () => {
   return (
     <MainIntroSectionWrapper>
       <MainIntroContentsContainer>
-        <Image
-          src={"/images/logos/logo.korean.png"}
-          alt={"롤페 로고"}
-          width={168}
-          height={84}
-        />
+        <div className={"logo-wrapper"}>
+          <Image
+            src={logo}
+            alt={"롤페 로고"}
+            layout="responsive"
+            width={168}
+            height={84}
+          />
+        </div>
         <p className={"intro"}>
           다같이 한 마음으로
           <br />
@@ -23,12 +28,7 @@ const MainIntroSection: React.FC = () => {
         <StyledButton>롤페 시작하기</StyledButton>
       </MainIntroContentsContainer>
       <div className={"scroll-down"}>
-        <Image
-          src={"/images/icons/icon_arrow_down.svg"}
-          width={15}
-          height={15}
-          alt={"scroll down"}
-        />
+        <Image src={arrowDown} width={15} height={15} alt={"scroll down"} />
         <em>아래로 스크롤 해보아요!</em>
       </div>
     </MainIntroSectionWrapper>
@@ -109,8 +109,9 @@ const MainIntroContentsContainer = styled.div`
 
   width: 100%;
 
-  & > img {
-    margin-bottom: 1.25rem;
+  & > .logo-wrapper {
+    width: 10.5rem;
+    height: 5.25rem;
   }
 
   & > .intro {
@@ -121,7 +122,7 @@ const MainIntroContentsContainer = styled.div`
     font-family: var(--font-hakgyoansim);
     font-weight: 400;
     line-height: 1.25rem;
-    margin-bottom: 3.75rem;
+    margin: 1.25rem 0rem 3.75rem 0rem;
   }
 
   & > button {
