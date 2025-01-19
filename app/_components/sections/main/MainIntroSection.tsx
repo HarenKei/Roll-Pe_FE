@@ -8,18 +8,20 @@ import { COLORS } from "@/public/styles/colors";
 const MainIntroSection: React.FC = () => {
   return (
     <MainIntroSectionWrapper>
-      <Image
-        src={"/images/logos/logo.korean.png"}
-        alt={"롤페 로고"}
-        width={168}
-        height={84}
-      />
-      <p className={"intro"}>
-        다같이 한 마음으로
-        <br />
-        사랑하는 사람에게 전달해보세요
-      </p>
-      <StyledButton>롤페 시작하기</StyledButton>
+      <MainIntroContentsContainer>
+        <Image
+          src={"/images/logos/logo.korean.png"}
+          alt={"롤페 로고"}
+          width={168}
+          height={84}
+        />
+        <p className={"intro"}>
+          다같이 한 마음으로
+          <br />
+          사랑하는 사람에게 전달해보세요
+        </p>
+        <StyledButton>롤페 시작하기</StyledButton>
+      </MainIntroContentsContainer>
       <div className={"scroll-down"}>
         <Image
           src={"/images/icons/icon_arrow_down.svg"}
@@ -36,10 +38,12 @@ const MainIntroSection: React.FC = () => {
 const MainIntroSectionWrapper = styled(MainContentSectionWrapper)`
   position: relative;
   z-index: 1;
+
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 10rem 1.25rem 2.5rem 1.25rem;
+
+  height: 100svh;
 
   background: url("images/image/image_background.png") no-repeat center center;
   background-size: cover;
@@ -60,33 +64,14 @@ const MainIntroSectionWrapper = styled(MainContentSectionWrapper)`
     );
   }
 
-  & > img {
-    margin-bottom: 1.25rem;
-  }
-
-  & > .intro {
-    color: ${COLORS.ROLLPE_SECONDARY};
-    text-align: center;
-    font-size: 1.25rem;
-    font-style: normal;
-    font-family: var(--font-hakgyoansim);
-    font-weight: 400;
-    line-height: 1.25rem;
-    margin-bottom: 3.75rem;
-  }
-
-  & > button {
-    position: relative;
-    z-index: 1;
-  }
-
   & > .scroll-down {
+    position: absolute;
+    bottom: 8rem;
     z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.25rem;
-    margin-top: 6.25rem;
 
     & > img {
       animation: float 2s ease-in-out infinite;
@@ -113,6 +98,35 @@ const MainIntroSectionWrapper = styled(MainContentSectionWrapper)`
       font-weight: 400;
       line-height: 1.25rem;
     }
+  }
+`;
+
+const MainIntroContentsContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+
+  & > img {
+    margin-bottom: 1.25rem;
+  }
+
+  & > .intro {
+    color: ${COLORS.ROLLPE_SECONDARY};
+    text-align: center;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-family: var(--font-hakgyoansim);
+    font-weight: 400;
+    line-height: 1.25rem;
+    margin-bottom: 3.75rem;
+  }
+
+  & > button {
+    position: relative;
+    z-index: 1;
   }
 `;
 
