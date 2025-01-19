@@ -4,16 +4,16 @@ import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 
 export const MainContentSectionWrapper = styled.section`
-  padding: 40px 20px;
-  width: calc(100% - 40px);
-  max-height: 40rem;
+  padding: 2.5rem 1.25rem;
+  width: calc(100% - 2.5rem);
 `;
 
 export const GuideContainer = styled.div`
+  padding: 2.5rem 0rem;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  width: calc(100% - 40px);
+  width: calc(100% - 2.5rem);
 `;
 
 export const GuideSectionTitle = styled.h2`

@@ -32,7 +32,6 @@ const MainRollpeGuideSection02Wrapper = styled(MainContentSectionWrapper)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(100% - 40px);
   background-color: ${COLORS.ROLLPE_SECTION_BACKGROUND};
 `;
 

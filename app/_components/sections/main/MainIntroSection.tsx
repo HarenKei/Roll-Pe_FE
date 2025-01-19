@@ -39,8 +39,7 @@ const MainIntroSectionWrapper = styled(MainContentSectionWrapper)`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  padding: 160px 20px 40px 20px;
+  padding: 10rem 1.25rem 2.5rem 1.25rem;
 
   background: url("images/image/image_background.png") no-repeat center center;
   background-size: cover;
@@ -53,7 +52,7 @@ const MainIntroSectionWrapper = styled(MainContentSectionWrapper)`
     bottom: 0;
     left: 0;
     right: 0;
-    height: 100px;
+    height: 6.25rem;
     background: linear-gradient(
       to bottom,
       rgba(255, 255, 255, 0) 0%,
@@ -62,18 +61,18 @@ const MainIntroSectionWrapper = styled(MainContentSectionWrapper)`
   }
 
   & > img {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
   }
 
   & > .intro {
     color: ${COLORS.ROLLPE_SECONDARY};
     text-align: center;
-    font-size: 1.24rem;
+    font-size: 1.25rem;
     font-style: normal;
     font-family: var(--font-hakgyoansim);
     font-weight: 400;
-    line-height: 1.24rem;
-    margin-bottom: 60px;
+    line-height: 1.25rem;
+    margin-bottom: 3.75rem;
   }
 
   & > button {
@@ -86,8 +85,8 @@ const MainIntroSectionWrapper = styled(MainContentSectionWrapper)`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.24rem;
-    margin-top: 100px;
+    gap: 0.25rem;
+    margin-top: 6.25rem;
 
     & > img {
       animation: float 2s ease-in-out infinite;
@@ -97,7 +96,7 @@ const MainIntroSectionWrapper = styled(MainContentSectionWrapper)`
           transform: translateY(0);
         }
         50% {
-          transform: translateY(-10px);
+          transform: translateY(-0.625rem);
         }
         100% {
           transform: translateY(0);
@@ -112,7 +111,7 @@ const MainIntroSectionWrapper = styled(MainContentSectionWrapper)`
       font-size: 1rem;
       font-style: normal;
       font-weight: 400;
-      line-height: 1.24rem;
+      line-height: 1.25rem;
     }
   }
 `;

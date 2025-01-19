@@ -28,16 +28,17 @@ export default function RootLayout({
               display: "flex",
               flexDirection: "column",
               alignContent: "center",
-              minWidth: "390px",
-              maxWidth: "600px",
+              width: "390px",
+              // maxWidth: "600px",
               height: "100svh",
               border: `1px solid ${COLORS.ROLLPE_GRAY}`,
+              overflowX: "hidden",
               overflowY: "auto",
               scrollbarWidth: "none",
               msOverflowStyle: "none",
             }}
           >
-            <main style={{ flex: "1" }}>{children}</main>
+            <main style={{ flex: "1", width: "100%" }}>{children}</main>
             <Footer />
           </div>
         </StyledComponentsRegistry>

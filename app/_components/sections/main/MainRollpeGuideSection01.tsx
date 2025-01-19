@@ -31,7 +31,6 @@ const MainRollpeGuideSection01Wrapper = styled(MainContentSectionWrapper)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(100% - 40px);
 `;
 
 export default MainRollpeGuideSection01;
