@@ -6,6 +6,7 @@ import {
   GuideContainer,
   GuideSectionTitle,
 } from "../../ui/sections/MainSection";
+import sectionImage from "@/public/images/image/image_section_1.png";
 
 const MainRollpeGuideSection01: React.FC = () => {
   return (
@@ -16,12 +17,15 @@ const MainRollpeGuideSection01: React.FC = () => {
           <br />
           우리만의 롤페
         </GuideSectionTitle>
-        <Image
-          src={"/images/image/image_section_1.png"}
-          width={305}
-          height={406}
-          alt={"롤페 설명1"}
-        />
+        <div className={"main-image-wrapper"}>
+          <Image
+            src={sectionImage}
+            layout="responsive"
+            width={305}
+            height={406}
+            alt={"롤페 설명1"}
+          />
+        </div>
       </GuideContainer>
     </MainRollpeGuideSection01Wrapper>
   );

@@ -7,6 +7,7 @@ import {
   GuideSectionTitle,
 } from "../../ui/sections/MainSection";
 import { COLORS } from "@/public/styles/colors";
+import sectionImage from "@/public/images/image/image_section_2.png";
 
 const MainRollpeGuideSection02: React.FC = () => {
   return (
@@ -17,12 +18,15 @@ const MainRollpeGuideSection02: React.FC = () => {
           <br />
           언제 어디서나
         </GuideSectionTitle>
-        <Image
-          src={"/images/image/image_section_2.png"}
-          width={305}
-          height={406}
-          alt={"롤페 설명1"}
-        />
+        <div className={"main-image-wrapper"}>
+          <Image
+            src={sectionImage}
+            layout="responsive"
+            width={305}
+            height={406}
+            alt={"롤페 설명1"}
+          />
+        </div>
       </GuideContainer>
     </MainRollpeGuideSection02Wrapper>
   );
@@ -33,6 +37,8 @@ const MainRollpeGuideSection02Wrapper = styled(MainContentSectionWrapper)`
   justify-content: center;
   align-items: center;
   background-color: ${COLORS.ROLLPE_SECTION_BACKGROUND};
+
+  
 `;
 
 export default MainRollpeGuideSection02;

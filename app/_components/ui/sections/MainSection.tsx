@@ -6,6 +6,11 @@ import { COLORS } from "@/public/styles/colors";
 export const MainContentSectionWrapper = styled.section`
   padding: 2.5rem 1.25rem;
   width: calc(100% - 2.5rem);
+
+  & > .main-image-wrapper {
+    width: 20rem;
+    height: 26.75rem;
+  }
 `;
 
 export const GuideContainer = styled.div`
