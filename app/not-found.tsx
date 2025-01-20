@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { COLORS } from "@/public/styles/colors";
 
-export default function NotFound() {
+const NotFound: React.FC = () => {
   return (
     <Page404Wrapper>
       <Page404ContentsContainer>
@@ -23,7 +23,7 @@ export default function NotFound() {
       </Page404ContentsContainer>
     </Page404Wrapper>
   );
-}
+};
 
 const Page404Wrapper = styled.div`
   display: flex;
@@ -63,3 +63,5 @@ const Page404ContentsContainer = styled.div`
     margin-top: 0.25rem;
   }
 `;
+
+export default NotFound;
