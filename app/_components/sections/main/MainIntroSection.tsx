@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import styled from "styled-components";
-import { StyledButton } from "../../ui/button/StyledButton";
+import { Button } from "../../ui/button/StyledButton";
 import { MainContentSectionWrapper } from "../../ui/sections/MainSection";
 import { COLORS } from "@/public/styles/colors";
 import logo from "@/public/images/logos/logo.korean.png";
@@ -25,7 +25,7 @@ const MainIntroSection: React.FC = () => {
           <br />
           사랑하는 사람에게 전달해보세요
         </p>
-        <StyledButton>롤페 시작하기</StyledButton>
+        <Button text={"롤페 시작하기"} route={"/main"} />
       </MainIntroContentsContainer>
       <div className={"scroll-down"}>
         <Image src={arrowDown} width={15} height={15} alt={"scroll down"} />

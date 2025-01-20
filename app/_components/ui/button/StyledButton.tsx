@@ -1,8 +1,23 @@
 "use client";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
+import { useRouter } from "next/navigation";
 
-export const StyledButton = styled.button`
+interface ButtonProps {
+  text: string;
+  route: string;
+}
+export const Button: React.FC<ButtonProps> = ({ text, route }) => {
+  const router = useRouter();
+
+  const onClickHandler = () => {
+    router.push(route);
+  };
+
+  return <StyledButton onClick={onClickHandler}>{text}</StyledButton>;
+};
+
+const StyledButton = styled.button`
   padding: 0.75rem;
   width: 100%;
   flex-shrink: 0;
