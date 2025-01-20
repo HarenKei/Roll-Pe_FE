@@ -2,9 +2,18 @@
 import Menu from "@/public/images/icons/icon_menu.svg";
 import Image from "next/image";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/public/redux/store";
+import { RootState } from "@/public/redux/store";
 
 const Header: React.FC = () => {
-  //TODO: 전역 상태 관리 통해 슬라이드 메뉴 구현.
+  const dispatch: AppDispatch = useDispatch();
+  const isMenuOpen = useSelector((state: RootState) => state);
+
+  const onClickMenuHandler = () => {
+    dispatch(setSlide(!isMenuOpen));
+  };
+
   return (
     <HeaderWrapper>
       <MenuButton>
