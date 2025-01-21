@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Header from "../_components/ui/layouts/Header";
+import SlideMenu from "../_components/ui/layouts/SlideMenu";
 
 export const metadata: Metadata = {
   title: "롤페 | Roll-Pe",

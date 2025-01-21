@@ -16,7 +16,7 @@ const Home: React.FC = () => {
   );
 };
 
-const MainPageContentsContainer = styled.div`
+const MainPageContentsContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;

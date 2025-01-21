@@ -5,4 +5,6 @@ const MainPage: React.FC = () => {
   return <></>;
 };
 
+const MainPageWrapper = styled.main``;
+
 export default MainPage;

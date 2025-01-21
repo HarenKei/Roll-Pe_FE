@@ -5,6 +5,7 @@ import StyledComponentsRegistry from "@/public/lib/registry";
 import { pretendard, hakgyoansim, dunggeunmo } from "@/public/fonts/fonts";
 import Footer from "./_components/ui/layouts/Footer";
 import ReduxProvider from "./_components/redux-provider/ReduxProvider";
+import SlideMenu from "./_components/ui/layouts/SlideMenu";
 
 export const metadata: Metadata = {
   title: "롤페 | Roll-Pe",
@@ -40,8 +41,17 @@ export default function RootLayout({
                 msOverflowStyle: "none",
               }}
             >
-              <main style={{ flex: "1", width: "100%" }}>{children}</main>
-              <Footer />
+              <div
+                style={{
+                  flex: "1",
+                  width: "100%",
+                  position: "relative",
+                }}
+              >
+                <SlideMenu />
+                {children}
+                <Footer />
+              </div>
             </div>
           </StyledComponentsRegistry>
         </ReduxProvider>
