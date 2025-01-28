@@ -7,6 +7,7 @@ interface ButtonProps {
   text: string;
   route: string;
 }
+
 export const Button: React.FC<ButtonProps> = ({ text, route }) => {
   const router = useRouter();
 
@@ -15,6 +16,20 @@ export const Button: React.FC<ButtonProps> = ({ text, route }) => {
   };
 
   return <StyledButton onClick={onClickHandler}>{text}</StyledButton>;
+};
+
+export const ButtonSecondary: React.FC<ButtonProps> = ({ text, route }) => {
+  const router = useRouter();
+
+  const onClickHandler = () => {
+    router.push(route);
+  };
+
+  return (
+    <StyledButtonSecondary onClick={onClickHandler}>
+      {text}
+    </StyledButtonSecondary>
+  );
 };
 
 const StyledButton = styled.button`
