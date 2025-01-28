@@ -36,7 +36,7 @@ const HeaderWrapper = styled.header`
   display: flex;
   justify-content: flex-end;
   width: calc(100% - 2.5rem);
-  padding: 2rem 1.25rem;
+  padding: 1rem 1.25rem;
 `;
 
 const MenuButton = styled.button`
