@@ -108,8 +108,9 @@ const SlideMenuWrapper = styled.div<{ isOpen: boolean }>`
   display: flex;
   justify-content: flex-end;
 
+  ${(props) => (props.isOpen ? "position:fixed" : "")};
   width: ${(props) => (props.isOpen ? "100%" : "0")};
-  height: 100%;
+  height: 100svh;
   background: ${(props) => (props.isOpen ? "rgba(0, 0, 0, 0.5)" : "")};
 `;
 
