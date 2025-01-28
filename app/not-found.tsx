@@ -25,7 +25,7 @@ const NotFound: React.FC = () => {
   );
 };
 
-const Page404Wrapper = styled.div`
+const Page404Wrapper = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;

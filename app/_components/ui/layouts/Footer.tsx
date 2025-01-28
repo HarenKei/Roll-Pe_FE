@@ -16,6 +16,7 @@ const Footer: React.FC = () => {
 };
 
 const FooterWrapper = styled.footer`
+  z-index: -1;
   display: flex;
   flex-direction: column;
   align-items: center;
