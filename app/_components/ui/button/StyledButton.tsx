@@ -61,4 +61,10 @@ const StyledButton = styled.button`
 export const StyledButtonSecondary = styled(StyledButton)`
   background-color: ${COLORS.ROLLPE_PRIMARY};
   color: ${COLORS.ROLLPE_MAIN};
+
+  &:hover {
+    background-color: ${COLORS.ROLLPE_MAIN};
+    color: ${COLORS.ROLLPE_PRIMARY};
+    transition: all 0.2s ease;
+  }
 `;
