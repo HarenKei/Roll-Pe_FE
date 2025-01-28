@@ -43,17 +43,21 @@ const SlideMenu: React.FC = () => {
   const slideRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!slideRef || !slideRef.current) return;
+    const slideHandler = () => {
+      if (!slideRef || !slideRef.current) return;
 
-    const slideStyle = slideRef.current.style;
+      const slideStyle = slideRef.current.style;
 
-    if (isSlideOpen) {
-      slideStyle.right = "0";
-      slideStyle.transition = "all 0.2s ease";
-    } else {
-      slideStyle.right = "-90%";
-      // slideStyle.transition = "all 0.2s ease";
-    }
+      if (isSlideOpen) {
+        slideStyle.right = "0";
+        slideStyle.transition = "all 0.2s ease";
+      } else {
+        slideStyle.right = "-90%";
+        // slideStyle.transition = "all 0.2s ease";
+      }
+    };
+
+    slideHandler();
   }, [isSlideOpen, slideRef]);
 
   const closeHandler = () => {
