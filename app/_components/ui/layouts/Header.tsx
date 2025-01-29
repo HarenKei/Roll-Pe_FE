@@ -61,7 +61,7 @@ export const HeaderBack: React.FC = () => {
 const HeaderWrapper = styled.header<{ left: boolean }>`
   position: absolute;
   top: 0;
-  z-index: 10;
+  z-index: 2;
 
   display: flex;
   justify-content: ${(props) => (props.left ? "flex-start" : "flex-end")};
