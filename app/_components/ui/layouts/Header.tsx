@@ -1,13 +1,15 @@
 "use client";
 import Menu from "@/public/images/icons/icon_menu.svg";
+import Back from "@/public/images/icons/icon_arrow_left.svg";
 import Image from "next/image";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/public/redux/store";
 import { RootState } from "@/public/redux/store";
 import { setSlide } from "@/public/redux/redux";
+import { useRouter } from "next/navigation";
 
-const Header: React.FC = () => {
+export const HeaderDefault: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const isMenuOpen = useSelector((state: RootState) => state.slideMenu.isOpen);
 
@@ -17,8 +19,8 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <HeaderWrapper>
-        <MenuButton onClick={onClickMenuHandler}>
+      <HeaderWrapper left={false}>
+        <MenuButton onClick={() => onClickMenuHandler()}>
           <Image
             src={Menu}
             layout="responsive"
@@ -32,11 +34,40 @@ const Header: React.FC = () => {
   );
 };
 
-const HeaderWrapper = styled.header`
+export const HeaderBack: React.FC = () => {
+  const router = useRouter();
+
+  const onClickBackHandler = () => {
+    router.back();
+  };
+
+  return (
+    <>
+      <HeaderWrapper left={true}>
+        <BackButton onClick={() => onClickBackHandler()}>
+          <Image
+            src={Back}
+            layout="responsive"
+            width={28}
+            height={28}
+            alt={"메뉴 아이콘"}
+          />
+        </BackButton>
+      </HeaderWrapper>
+    </>
+  );
+};
+
+const HeaderWrapper = styled.header<{ left: boolean }>`
+  position: absolute;
+  top: 0;
+  z-index: 10;
+
   display: flex;
-  justify-content: flex-end;
+  justify-content: ${(props) => (props.left ? "flex-start" : "flex-end")};
   width: calc(100% - 2.5rem);
   padding: 1rem 1.25rem;
+  background: transparent;
 `;
 
 const MenuButton = styled.button`
@@ -51,4 +82,7 @@ const MenuButton = styled.button`
   }
 `;
 
-export default Header;
+const BackButton = styled(MenuButton)`
+  width: 0.75rem;
+  height: 1.25rem;
+`;
