@@ -22,7 +22,7 @@ const SignInPage: React.FC = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm<SignInInputs>();
 
   const onSubmit: SubmitHandler<SignInInputs> = (data) => {
     console.log(data);
@@ -47,7 +47,7 @@ const SignInPage: React.FC = () => {
         </p>
       </SignInIntro>
       <SignInFormWrapper>
-        <SignInForm>
+        <SignInForm onSubmit={handleSubmit(onSubmit)}>
           <TextInput
             type={"email"}
             placeholder={"이메일"}
