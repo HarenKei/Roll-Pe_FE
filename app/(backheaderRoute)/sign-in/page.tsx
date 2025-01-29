@@ -9,6 +9,7 @@ import Apple from "@/public/images/icons/icon_apple.svg";
 import { Button, ButtonSubmit } from "@/app/_components/ui/button/StyledButton";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
+import { Checkbox, TextInput } from "@/app/_components/ui/input/Input";
 
 interface SignInInputs {
   email: string;
@@ -47,21 +48,17 @@ const SignInPage: React.FC = () => {
       </SignInIntro>
       <SignInFormWrapper>
         <SignInForm>
-          <input
-            className={"text-input"}
+          <TextInput
+            type={"email"}
             placeholder={"이메일"}
             {...register("email")}
           />
-          <input
+          <TextInput
             type={"password"}
-            className={"text-input"}
             placeholder={"비밀번호"}
             {...register("password")}
           />
-          <div className={"checkbox-wrapper"}>
-            <input type={"checkbox"} id={"maintain-login"} />
-            <label htmlFor="maintain-login">로그인 유지</label>
-          </div>
+          <Checkbox checkboxId={"maintain-login"} label={"로그인 유지"} />
           <ButtonSubmit text={"로그인"} />
         </SignInForm>
       </SignInFormWrapper>
@@ -162,53 +159,6 @@ const SignInForm = styled.form`
   gap: 0.75rem;
 
   width: 100%;
-
-  & > .text-input {
-    padding: 1rem;
-    width: calc(100% - 2rem);
-    border-radius: 1rem;
-    border: 2px solid ${COLORS.ROLLPE_GRAY};
-    background: ${COLORS.ROLLPE_PRIMARY};
-    font-family: var(--font-hakgyoansim);
-    color: ${COLORS.ROLLPE_GRAY};
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 100%;
-  }
-
-  & > .checkbox-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-
-    margin-bottom: 1.5rem;
-
-    input[type="checkbox"] {
-      appearance: none;
-
-      box-sizing: border-box;
-      background-clip: content-box;
-      padding: 0.25em;
-      width: 1.25rem;
-      height: 1.25rem;
-      border-radius: 0.25rem;
-      border: 2px solid ${COLORS.ROLLPE_GRAY};
-      cursor: pointer;
-    }
-
-    input[type="checkbox"]:checked {
-      background-color: ${COLORS.ROLLPE_MAIN};
-    }
-
-    & > label {
-      color: ${COLORS.ROLLPE_GRAY};
-      font-size: 0.875rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-  }
 `;
 
 const OtherMenuContainer = styled.div`

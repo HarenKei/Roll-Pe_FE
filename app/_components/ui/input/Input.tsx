@@ -2,12 +2,25 @@
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 
+interface TextInputProps {
+  type: string;
+  placeholder: string;
+}
+
 interface CheckboxProps {
   checkboxId: string;
   label: string;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({ checkboxId, label }) => {
+export const TextInput: React.FC<TextInputProps> = ({ type, placeholder }) => {
+  return (
+    <>
+      <StyledInput type={type} placeholder={placeholder} />
+    </>
+  );
+};
+
+export const Checkbox: React.FC<CheckboxProps> = ({ checkboxId, label }) => {
   return (
     <CheckboxWrapper>
       <StyledCheckbox id={checkboxId} />
@@ -15,6 +28,20 @@ const Checkbox: React.FC<CheckboxProps> = ({ checkboxId, label }) => {
     </CheckboxWrapper>
   );
 };
+
+const StyledInput = styled.input`
+  padding: 1rem;
+  width: calc(100% - 2rem);
+  border-radius: 1rem;
+  border: 2px solid ${COLORS.ROLLPE_GRAY};
+  background: ${COLORS.ROLLPE_PRIMARY};
+  font-family: var(--font-hakgyoansim);
+  color: ${COLORS.ROLLPE_GRAY};
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+`;
 
 const CheckboxWrapper = styled.div`
   display: flex;
@@ -48,5 +75,3 @@ const StyledCheckbox = styled.input.attrs({ type: "checkbox" })`
     background-color: ${COLORS.ROLLPE_MAIN};
   }
 `;
-
-export default Checkbox;
