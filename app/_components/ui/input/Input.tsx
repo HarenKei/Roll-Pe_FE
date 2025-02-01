@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
 import SearchIcon from "@/public/images/icons/icon_search.svg";
+import Link from "next/link";
 
 interface TextInputProps {
   type: string;
@@ -12,6 +13,8 @@ interface TextInputProps {
 interface CheckboxProps {
   checkboxId: string;
   label: string;
+  link?: string;
+  isLabelBlack?: boolean;
 }
 
 export const TextInput: React.FC<TextInputProps> = ({ type, placeholder }) => {
@@ -42,11 +45,17 @@ export const SearchInput: React.FC = () => {
   );
 };
 
-export const Checkbox: React.FC<CheckboxProps> = ({ checkboxId, label }) => {
+export const Checkbox: React.FC<CheckboxProps> = ({
+  checkboxId,
+  label,
+  link,
+  isLabelBlack,
+}) => {
   return (
-    <CheckboxWrapper>
+    <CheckboxWrapper isLabelBlack={isLabelBlack}>
       <StyledCheckbox id={checkboxId} />
       <label htmlFor={checkboxId}>{label}</label>
+      {link && <Link href={link}>보기</Link>}
     </CheckboxWrapper>
   );
 };
@@ -55,7 +64,7 @@ const SearchInputWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 0rem 1rem 0rem 1rem;
   width: calc(100% - 2rem);
 
   border-radius: 1rem;
@@ -101,19 +110,26 @@ const StyledInput = styled.input`
   line-height: 100%;
 `;
 
-const StyledSearchInput = styled(StyledInput)`
-  border: 2px solid ${COLORS.ROLLPE_SECONDARY};
-  color: ${COLORS.ROLLPE_SECONDARY};
-`;
-
-const CheckboxWrapper = styled.div`
+const CheckboxWrapper = styled.div<{ isLabelBlack?: boolean }>`
   display: flex;
   align-items: center;
   gap: 0.25rem;
   font-family: var(--font-hakgyoansim);
-  padding-bottom: 1.5rem;
 
   & > label {
+    color: ${(props) =>
+      props.isLabelBlack && props.isLabelBlack
+        ? COLORS.ROLLPE_SECONDARY
+        : COLORS.ROLLPE_GRAY};
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  & > a {
+    all: unset;
+    margin-left: auto;
     color: ${COLORS.ROLLPE_GRAY};
     font-size: 0.875rem;
     font-style: normal;
