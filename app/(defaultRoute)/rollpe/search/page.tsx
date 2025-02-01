@@ -1,7 +1,57 @@
 "use client";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
-import { SearchInput, TextInput } from "@/app/_components/ui/input/Input";
+import { SearchInput } from "@/app/_components/ui/input/Input";
+import { RollpeListItemProps } from "@/public/utils/types";
+import RollpeList from "@/app/_components/ui/list/RollpeList";
+
+const DUMMY_ROLLPE_LIST: RollpeListItemProps[] = [
+  {
+    rollpeId: "r01",
+    rollpeTitle: "롤페 제목",
+    rollpeOwner: "김테스트1",
+    createdAt: "2025.2.1",
+    dDay: 365,
+    isPublic: true,
+    thumbnail: "",
+  },
+  {
+    rollpeId: "r02",
+    rollpeTitle: "롤페 제목",
+    rollpeOwner: "김테스트1",
+    createdAt: "2025.2.1",
+    dDay: 365,
+    isPublic: false,
+    thumbnail: "",
+  },
+  {
+    rollpeId: "r03",
+    rollpeTitle: "롤페 제목",
+    rollpeOwner: "김테스트1",
+    createdAt: "2025.2.1",
+    dDay: 365,
+    isPublic: false,
+    thumbnail: "",
+  },
+  {
+    rollpeId: "r04",
+    rollpeTitle: "롤페 제목",
+    rollpeOwner: "김테스트1",
+    createdAt: "2025.2.1",
+    dDay: 365,
+    isPublic: true,
+    thumbnail: "",
+  },
+  {
+    rollpeId: "r05",
+    rollpeTitle: "롤페 제목",
+    rollpeOwner: "김테스트1",
+    createdAt: "2025.2.1",
+    dDay: 365,
+    isPublic: false,
+    thumbnail: "",
+  },
+];
 
 const RollpeSearchPage: React.FC = () => {
   return (
@@ -11,6 +61,10 @@ const RollpeSearchPage: React.FC = () => {
           <h1>진행 중인 롤페를 검색해요.</h1>
           <SearchInput />
         </div>
+        <RollpeList
+          rollpeList={DUMMY_ROLLPE_LIST}
+          resultText={"의 검색 결과"}
+        />
       </RollpeSearchContainer>
     </RollpeSearchWrapper>
   );

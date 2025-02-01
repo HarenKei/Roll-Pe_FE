@@ -11,4 +11,5 @@ export interface RollpeListItemProps {
 
 export interface RollpeListProps {
   rollpeList: RollpeListItemProps[];
+  resultText: string;
 }

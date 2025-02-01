@@ -5,11 +5,13 @@ import { COLORS } from "@/public/styles/colors";
 import { RollpeListItemProps, RollpeListProps } from "@/public/utils/types";
 import RollpeListItem from "./RollpeListItem";
 
-const RollpeList: React.FC<RollpeListProps> = ({ rollpeList }) => {
+const RollpeList: React.FC<RollpeListProps> = ({ rollpeList, resultText }) => {
   return (
     <RollpeListWrapper>
       <div className={"count-wrapper"}>
-        <em>총 {rollpeList.length}개</em>
+        <em>
+          총 {rollpeList.length}개{resultText}
+        </em>
       </div>
       <RollpeListContainer>
         {rollpeList.map((rollpe: RollpeListItemProps, _: number) => (

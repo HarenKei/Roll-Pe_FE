@@ -59,7 +59,7 @@ const MyRollpePage: React.FC = () => {
         <div className={"title-wrapper"}>
           <h1>내 롤페</h1>
         </div>
-        <RollpeList rollpeList={DUMMY_ROLLPE_LIST} />
+        <RollpeList rollpeList={DUMMY_ROLLPE_LIST} resultText={""} />
       </MyRollpeContainer>
     </MyRollpeWrapper>
   );
