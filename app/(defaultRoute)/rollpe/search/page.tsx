@@ -1,6 +1,7 @@
 "use client";
-import { COLORS } from "@/public/styles/colors";
 import styled from "styled-components";
+import { COLORS } from "@/public/styles/colors";
+import { SearchInput } from "@/app/_components/ui/input/Input";
 import { RollpeListItemProps } from "@/public/utils/types";
 import RollpeList from "@/app/_components/ui/list/RollpeList";
 
@@ -52,41 +53,51 @@ const DUMMY_ROLLPE_LIST: RollpeListItemProps[] = [
   },
 ];
 
-const MyRollpePage: React.FC = () => {
+const RollpeSearchPage: React.FC = () => {
   return (
-    <MyRollpeWrapper>
-      <MyRollpeContainer>
-        <div className={"title-wrapper"}>
-          <h1>내 롤페</h1>
+    <RollpeSearchWrapper>
+      <RollpeSearchContainer>
+        <div className={"search-wrapper"}>
+          <h1>진행 중인 롤페를 검색해요.</h1>
+          <SearchInput />
         </div>
-        <RollpeList rollpeList={DUMMY_ROLLPE_LIST} resultText={""} />
-      </MyRollpeContainer>
-    </MyRollpeWrapper>
+        <RollpeList
+          rollpeList={DUMMY_ROLLPE_LIST}
+          resultText={"의 검색 결과"}
+        />
+      </RollpeSearchContainer>
+    </RollpeSearchWrapper>
   );
 };
 
-const MyRollpeWrapper = styled.main`
-  padding: 5rem 1.25rem;
+const RollpeSearchWrapper = styled.main`
+  padding: 2.5rem 1.25rem;
   width: calc(100% - 2.5rem);
   font-family: var(--font-hakgyoansim);
 `;
 
-const MyRollpeContainer = styled.div`
+const RollpeSearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-
+  gap: 4.75rem;
   width: 100%;
 
-  & > .title-wrapper > h1 {
-    color: ${COLORS.ROLLPE_SECONDARY};
-    text-align: center;
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  & > .search-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    width: 100%;
+
+    & > h1 {
+      color: ${COLORS.ROLLPE_SECONDARY};
+      font-size: 1.5rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
   }
 `;
 
-export default MyRollpePage;
+export default RollpeSearchPage;

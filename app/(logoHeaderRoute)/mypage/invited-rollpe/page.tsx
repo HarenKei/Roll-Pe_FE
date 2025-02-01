@@ -52,12 +52,12 @@ const DUMMY_ROLLPE_LIST: RollpeListItemProps[] = [
   },
 ];
 
-const MyRollpePage: React.FC = () => {
+const InvitedRollpePage: React.FC = () => {
   return (
     <MyRollpeWrapper>
       <MyRollpeContainer>
         <div className={"title-wrapper"}>
-          <h1>내 롤페</h1>
+          <h1>초대받은 롤페</h1>
         </div>
         <RollpeList rollpeList={DUMMY_ROLLPE_LIST} resultText={""} />
       </MyRollpeContainer>
@@ -89,4 +89,4 @@ const MyRollpeContainer = styled.div`
   }
 `;
 
-export default MyRollpePage;
+export default InvitedRollpePage;

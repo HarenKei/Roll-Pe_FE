@@ -11,6 +11,7 @@ interface ButtonProps {
 
 interface SubmitProps {
   text: string;
+  isDisabled?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({ text, route }) => {
@@ -37,8 +38,12 @@ export const ButtonSecondary: React.FC<ButtonProps> = ({ text, route }) => {
   );
 };
 
-export const ButtonSubmit: React.FC<SubmitProps> = ({ text }) => {
-  return <StyledSubmit value={text} />;
+export const ButtonSubmit: React.FC<SubmitProps> = ({ text, isDisabled }) => {
+  return isDisabled ? (
+    <StyledSubmit value={text} disabled />
+  ) : (
+    <StyledSubmit value={text} />
+  );
 };
 
 const StyledSubmit = styled.input.attrs({ type: "submit" })`
@@ -64,6 +69,11 @@ const StyledSubmit = styled.input.attrs({ type: "submit" })`
     background-color: ${COLORS.ROLLPE_PRIMARY};
     color: ${COLORS.ROLLPE_MAIN};
     transition: all 0.2s ease;
+  }
+
+  &:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
   }
 `;
 
