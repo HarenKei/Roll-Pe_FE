@@ -1,0 +1,12 @@
+.ratioSwiperWrapper,
+.themeSwiperWrapper {
+  width: 100%;
+}
+
+.ratioSwiperSlide {
+  width: 7.5rem;
+}
+
+.themeSwiperSlide {
+  width: 5rem;
+}
