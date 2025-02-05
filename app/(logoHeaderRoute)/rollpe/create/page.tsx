@@ -11,7 +11,14 @@ import "./local-swiper.css";
 import {
   RatioSwiperCard,
   ThemeSwiperCard,
+  SizeSwiperCard,
 } from "@/app/_components/ui/card/create-rollpe-swiper/CreateRollpeSipwerCard";
+import Image from "next/image";
+import DUMMY from "@/public/images/image/image_templete.png";
+import {
+  Button,
+  StyledButtonSecondary,
+} from "@/app/_components/ui/button/StyledButton";
 
 interface RatioSwiperCardData {
   id: number;
@@ -23,6 +30,12 @@ interface ThemeSwiperCardData {
   id: number;
   exam: React.ReactNode;
   title: string;
+}
+
+interface SizeSwiperCardData {
+  id: number;
+  title: string;
+  max: number;
 }
 
 const RATIO_CARD_LIST: RatioSwiperCardData[] = [
@@ -54,20 +67,6 @@ const RATIO_CARD_LIST: RatioSwiperCardData[] = [
     ),
     title: "세로",
   },
-  {
-    id: 3,
-    exam: (
-      <div
-        style={{
-          width: "4.5rem",
-          height: "4.5rem",
-          boxShadow: "0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25)",
-          background: `${COLORS.ROLLPE_PRIMARY}`,
-        }}
-      ></div>
-    ),
-    title: "정방형",
-  },
 ];
 
 const THEME_CARD_LIST: ThemeSwiperCardData[] = [
@@ -78,9 +77,23 @@ const THEME_CARD_LIST: ThemeSwiperCardData[] = [
   { id: 5, exam: <div></div>, title: "설날" },
 ];
 
+const SIZE_CARD_LIST: SizeSwiperCardData[] = [
+  {
+    id: 1,
+    title: "A4",
+    max: 13,
+  },
+];
+
 const RollpeCreatePage: React.FC = () => {
   const [ratioSelected, setRatioSelected] = useState<number>(1);
   const [themeSelected, setThemeSelected] = useState<number>(1);
+  const [sizeSelected, setSizeSelected] = useState<number>(1);
+  const [isPublic, setIsPublic] = useState<boolean>(true);
+
+  const onPublicClickHandler = () => {
+    setIsPublic(!isPublic);
+  };
 
   return (
     <RollpeCreatePageWrapper>
@@ -150,19 +163,69 @@ const RollpeCreatePage: React.FC = () => {
 
         <div className={"size-select-container"}>
           <h3>크기를 선택하세요</h3>
+          <SwiperWrapper>
+            <Swiper
+              slidesPerView={"auto"}
+              spaceBetween={20}
+              freeMode={true}
+              modules={[FreeMode]}
+              className="sizeSwiperWrapper"
+            >
+              {SIZE_CARD_LIST.map(
+                (cardData: SizeSwiperCardData, index: number) => (
+                  <SwiperSlide className={"sizeSwiperSlide"} key={index}>
+                    <SizeSwiperCard
+                      id={cardData.id}
+                      title={cardData.title}
+                      max={cardData.max}
+                      isSelected={sizeSelected}
+                      setIsSelected={setSizeSelected}
+                    />
+                  </SwiperSlide>
+                )
+              )}
+            </Swiper>
+          </SwiperWrapper>
         </div>
 
         <div className={"public-select-container"}>
-          <h3>공개 설정 여부</h3>
+          <div className={"sub-title"}>
+            <h3>공개 설정 여부</h3>
+            <h4>링크를 가진 모든 분들이 볼 수 있어요.</h4>
+          </div>
+          <Tab isPublic={isPublic}>
+            <button
+              className={"tab-item public"}
+              onClick={onPublicClickHandler}
+            >
+              <p>공개</p>
+            </button>
+            <button
+              className={"tab-item private"}
+              onClick={onPublicClickHandler}
+            >
+              <p>비공개</p>
+            </button>
+          </Tab>
+          {isPublic || <TextInput type={"password"} placeholder={"비밀번호"} />}
         </div>
 
         <div className={"end-select-container"}>
-          <h3>종료 일시를 지정해주세요</h3>
+          <h3>종료일을 지정해주세요</h3>
+          <TextInput
+            type={"datetime-local"}
+            placeholder={"종료일을 선택해주세요"}
+          />
         </div>
 
         <div className={"preview-container"}>
           <h3>미리보기</h3>
+          <div className={"preview-wrapper"}>
+            <Image src={DUMMY} alt={"미리보기"} layout="responsive" />
+          </div>
         </div>
+
+        <Button text={"만들기"} router={""} />
       </RollpeCreatePageContainer>
     </RollpeCreatePageWrapper>
   );
@@ -183,12 +246,17 @@ const RollpeCreatePageContainer = styled.div`
 
   width: 100%;
 
+  color: ${COLORS.ROLLPE_SECONDARY};
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
   h3 {
-    color: ${COLORS.ROLLPE_SECONDARY};
     font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.25rem;
+  }
+
+  h4 {
+    font-size: 0.75rem;
   }
 
   & > div {
@@ -196,6 +264,20 @@ const RollpeCreatePageContainer = styled.div`
     flex-direction: column;
     gap: 1.25rem;
     width: 100%;
+
+    & > .sub-title {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    & > .preview-wrapper {
+      width: 100%;
+
+      & > img {
+        width: 100%;
+      }
+    }
   }
 
   & > .title-wrapper > h1 {
@@ -211,6 +293,41 @@ const RollpeCreatePageContainer = styled.div`
 const SwiperWrapper = styled.div`
   width: 100%;
   overflow: hidden;
+`;
+
+const Tab = styled.div<{ isPublic: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+
+  width: calc(100% - 1rem);
+  color: ${COLORS.ROLLPE_SECONDARY};
+  background-color: #f1f1f1;
+  border-radius: 1rem;
+
+  & > .tab-item {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 45%;
+    padding: 0.75rem 0.5rem;
+    transition: color 0.2s ease;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+
+  .public {
+    background-color: ${(props) =>
+      props.isPublic ? COLORS.ROLLPE_PRIMARY : "transparent"};
+  }
+
+  .private {
+    background-color: ${(props) =>
+      !props.isPublic ? COLORS.ROLLPE_PRIMARY : "transparent"};
+  }
 `;
 
 export default RollpeCreatePage;
