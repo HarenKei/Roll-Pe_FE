@@ -108,6 +108,10 @@ const StyledInput = styled.input`
   font-style: normal;
   font-weight: 400;
   line-height: 100%;
+
+  &:focus {
+    border: 2px solid ${COLORS.ROLLPE_SECONDARY};
+  }
 `;
 
 const CheckboxWrapper = styled.div<{ isLabelBlack?: boolean }>`

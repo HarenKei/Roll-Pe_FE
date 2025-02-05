@@ -57,7 +57,7 @@ export const HeaderBack: React.FC = () => {
   );
 };
 
-export const HeaderLogo: React.FC = () => {
+export const HeaderMenuLogo: React.FC = () => {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
   const isMenuOpen = useSelector((state: RootState) => state.slideMenu.isOpen);
@@ -103,6 +103,40 @@ export const HeaderLogo: React.FC = () => {
           alt={"메뉴 아이콘"}
         />
       </MenuButton>
+    </LogoHeaderWRapper>
+  );
+};
+
+export const HeaderLogo = () => {
+  const router = useRouter();
+
+  const onClickBackHandler = () => {
+    router.back();
+  };
+
+  const onClickLogoHandler = () => {
+    router.push("/main");
+  };
+  return (
+    <LogoHeaderWRapper left={true}>
+      <BackButton onClick={() => onClickBackHandler()}>
+        <Image
+          src={Back}
+          layout="responsive"
+          width={28}
+          height={28}
+          alt={"메뉴 아이콘"}
+        />
+      </BackButton>
+      <LogoButton onClick={() => onClickLogoHandler()}>
+        <Image
+          src={logo}
+          layout="responsive"
+          width={48}
+          height={24}
+          alt={"홈으로"}
+        />
+      </LogoButton>
     </LogoHeaderWRapper>
   );
 };
