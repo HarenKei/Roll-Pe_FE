@@ -225,7 +225,7 @@ const RollpeCreatePage: React.FC = () => {
           </div>
         </div>
 
-        <Button text={"만들기"} router={""} />
+        <Button text={"만들기"} route={""} />
       </RollpeCreatePageContainer>
     </RollpeCreatePageWrapper>
   );
