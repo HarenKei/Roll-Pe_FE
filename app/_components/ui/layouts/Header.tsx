@@ -75,7 +75,7 @@ export const HeaderMenuLogo: React.FC = () => {
   };
 
   return (
-    <LogoHeaderWRapper left={true}>
+    <LogoHeaderWrapper left={true}>
       <BackButton onClick={() => onClickBackHandler()}>
         <Image
           src={Back}
@@ -103,7 +103,7 @@ export const HeaderMenuLogo: React.FC = () => {
           alt={"메뉴 아이콘"}
         />
       </MenuButton>
-    </LogoHeaderWRapper>
+    </LogoHeaderWrapper>
   );
 };
 
@@ -118,14 +118,14 @@ export const HeaderLogo = () => {
     router.push("/main");
   };
   return (
-    <LogoHeaderWRapper left={true}>
+    <LogoHeaderWrapper left={true}>
       <BackButton onClick={() => onClickBackHandler()}>
         <Image
           src={Back}
           layout="responsive"
           width={28}
           height={28}
-          alt={"메뉴 아이콘"}
+          alt={"뒤로가기"}
         />
       </BackButton>
       <LogoButton onClick={() => onClickLogoHandler()}>
@@ -137,7 +137,8 @@ export const HeaderLogo = () => {
           alt={"홈으로"}
         />
       </LogoButton>
-    </LogoHeaderWRapper>
+      <div className={"dummy"}></div>
+    </LogoHeaderWrapper>
   );
 };
 
@@ -153,7 +154,7 @@ const HeaderWrapper = styled.header<{ left: boolean }>`
   background: transparent;
 `;
 
-const LogoHeaderWRapper = styled(HeaderWrapper)`
+const LogoHeaderWrapper = styled(HeaderWrapper)`
   align-items: center;
   justify-content: space-between;
 `;
