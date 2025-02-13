@@ -17,13 +17,13 @@ interface CheckboxProps {
   isLabelBlack?: boolean;
 }
 
-export const TextInput: React.FC<TextInputProps> = ({ type, placeholder }) => {
-  return (
-    <>
-      <StyledInput type={type} placeholder={placeholder} />
-    </>
-  );
-};
+// export const TextInput: React.FC<TextInputProps> = ({ type, placeholder }) => {
+//   return (
+//     <>
+//       <StyledInput type={type} placeholder={placeholder} />
+//     </>
+//   );
+// };
 
 export const SearchInput: React.FC = () => {
   const onClikcHandler = () => {
@@ -96,18 +96,22 @@ const SearchInputWrapper = styled.div`
   }
 `;
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
   padding: 1rem;
   width: calc(100% - 2rem);
   border-radius: 1rem;
   border: 2px solid ${COLORS.ROLLPE_GRAY};
   background: ${COLORS.ROLLPE_PRIMARY};
   font-family: var(--font-hakgyoansim);
-  color: ${COLORS.ROLLPE_GRAY};
+  color: ${COLORS.ROLLPE_SECONDARY};
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
   line-height: 100%;
+
+  &::placeholder {
+    color: ${COLORS.ROLLPE_GRAY};
+  }
 
   &:focus {
     border: 2px solid ${COLORS.ROLLPE_SECONDARY};
