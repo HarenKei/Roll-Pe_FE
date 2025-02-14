@@ -61,7 +61,6 @@ const SignUpForm: React.FC = () => {
         });
       } catch (error) {
         console.error(error);
-
         throw error;
       }
     });
