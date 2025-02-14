@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { StyledInput, Checkbox } from "@/app/_components/ui/input/Input";
 import { ButtonSubmit } from "@/app/_components/ui/button/StyledButton";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { COLORS } from "@/public/styles/colors";
+import { signUp } from "@/app/api/auth/sign-up/route";
 
 interface SignUpInputs {
   email: string;
@@ -27,6 +28,8 @@ const SignUpForm: React.FC = () => {
   const [passwordError, setPasswordError] = useState<string>("");
   const [check, setCheck] = useState<string[]>([]);
 
+  const [isPending, startTransition] = useTransition();
+
   const emailChangeHandler = (email: string) => {
     if (email && !emailRegex.test(email)) {
       setEmailError("유효한 이메일 주소를 입력해주세요.");
@@ -44,7 +47,24 @@ const SignUpForm: React.FC = () => {
   };
 
   const onSubmit = (data: SignUpInputs) => {
-    console.log(data);
+    startTransition(async () => {
+      try {
+        const result = await signUp({
+          email: data.email,
+          name: data.nickname,
+          password: data.password,
+        }).then((res) => {
+          console.log(res);
+          alert(
+            "회원가입이 정상적으로 완료되었습니다.\n이메일 인증 후 로그인해주세요."
+          );
+        });
+      } catch (error) {
+        console.error(error);
+
+        throw error;
+      }
+    });
   };
 
   const handleChangeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
