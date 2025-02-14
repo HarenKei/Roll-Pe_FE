@@ -4,6 +4,7 @@ import { StyledInput, Checkbox } from "@/app/_components/ui/input/Input";
 import { ButtonSubmit } from "@/app/_components/ui/button/StyledButton";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { COLORS } from "@/public/styles/colors";
 
 interface SignUpInputs {
   email: string;
@@ -12,12 +13,35 @@ interface SignUpInputs {
 }
 
 const SignUpForm: React.FC = () => {
-  const [check, setCheck] = useState<string[]>([]);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<SignUpInputs>();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const nicknameRegex = /^[a-zA-Z0-9ㄱ-ㅎ가-힣]{2,6}$/;
+
+  const [emailError, setEmailError] = useState<string>("");
+  const [nicknameError, setNicknameError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
+  const [check, setCheck] = useState<string[]>([]);
+
+  const emailChangeHandler = (email: string) => {
+    if (email && !emailRegex.test(email)) {
+      setEmailError("유효한 이메일 주소를 입력해주세요.");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const nicknameChangeHandler = (nickname: string) => {
+    if (nickname && !nicknameRegex.test(nickname)) {
+      setNicknameError("2-6자의 한글, 영문, 숫자만 입력 가능합니다.");
+    } else {
+      setNicknameError("");
+    }
+  };
 
   const onSubmit = (data: SignUpInputs) => {
     console.log(data);
@@ -34,8 +58,12 @@ const SignUpForm: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(check);
-  }, [check]);
+    emailChangeHandler(watch("email"));
+  }, [watch("email"), emailChangeHandler]);
+
+  useEffect(() => {
+    nicknameChangeHandler(watch("nickname"));
+  }, [watch("nickname"), nicknameChangeHandler]);
 
   return (
     <FormWrapper>
@@ -45,18 +73,33 @@ const SignUpForm: React.FC = () => {
           placeholder={"이메일"}
           {...register("email")}
         />
+        <p className={"error-message"}>{emailError !== "" && emailError}</p>
         <StyledInput
           type={"text"}
           placeholder={"닉네임(2-6자)"}
           maxLength={6}
           {...register("nickname")}
         />
+        <p className={"error-message"}>
+          {nicknameError !== "" && nicknameError}
+        </p>
         <StyledInput
           type={"password"}
           placeholder={"비밀번호"}
           {...register("password")}
         />
-        <StyledInput type={"password"} placeholder={"비밀번호 확인"} />
+        <StyledInput
+          type={"password"}
+          placeholder={"비밀번호 확인"}
+          onChange={(e) => {
+            if (watch("password") !== e.target.value)
+              setPasswordError("비밀번호가 일치하지 않습니다");
+            else setPasswordError("");
+          }}
+        />
+        <p className={"error-message"}>
+          {passwordError !== "" && passwordError}
+        </p>
         <div className={"checkbox-container"}>
           <Checkbox
             checkboxId={"age"}
@@ -100,6 +143,14 @@ const Form = styled.form`
     flex-direction: column;
     margin: 2rem 0rem 1.25rem 0rem;
     width: 100%;
+  }
+
+  & > .error-message {
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-hakgyoansim);
+    font-size: 0.875rem;
+    color: ${COLORS.ROLLPE_MAIN};
   }
 `;
 
