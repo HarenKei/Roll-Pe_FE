@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { StyledInput, Checkbox } from "@/app/_components/ui/input/Input";
 import { ButtonSubmit } from "@/app/_components/ui/button/StyledButton";
 import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
 
 interface SignUpInputs {
   email: string;
@@ -11,6 +12,7 @@ interface SignUpInputs {
 }
 
 const SignUpForm: React.FC = () => {
+  const [check, setCheck] = useState<string[]>([]);
   const {
     register,
     handleSubmit,
@@ -20,6 +22,20 @@ const SignUpForm: React.FC = () => {
   const onSubmit = (data: SignUpInputs) => {
     console.log(data);
   };
+
+  const handleChangeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked, value } = e.target;
+
+    if (checked) {
+      setCheck((prev) => [...prev, value]);
+    } else {
+      setCheck(check.filter((el) => el !== value));
+    }
+  };
+
+  useEffect(() => {
+    console.log(check);
+  }, [check]);
 
   return (
     <FormWrapper>
@@ -46,21 +62,24 @@ const SignUpForm: React.FC = () => {
             checkboxId={"age"}
             label={"저는 만14세 이상입니다."}
             isLabelBlack={true}
+            onChange={handleChangeCheck}
           />
           <Checkbox
             checkboxId={"terms"}
             label={"서비스 이용약관에 동의합니다."}
             isLabelBlack={true}
             link={"/terms-of-service"}
+            onChange={handleChangeCheck}
           />
           <Checkbox
             checkboxId={"privacy"}
             label={"개인정보 수집 및 이용에 동의합니다."}
             isLabelBlack={true}
             link={"/privacy-policy"}
+            onChange={handleChangeCheck}
           />
         </div>
-        <ButtonSubmit text={"회원가입"} />
+        <ButtonSubmit text={"회원가입"} isDisabled={check.length !== 3} />
       </Form>
     </FormWrapper>
   );

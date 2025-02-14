@@ -6,6 +6,7 @@ import { signIn } from "@/app/api/auth/sign-in/route";
 import { ButtonSubmit } from "@/app/_components/ui/button/StyledButton";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { StyledInput } from "@/app/_components/ui/input/Input";
 
 interface SignInInputs {
   email: string;
@@ -66,27 +67,6 @@ const Form = styled.form`
   gap: 0.75rem;
 
   width: 100%;
-`;
-
-const StyledInput = styled.input`
-  padding: 1rem;
-  width: calc(100% - 2rem);
-  border-radius: 1rem;
-  border: 2px solid ${COLORS.ROLLPE_GRAY};
-  background: ${COLORS.ROLLPE_PRIMARY};
-  font-family: var(--font-hakgyoansim);
-  color: ${COLORS.ROLLPE_SECONDARY};
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-
-  &::placeholder {
-    color: ${COLORS.ROLLPE_GRAY};
-  }
-  &:focus {
-    border: 2px solid ${COLORS.ROLLPE_SECONDARY};
-  }
 `;
 
 export default SignInForm;

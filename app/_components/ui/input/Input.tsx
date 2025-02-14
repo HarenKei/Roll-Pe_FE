@@ -5,25 +5,13 @@ import Image from "next/image";
 import SearchIcon from "@/public/images/icons/icon_search.svg";
 import Link from "next/link";
 
-interface TextInputProps {
-  type: string;
-  placeholder: string;
-}
-
 interface CheckboxProps {
   checkboxId: string;
   label: string;
   link?: string;
   isLabelBlack?: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-
-// export const TextInput: React.FC<TextInputProps> = ({ type, placeholder }) => {
-//   return (
-//     <>
-//       <StyledInput type={type} placeholder={placeholder} />
-//     </>
-//   );
-// };
 
 export const SearchInput: React.FC = () => {
   const onClikcHandler = () => {
@@ -50,10 +38,17 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   label,
   link,
   isLabelBlack,
+  onChange,
 }) => {
   return (
     <CheckboxWrapper isLabelBlack={isLabelBlack}>
-      <StyledCheckbox id={checkboxId} />
+      <StyledCheckbox
+        id={checkboxId}
+        value={checkboxId}
+        onChange={(e) => {
+          onChange(e);
+        }}
+      />
       <label htmlFor={checkboxId}>{label}</label>
       {link && <Link href={link}>보기</Link>}
     </CheckboxWrapper>
