@@ -122,7 +122,15 @@ const SignUpForm: React.FC = () => {
             onChange={handleChangeCheck}
           />
         </div>
-        <ButtonSubmit text={"회원가입"} isDisabled={check.length !== 3} />
+        <ButtonSubmit
+          text={"회원가입"}
+          isDisabled={
+            check.length !== 3 ||
+            watch("email") === "" ||
+            watch("password") === "" ||
+            watch("nickname") === ""
+          }
+        />
       </Form>
     </FormWrapper>
   );
