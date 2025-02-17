@@ -5,25 +5,13 @@ import Image from "next/image";
 import SearchIcon from "@/public/images/icons/icon_search.svg";
 import Link from "next/link";
 
-interface TextInputProps {
-  type: string;
-  placeholder: string;
-}
-
 interface CheckboxProps {
   checkboxId: string;
   label: string;
   link?: string;
   isLabelBlack?: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-
-export const TextInput: React.FC<TextInputProps> = ({ type, placeholder }) => {
-  return (
-    <>
-      <StyledInput type={type} placeholder={placeholder} />
-    </>
-  );
-};
 
 export const SearchInput: React.FC = () => {
   const onClikcHandler = () => {
@@ -50,10 +38,17 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   label,
   link,
   isLabelBlack,
+  onChange,
 }) => {
   return (
     <CheckboxWrapper isLabelBlack={isLabelBlack}>
-      <StyledCheckbox id={checkboxId} />
+      <StyledCheckbox
+        id={checkboxId}
+        value={checkboxId}
+        onChange={(e) => {
+          onChange(e);
+        }}
+      />
       <label htmlFor={checkboxId}>{label}</label>
       {link && <Link href={link}>보기</Link>}
     </CheckboxWrapper>
@@ -96,18 +91,22 @@ const SearchInputWrapper = styled.div`
   }
 `;
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
   padding: 1rem;
   width: calc(100% - 2rem);
   border-radius: 1rem;
   border: 2px solid ${COLORS.ROLLPE_GRAY};
   background: ${COLORS.ROLLPE_PRIMARY};
   font-family: var(--font-hakgyoansim);
-  color: ${COLORS.ROLLPE_GRAY};
+  color: ${COLORS.ROLLPE_SECONDARY};
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
   line-height: 100%;
+
+  &::placeholder {
+    color: ${COLORS.ROLLPE_GRAY};
+  }
 
   &:focus {
     border: 2px solid ${COLORS.ROLLPE_SECONDARY};
