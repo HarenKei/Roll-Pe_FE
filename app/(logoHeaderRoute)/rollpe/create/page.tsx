@@ -2,7 +2,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
-import { TextInput } from "@/app/_components/ui/input/Input";
+import { StyledInput } from "@/app/_components/ui/input/Input";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
@@ -15,10 +15,7 @@ import {
 } from "@/app/_components/ui/card/create-rollpe-swiper/CreateRollpeSipwerCard";
 import Image from "next/image";
 import DUMMY from "@/public/images/image/image_templete.png";
-import {
-  Button,
-  StyledButtonSecondary,
-} from "@/app/_components/ui/button/StyledButton";
+import { Button } from "@/app/_components/ui/button/StyledButton";
 
 interface RatioSwiperCardData {
   id: number;
@@ -104,7 +101,7 @@ const RollpeCreatePage: React.FC = () => {
 
         <div className={"title-input-container"}>
           <h3>제목을 입력하세요</h3>
-          <TextInput type={"text"} placeholder="제목 입력" />
+          <StyledInput type={"text"} placeholder="제목 입력" />
         </div>
 
         <div className={"ratio-select-container"}>
@@ -207,12 +204,14 @@ const RollpeCreatePage: React.FC = () => {
               <p>비공개</p>
             </button>
           </Tab>
-          {isPublic || <TextInput type={"password"} placeholder={"비밀번호"} />}
+          {isPublic || (
+            <StyledInput type={"password"} placeholder={"비밀번호"} />
+          )}
         </div>
 
         <div className={"end-select-container"}>
           <h3>종료일을 지정해주세요</h3>
-          <TextInput
+          <StyledInput
             type={"datetime-local"}
             placeholder={"종료일을 선택해주세요"}
           />

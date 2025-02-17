@@ -79,6 +79,10 @@ const ModalHeader = styled.div`
   & > .title {
     font-size: 1.75rem;
   }
+
+  & > .dummy {
+    flex-grow: 0;
+  }
 `;
 
 const ModalContents = styled.div`

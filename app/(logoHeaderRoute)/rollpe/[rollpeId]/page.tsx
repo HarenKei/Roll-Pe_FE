@@ -11,14 +11,20 @@ import {
 } from "@/app/_components/ui/button/StyledButton";
 import { Modal } from "@/app/_components/ui/modal/Modal";
 import ParticipantsList from "@/app/_components/ui/modal/modal-contents/participants-list/ParticipantsList";
+import RollpeEditForm from "@/app/_components/ui/modal/modal-contents/rollpe-edit/RollpeEditForm";
 
 const RollpeDetailPage: React.FC = () => {
   const [isParticipantsModalOpen, setIsParticipantsModalOpen] =
     useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(true);
   const rollpeId = useParams().rollpeId;
 
   const onClickParticipantListOpen = () => {
     setIsParticipantsModalOpen(true);
+  };
+
+  const onClickEditOpen = () => {
+    setIsEditModalOpen(true);
   };
 
   return (
@@ -65,6 +71,13 @@ const RollpeDetailPage: React.FC = () => {
           title={"참여자 목록"}
           children={<ParticipantsList />}
           setModalState={setIsParticipantsModalOpen}
+        />
+      )}
+      {isEditModalOpen && (
+        <Modal
+          title={"수정하기"}
+          children={<RollpeEditForm />}
+          setModalState={setIsEditModalOpen}
         />
       )}
     </>
