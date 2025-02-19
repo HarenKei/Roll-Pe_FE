@@ -7,6 +7,8 @@ import { ButtonSubmit } from "@/app/_components/ui/button/StyledButton";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { StyledInput } from "@/app/_components/ui/input/Input";
+import { useDispatch, UseDispatch } from "react-redux";
+import { setUser } from "@/public/redux/slices/userSlice";
 
 interface SignInInputs {
   email: string;
@@ -14,6 +16,7 @@ interface SignInInputs {
 }
 
 const SignInForm: React.FC = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const {
@@ -27,10 +30,14 @@ const SignInForm: React.FC = () => {
     startTransition(async () => {
       try {
         const result = await signIn(data.email, data.password).then((res) => {
+          dispatch(setUser({ name: res.name, email: res.email }));
           router.push("/main");
         });
       } catch (err) {
-        console.error(err);
+        if (err instanceof Error) {
+          // console.log(err.message);
+          alert(err.message);
+        }
       }
     });
   };
