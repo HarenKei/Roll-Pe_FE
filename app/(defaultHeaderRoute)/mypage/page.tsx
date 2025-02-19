@@ -4,8 +4,17 @@ import { COLORS } from "@/public/styles/colors";
 import Apple from "@/public/images/icons/icon_apple.svg";
 import Image from "next/image";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { RootState } from "@/public/redux/store";
+import { useEffect } from "react";
 
 const MyPage: React.FC = () => {
+  const user = useSelector((state: RootState) => state.simpleUser);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <MyPageWrapper>
       <MyPageContainer>
@@ -15,7 +24,7 @@ const MyPage: React.FC = () => {
           <div className={"profile-container"}>
             <div className={"basic-info-wrapper"}>
               <div className={"user-name-container"}>
-                <h2 className={"user-name"}>김텐가님</h2>
+                <h2 className={"user-name"}>{user.name}님</h2>
                 <button className={"social-icon-wrapper apple"}>
                   <Image
                     src={Apple}
