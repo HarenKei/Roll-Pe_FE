@@ -217,6 +217,11 @@ const RollpeCreatePage: React.FC = () => {
           />
         </div>
 
+        <div className={"end-select-container"}>
+          <h3>전달할 사람을 지정해주세요</h3>
+          <StyledInput type={"text"} placeholder={"김태은"} />
+        </div>
+
         <div className={"preview-container"}>
           <h3>미리보기</h3>
           <div className={"preview-wrapper"}>

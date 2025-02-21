@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState, useTransition } from "react";
 import { COLORS } from "@/public/styles/colors";
 import { signUp } from "@/app/api/auth/sign-up/route";
+import Loading from "@/app/_components/ui/loading/Loading";
 
 interface SignUpInputs {
   email: string;
