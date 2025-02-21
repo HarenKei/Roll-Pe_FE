@@ -6,7 +6,7 @@ import axios from "axios";
 export const signIn = async (email: string, password: string) => {
 
   try {
-    const response = await axios.post("http://dev.popping.world/api/user/signin", {
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/signin`, {
       email,
       password,
     });

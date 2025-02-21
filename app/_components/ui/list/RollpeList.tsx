@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 
 import { RollpeListItemProps, RollpeListProps } from "@/public/utils/types";
-import RollpeListItem from "./RollpeListItem";
+import { RollpeListItem } from "./RollpeListItem";
+// import RollpeListItem from "./RollpeListItem";
 
 const RollpeList: React.FC<RollpeListProps> = ({ rollpeList, resultText }) => {
   return (

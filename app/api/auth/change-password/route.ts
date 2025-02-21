@@ -13,7 +13,7 @@ interface SignUpInputs {
 
 export const changePassword = async (requestBody: SignUpInputs) => {
   try {
-    const response = await axios.post("http://dev.popping.world/api/user/signup", {
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/signup`, {
       ...requestBody,
     });
 
