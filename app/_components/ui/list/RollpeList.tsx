@@ -3,10 +3,12 @@ import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 
 import { RollpeListItemProps, RollpeListProps } from "@/public/utils/types";
-import { RollpeListItem } from "./RollpeListItem";
-// import RollpeListItem from "./RollpeListItem";
+import { RollpeListItem, RollpeSearchListItem } from "./RollpeListItem";
 
-const RollpeList: React.FC<RollpeListProps> = ({ rollpeList, resultText }) => {
+export const RollpeList: React.FC<RollpeListProps> = ({
+  rollpeList,
+  resultText,
+}) => {
   return (
     <RollpeListWrapper>
       <div className={"count-wrapper"}>
@@ -17,6 +19,35 @@ const RollpeList: React.FC<RollpeListProps> = ({ rollpeList, resultText }) => {
       <RollpeListContainer>
         {rollpeList.map((rollpe: RollpeListItemProps, _: number) => (
           <RollpeListItem
+            key={rollpe.rollpeId}
+            rollpeId={rollpe.rollpeId}
+            rollpeTitle={rollpe.rollpeTitle}
+            rollpeOwner={rollpe.rollpeOwner}
+            createdAt={rollpe.createdAt}
+            dDay={rollpe.dDay}
+            isPublic={rollpe.isPublic}
+            thumbnail={rollpe.thumbnail}
+          />
+        ))}
+      </RollpeListContainer>
+    </RollpeListWrapper>
+  );
+};
+
+export const RollpeSearchList: React.FC<RollpeListProps> = ({
+  rollpeList,
+  resultText,
+}) => {
+  return (
+    <RollpeListWrapper>
+      <div className={"count-wrapper"}>
+        <em>
+          총 {rollpeList.length}개{resultText}
+        </em>
+      </div>
+      <RollpeListContainer>
+        {rollpeList.map((rollpe: RollpeListItemProps, _: number) => (
+          <RollpeSearchListItem
             key={rollpe.rollpeId}
             rollpeId={rollpe.rollpeId}
             rollpeTitle={rollpe.rollpeTitle}
@@ -59,5 +90,3 @@ const RollpeListContainer = styled.ul`
   flex-direction: column;
   width: 100%;
 `;
-
-export default RollpeList;

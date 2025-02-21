@@ -2,7 +2,7 @@
 import { COLORS } from "@/public/styles/colors";
 import styled from "styled-components";
 import { RollpeListItemProps } from "@/public/utils/types";
-import RollpeList from "@/app/_components/ui/list/RollpeList";
+import { RollpeList } from "@/app/_components/ui/list/RollpeList";
 
 const DUMMY_ROLLPE_LIST: RollpeListItemProps[] = [
   {
