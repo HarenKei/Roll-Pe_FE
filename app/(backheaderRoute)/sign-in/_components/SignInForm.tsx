@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { StyledInput } from "@/app/_components/ui/input/Input";
 import { useDispatch, UseDispatch } from "react-redux";
 import { setUser } from "@/public/redux/slices/userSlice";
+import Loading from "@/app/_components/ui/loading/Loading";
 
 interface SignInInputs {
   email: string;
@@ -43,21 +44,24 @@ const SignInForm: React.FC = () => {
   };
 
   return (
-    <FormWrapper>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <StyledInput
-          type={"email"}
-          {...register("email")}
-          placeholder={"이메일"}
-        />
-        <StyledInput
-          type={"password"}
-          {...register("password")}
-          placeholder={"비밀번호"}
-        />
-        <ButtonSubmit text={"로그인"} />
-      </Form>
-    </FormWrapper>
+    <>
+      {isPending && <Loading />}
+      <FormWrapper>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <StyledInput
+            type={"email"}
+            {...register("email")}
+            placeholder={"이메일"}
+          />
+          <StyledInput
+            type={"password"}
+            {...register("password")}
+            placeholder={"비밀번호"}
+          />
+          <ButtonSubmit text={"로그인"} />
+        </Form>
+      </FormWrapper>
+    </>
   );
 };
 
