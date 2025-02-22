@@ -2,16 +2,30 @@
 import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 import styled from "styled-components";
 import DUMMY from "@/public/images/image/image_templete.png";
-import REPORT from "@/public/images/icons/icon_siren.svg";
 import {
   Button,
   ButtonSecondary,
 } from "@/app/_components/ui/button/StyledButton";
+import { Modal } from "@/app/_components/ui/modal/Modal";
+import ParticipantsList from "@/app/_components/ui/modal/modal-contents/participants-list/ParticipantsList";
+import RollpeEditForm from "@/app/_components/ui/modal/modal-contents/rollpe-edit/RollpeEditForm";
 
 const RollpeDetailPage: React.FC = () => {
+  const [isParticipantsModalOpen, setIsParticipantsModalOpen] =
+    useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(true);
   const rollpeId = useParams().rollpeId;
+
+  const onClickParticipantListOpen = () => {
+    setIsParticipantsModalOpen(true);
+  };
+
+  const onClickEditOpen = () => {
+    setIsEditModalOpen(true);
+  };
 
   return (
     <>
@@ -38,15 +52,8 @@ const RollpeDetailPage: React.FC = () => {
           </div>
 
           <div className={"menu-button-container"}>
-            <Button text={"공유하기"} route={""} />
-            <div className={"sub-button-container"}>
-              <ButtonSecondary text={"롤페 나가기"} route={""} />
-              <button className={"report"}>
-                <div className={"img-wrapper"}>
-                  <Image src={REPORT} alt={"신고"} layout="responsive" />
-                </div>
-              </button>
-            </div>
+            <Button text={"이미지로 저장하기"} route={""} />
+            <ButtonSecondary text={"마음이 담긴 롤페 전달하기"} route={""} />
           </div>
         </RollpeDetailPageContainer>
       </RollpeDetailPageWrapper>
@@ -133,36 +140,10 @@ const RollpeDetailPageContainer = styled.div`
   & > .menu-button-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-top: 6rem;
     gap: 0.5rem;
     width: 100%;
-
-    & > .sub-button-container {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-
-      & > button {
-        flex-shrink: 1;
-      }
-
-      & > .report {
-        all: unset;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 3.5rem;
-        height: 3rem;
-        border: 2px solid ${COLORS.ROLLPE_MAIN};
-        border-radius: 0.5rem;
-        cursor: pointer;
-
-        & > .img-wrapper {
-          width: 1.1875rem;
-          height: 1.1875rem;
-        }
-      }
-    }
   }
 `;
 
