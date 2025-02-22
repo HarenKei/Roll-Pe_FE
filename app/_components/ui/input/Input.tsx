@@ -59,7 +59,7 @@ const SearchInputWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0rem 1rem 0rem 1rem;
+  padding: 0.5rem 1rem;
   width: calc(100% - 2rem);
 
   border-radius: 1rem;

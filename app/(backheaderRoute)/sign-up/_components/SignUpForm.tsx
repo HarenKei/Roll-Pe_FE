@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState, useTransition } from "react";
 import { COLORS } from "@/public/styles/colors";
 import { signUp } from "@/app/api/auth/sign-up/route";
+import Loading from "@/app/_components/ui/loading/Loading";
 
 interface SignUpInputs {
   email: string;
@@ -22,17 +23,19 @@ const SignUpForm: React.FC = () => {
   } = useForm<SignUpInputs>();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const nicknameRegex = /^[a-zA-Z0-9ㄱ-ㅎ가-힣]{2,6}$/;
+  const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,}$/;
 
   const [emailError, setEmailError] = useState<string>("");
   const [nicknameError, setNicknameError] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
+  const [passwordCheckError, setPasswordCheckError] = useState<string>("");
   const [check, setCheck] = useState<string[]>([]);
 
   const [isPending, startTransition] = useTransition();
 
   const emailChangeHandler = (email: string) => {
     if (email && !emailRegex.test(email)) {
-      setEmailError("유효한 이메일 주소를 입력해주세요.");
+      setEmailError("이메일을 다시 확인하세요.");
     } else {
       setEmailError("");
     }
@@ -40,9 +43,19 @@ const SignUpForm: React.FC = () => {
 
   const nicknameChangeHandler = (nickname: string) => {
     if (nickname && !nicknameRegex.test(nickname)) {
-      setNicknameError("2-6자의 한글, 영문, 숫자만 입력 가능합니다.");
+      setNicknameError("닉네임은 2-6자로 적어주세요.");
     } else {
       setNicknameError("");
+    }
+  };
+
+  const passwordChangeHandler = (password: string) => {
+    if (password && !passwordRegex.test(password)) {
+      setPasswordError(
+        "비밀번호는 8자 이상, 대소문자, 숫자, 특수문자를 포함해야 합니다."
+      );
+    } else {
+      setPasswordError("");
     }
   };
 
@@ -84,6 +97,10 @@ const SignUpForm: React.FC = () => {
     nicknameChangeHandler(watch("nickname"));
   }, [watch("nickname"), nicknameChangeHandler]);
 
+  useEffect(() => {
+    passwordChangeHandler(watch("password"));
+  }, [watch("password"), passwordChangeHandler]);
+
   return (
     <FormWrapper>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -107,17 +124,20 @@ const SignUpForm: React.FC = () => {
           placeholder={"비밀번호"}
           {...register("password")}
         />
+        <p className={"error-message"}>
+          {passwordError !== "" && passwordError}
+        </p>
         <StyledInput
           type={"password"}
           placeholder={"비밀번호 확인"}
           onChange={(e) => {
             if (watch("password") !== e.target.value)
-              setPasswordError("비밀번호가 일치하지 않습니다");
-            else setPasswordError("");
+              setPasswordCheckError("비밀번호가 일치하지 않습니다");
+            else setPasswordCheckError("");
           }}
         />
         <p className={"error-message"}>
-          {passwordError !== "" && passwordError}
+          {passwordCheckError !== "" && passwordCheckError}
         </p>
         <div className={"checkbox-container"}>
           <Checkbox

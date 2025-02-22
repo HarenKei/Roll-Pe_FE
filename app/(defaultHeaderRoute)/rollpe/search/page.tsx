@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import { SearchInput } from "@/app/_components/ui/input/Input";
 import { RollpeListItemProps } from "@/public/utils/types";
-import RollpeList from "@/app/_components/ui/list/RollpeList";
+import { RollpeSearchList } from "@/app/_components/ui/list/RollpeList";
 
 const DUMMY_ROLLPE_LIST: RollpeListItemProps[] = [
   {
@@ -61,7 +61,7 @@ const RollpeSearchPage: React.FC = () => {
           <h1>진행 중인 롤페를 검색해요.</h1>
           <SearchInput />
         </div>
-        <RollpeList
+        <RollpeSearchList
           rollpeList={DUMMY_ROLLPE_LIST}
           resultText={"의 검색 결과"}
         />

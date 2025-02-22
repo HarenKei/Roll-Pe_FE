@@ -52,10 +52,6 @@ const SignIn: React.FC = () => {
           <button className={"social-item google"}>
             <Image src={Google} width={20} height={20} alt={"Google 로그인"} />
           </button>
-
-          <button className={"social-item apple"}>
-            <Image src={Apple} width={20} height={20} alt={"Google 로그인"} />
-          </button>
         </div>
 
         <div className={"account-menu-container service-menu-container"}>

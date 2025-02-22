@@ -2,50 +2,85 @@
 import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import DUMMY from "@/public/images/image/image_templete.png";
 import {
   Button,
   ButtonSecondary,
 } from "@/app/_components/ui/button/StyledButton";
+import { Modal } from "@/app/_components/ui/modal/Modal";
+import ParticipantsList from "@/app/_components/ui/modal/modal-contents/participants-list/ParticipantsList";
+import RollpeEditForm from "@/app/_components/ui/modal/modal-contents/rollpe-edit/RollpeEditForm";
 
 const RollpeDetailPage: React.FC = () => {
+  const [isParticipantsModalOpen, setIsParticipantsModalOpen] =
+    useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(true);
   const rollpeId = useParams().rollpeId;
 
+  const onClickParticipantListOpen = () => {
+    setIsParticipantsModalOpen(true);
+  };
+
+  const onClickEditOpen = () => {
+    setIsEditModalOpen(true);
+  };
+
   return (
-    <RollpeDetailPageWrapper>
-      <RollpeDetailPageContainer>
-        <div className={"title-wrapper"}>
-          <h1>제목영역 롤페 아이디: {rollpeId}</h1>
-        </div>
-
-        <div className={"preview-wrapper"}>
-          <div className={"preview-image-wrapper"}>
-            <Image src={DUMMY} alt={"미리보기 이미지"} layout="responsive" />
+    <>
+      <RollpeDetailPageWrapper>
+        <RollpeDetailPageContainer>
+          <div className={"title-wrapper"}>
+            <h1>제목영역 롤페 아이디: {rollpeId}</h1>
           </div>
-          <p>롤페를 눌러 마음을 전달하세요!</p>
-        </div>
 
-        <div className={"writer-wrapper"}>
-          <h4>작성자(3/13)</h4>
-          <ul className={"writer-container"}>
-            <li>김텐가(TengaSuki)</li>
-            <li>김텐가(TengaSuki)</li>
-            <li>김텐가(TengaSuki)</li>
-          </ul>
-        </div>
+          <div className={"preview-wrapper"}>
+            <div className={"preview-image-wrapper"}>
+              <Image src={DUMMY} alt={"미리보기 이미지"} layout="responsive" />
+            </div>
+            <p>롤페를 눌러 마음을 전달하세요!</p>
+          </div>
 
-        <div className={"participant-button-wrapper"}>
-          <button className={"participant-list-open"}>참여자 목록 &gt;</button>
-        </div>
+          <div className={"writer-wrapper"}>
+            <h4>작성자(3/13)</h4>
+            <ul className={"writer-container"}>
+              <li>김텐가(TengaSuki)</li>
+              <li>김텐가(TengaSuki)</li>
+              <li>김텐가(TengaSuki)</li>
+            </ul>
+          </div>
 
-        <div className={"menu-button-container"}>
-          <Button text={"공유하기"} route={""} />
-          <ButtonSecondary text={"수정하기"} route={""} />
-        </div>
-      </RollpeDetailPageContainer>
-    </RollpeDetailPageWrapper>
+          <div className={"participant-button-wrapper"}>
+            <button
+              className={"participant-list-open"}
+              onClick={onClickParticipantListOpen}
+            >
+              참여자 목록 &gt;
+            </button>
+          </div>
+
+          <div className={"menu-button-container"}>
+            <Button text={"공유하기"} route={""} />
+            <ButtonSecondary text={"수정하기"} route={""} />
+          </div>
+        </RollpeDetailPageContainer>
+      </RollpeDetailPageWrapper>
+      {isParticipantsModalOpen && (
+        <Modal
+          title={"참여자 목록"}
+          children={<ParticipantsList />}
+          setModalState={setIsParticipantsModalOpen}
+        />
+      )}
+      {isEditModalOpen && (
+        <Modal
+          title={"수정하기"}
+          children={<RollpeEditForm />}
+          setModalState={setIsEditModalOpen}
+        />
+      )}
+    </>
   );
 };
 

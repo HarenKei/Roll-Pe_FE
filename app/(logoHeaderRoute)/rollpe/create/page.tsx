@@ -2,7 +2,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
-import { TextInput } from "@/app/_components/ui/input/Input";
+import { StyledInput } from "@/app/_components/ui/input/Input";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
@@ -15,10 +15,9 @@ import {
 } from "@/app/_components/ui/card/create-rollpe-swiper/CreateRollpeSipwerCard";
 import Image from "next/image";
 import DUMMY from "@/public/images/image/image_templete.png";
-import {
-  Button,
-  StyledButtonSecondary,
-} from "@/app/_components/ui/button/StyledButton";
+import { Button } from "@/app/_components/ui/button/StyledButton";
+import { Modal } from "@/app/_components/ui/modal/Modal";
+import ReceiverSelect from "@/app/_components/ui/modal/modal-contents/receiver-select/ReceiverSelect";
 
 interface RatioSwiperCardData {
   id: number;
@@ -90,144 +89,170 @@ const RollpeCreatePage: React.FC = () => {
   const [themeSelected, setThemeSelected] = useState<number>(1);
   const [sizeSelected, setSizeSelected] = useState<number>(1);
   const [isPublic, setIsPublic] = useState<boolean>(true);
+  const [receiveUser, setReceiveUser] =
+    useState<string>("전달할 사람을 지정해주세요.");
+  const [receiveModalOpen, setReceiveModalOpen] = useState<boolean>(false);
 
   const onPublicClickHandler = () => {
     setIsPublic(!isPublic);
   };
 
   return (
-    <RollpeCreatePageWrapper>
-      <RollpeCreatePageContainer>
-        <div className={"title-wrapper"}>
-          <h1>롤페 만들기</h1>
-        </div>
-
-        <div className={"title-input-container"}>
-          <h3>제목을 입력하세요</h3>
-          <TextInput type={"text"} placeholder="제목 입력" />
-        </div>
-
-        <div className={"ratio-select-container"}>
-          <h3>비율을 선택하세요</h3>
-          <SwiperWrapper>
-            <Swiper
-              slidesPerView={"auto"}
-              spaceBetween={20}
-              freeMode={true}
-              modules={[FreeMode]}
-              className="ratioSwiperWrapper"
-            >
-              {RATIO_CARD_LIST.map(
-                (cardData: RatioSwiperCardData, index: number) => (
-                  <SwiperSlide className={"ratioSwiperSlide"} key={index}>
-                    <RatioSwiperCard
-                      id={cardData.id}
-                      exam={cardData.exam}
-                      title={cardData.title}
-                      isSelected={ratioSelected}
-                      setIsSelected={setRatioSelected}
-                    />
-                  </SwiperSlide>
-                )
-              )}
-            </Swiper>
-          </SwiperWrapper>
-        </div>
-
-        <div className={"theme-select-container"}>
-          <h3>테마를 선택하세요</h3>
-          <SwiperWrapper>
-            <Swiper
-              slidesPerView={"auto"}
-              spaceBetween={20}
-              freeMode={true}
-              modules={[FreeMode]}
-              className="themeSwiperWrapper"
-            >
-              {THEME_CARD_LIST.map(
-                (cardData: ThemeSwiperCardData, index: number) => (
-                  <SwiperSlide className={"themeSwiperSlide"} key={index}>
-                    <ThemeSwiperCard
-                      id={cardData.id}
-                      exam={cardData.exam}
-                      title={cardData.title}
-                      isSelected={themeSelected}
-                      setIsSelected={setThemeSelected}
-                    />
-                  </SwiperSlide>
-                )
-              )}
-            </Swiper>
-          </SwiperWrapper>
-        </div>
-
-        <div className={"size-select-container"}>
-          <h3>크기를 선택하세요</h3>
-          <SwiperWrapper>
-            <Swiper
-              slidesPerView={"auto"}
-              spaceBetween={20}
-              freeMode={true}
-              modules={[FreeMode]}
-              className="sizeSwiperWrapper"
-            >
-              {SIZE_CARD_LIST.map(
-                (cardData: SizeSwiperCardData, index: number) => (
-                  <SwiperSlide className={"sizeSwiperSlide"} key={index}>
-                    <SizeSwiperCard
-                      id={cardData.id}
-                      title={cardData.title}
-                      max={cardData.max}
-                      isSelected={sizeSelected}
-                      setIsSelected={setSizeSelected}
-                    />
-                  </SwiperSlide>
-                )
-              )}
-            </Swiper>
-          </SwiperWrapper>
-        </div>
-
-        <div className={"public-select-container"}>
-          <div className={"sub-title"}>
-            <h3>공개 설정 여부</h3>
-            <h4>링크를 가진 모든 분들이 볼 수 있어요.</h4>
+    <>
+      <RollpeCreatePageWrapper>
+        <RollpeCreatePageContainer>
+          <div className={"title-wrapper"}>
+            <h1>롤페 만들기</h1>
           </div>
-          <Tab isPublic={isPublic}>
-            <button
-              className={"tab-item public"}
-              onClick={onPublicClickHandler}
-            >
-              <p>공개</p>
-            </button>
-            <button
-              className={"tab-item private"}
-              onClick={onPublicClickHandler}
-            >
-              <p>비공개</p>
-            </button>
-          </Tab>
-          {isPublic || <TextInput type={"password"} placeholder={"비밀번호"} />}
-        </div>
 
-        <div className={"end-select-container"}>
-          <h3>종료일을 지정해주세요</h3>
-          <TextInput
-            type={"datetime-local"}
-            placeholder={"종료일을 선택해주세요"}
-          />
-        </div>
-
-        <div className={"preview-container"}>
-          <h3>미리보기</h3>
-          <div className={"preview-wrapper"}>
-            <Image src={DUMMY} alt={"미리보기"} layout="responsive" />
+          <div className={"title-input-container"}>
+            <h3>제목을 입력하세요</h3>
+            <StyledInput type={"text"} placeholder="제목 입력" />
           </div>
-        </div>
 
-        <Button text={"만들기"} route={""} />
-      </RollpeCreatePageContainer>
-    </RollpeCreatePageWrapper>
+          <div className={"ratio-select-container"}>
+            <h3>비율을 선택하세요</h3>
+            <SwiperWrapper>
+              <Swiper
+                slidesPerView={"auto"}
+                spaceBetween={20}
+                freeMode={true}
+                modules={[FreeMode]}
+                className="ratioSwiperWrapper"
+              >
+                {RATIO_CARD_LIST.map(
+                  (cardData: RatioSwiperCardData, index: number) => (
+                    <SwiperSlide className={"ratioSwiperSlide"} key={index}>
+                      <RatioSwiperCard
+                        id={cardData.id}
+                        exam={cardData.exam}
+                        title={cardData.title}
+                        isSelected={ratioSelected}
+                        setIsSelected={setRatioSelected}
+                      />
+                    </SwiperSlide>
+                  )
+                )}
+              </Swiper>
+            </SwiperWrapper>
+          </div>
+
+          <div className={"theme-select-container"}>
+            <h3>테마를 선택하세요</h3>
+            <SwiperWrapper>
+              <Swiper
+                slidesPerView={"auto"}
+                spaceBetween={20}
+                freeMode={true}
+                modules={[FreeMode]}
+                className="themeSwiperWrapper"
+              >
+                {THEME_CARD_LIST.map(
+                  (cardData: ThemeSwiperCardData, index: number) => (
+                    <SwiperSlide className={"themeSwiperSlide"} key={index}>
+                      <ThemeSwiperCard
+                        id={cardData.id}
+                        exam={cardData.exam}
+                        title={cardData.title}
+                        isSelected={themeSelected}
+                        setIsSelected={setThemeSelected}
+                      />
+                    </SwiperSlide>
+                  )
+                )}
+              </Swiper>
+            </SwiperWrapper>
+          </div>
+
+          <div className={"size-select-container"}>
+            <h3>크기를 선택하세요</h3>
+            <SwiperWrapper>
+              <Swiper
+                slidesPerView={"auto"}
+                spaceBetween={20}
+                freeMode={true}
+                modules={[FreeMode]}
+                className="sizeSwiperWrapper"
+              >
+                {SIZE_CARD_LIST.map(
+                  (cardData: SizeSwiperCardData, index: number) => (
+                    <SwiperSlide className={"sizeSwiperSlide"} key={index}>
+                      <SizeSwiperCard
+                        id={cardData.id}
+                        title={cardData.title}
+                        max={cardData.max}
+                        isSelected={sizeSelected}
+                        setIsSelected={setSizeSelected}
+                      />
+                    </SwiperSlide>
+                  )
+                )}
+              </Swiper>
+            </SwiperWrapper>
+          </div>
+
+          <div className={"public-select-container"}>
+            <div className={"sub-title"}>
+              <h3>공개 설정 여부</h3>
+              <h4>링크를 가진 모든 분들이 볼 수 있어요.</h4>
+            </div>
+            <Tab isPublic={isPublic}>
+              <button
+                className={"tab-item public"}
+                onClick={onPublicClickHandler}
+              >
+                <p>공개</p>
+              </button>
+              <button
+                className={"tab-item private"}
+                onClick={onPublicClickHandler}
+              >
+                <p>비공개</p>
+              </button>
+            </Tab>
+            {isPublic || (
+              <StyledInput type={"password"} placeholder={"비밀번호"} />
+            )}
+          </div>
+
+          <div className={"end-select-container"}>
+            <h3>종료일을 지정해주세요</h3>
+            <StyledInput
+              type={"datetime-local"}
+              placeholder={"종료일을 선택해주세요"}
+            />
+          </div>
+
+          <div className={"end-select-container"}>
+            <h3>전달할 사람을 지정해주세요</h3>
+            <button
+              className={"receive-user-button"}
+              onClick={() => {
+                setReceiveModalOpen(true);
+              }}
+            >
+              {receiveUser}
+            </button>
+          </div>
+
+          <div className={"preview-container"}>
+            <h3>미리보기</h3>
+            <div className={"preview-wrapper"}>
+              <Image src={DUMMY} alt={"미리보기"} layout="responsive" />
+            </div>
+          </div>
+
+          <Button text={"만들기"} route={""} />
+        </RollpeCreatePageContainer>
+      </RollpeCreatePageWrapper>
+      {receiveModalOpen && (
+        <Modal
+          title={"전달하기"}
+          children={<ReceiverSelect />}
+          setModalState={setReceiveModalOpen}
+        />
+      )}
+    </>
   );
 };
 
@@ -277,6 +302,16 @@ const RollpeCreatePageContainer = styled.div`
       & > img {
         width: 100%;
       }
+    }
+
+    & > .receive-user-button {
+      all: unset;
+      cursor: pointer;
+      padding: 1rem;
+      width: calc(100% - 2rem);
+      border: 2px solid ${COLORS.ROLLPE_SECONDARY};
+      border-radius: 1rem;
+      font-size: 1.25rem;
     }
   }
 
