@@ -13,3 +13,15 @@ export interface RollpeListProps {
   rollpeList: RollpeListItemProps[];
   resultText: string;
 }
+
+
+export interface MainRollpeCardProps {
+  id: number;
+  title: string;
+  viewStat: boolean;
+  receivingStat: number;
+  receivingDate: string;
+  hostName: string;
+  code: string;
+  theme: any[];
+}
