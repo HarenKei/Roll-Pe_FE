@@ -2,31 +2,49 @@
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
+import { MainRollpeCardProps } from "@/public/utils/types";
 
-const MainRollpeCard: React.FC = () => {
+const MainRollpeCard: React.FC<MainRollpeCardProps> = (
+  data: MainRollpeCardProps
+) => {
+  const {
+    id,
+    title,
+    viewStat,
+    receivingStat,
+    receivingDate,
+    hostName,
+    code,
+    theme,
+  } = data;
+
   return (
     <CardWrapper>
-      <div className={"card-image"}>
-        <Badge>
-          <p>D-30</p>
-        </Badge>
+      <CardContainer>
+        <div className={"card-image"}>
+          <Badge>
+            <p>D-30</p>
+          </Badge>
 
-        <Image
-          src={"/images/image/image_dummy_cake.png"}
-          width={50}
-          height={46}
-          alt={""}
-        />
-      </div>
-      <div className={"card-contents"}>
-        <h3 className={"card-title"}>롤페 제목</h3>
-        <p className={"card-user"}>김테스트1</p>
-      </div>
+          <Image
+            src={"/images/image/image_dummy_cake.png"}
+            width={50}
+            height={46}
+            alt={""}
+          />
+        </div>
+        <div className={"card-contents"}>
+          <h3 className={"card-title"}>{title}</h3>
+          <p className={"card-user"}>{hostName}</p>
+        </div>
+      </CardContainer>
     </CardWrapper>
   );
 };
 
-const CardWrapper = styled.button`
+const CardWrapper = styled.li``;
+
+const CardContainer = styled.button`
   all: unset;
 
   display: flex;
