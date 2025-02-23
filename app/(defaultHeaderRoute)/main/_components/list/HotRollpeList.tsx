@@ -25,10 +25,6 @@ const HotRollpeList: React.FC = () => {
     getList();
   }, []);
 
-  useEffect(() => {
-    console.log(hotRollpeList);
-  }, [hotRollpeList]);
-
   return (
     <ListContainer>
       {hotRollpeList &&
