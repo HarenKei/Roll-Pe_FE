@@ -50,7 +50,7 @@ const ReceiverSelect: React.FC = () => {
           setSelectedReceiver={setSelectedReceiver}
         />
       </ReceiverSelectList>
-      <Button text={"선택완료"} route={"/"} />
+      <Button text={"선택완료"} onClickHandler={() => {}} />
     </ReceiverSelectContainer>
   );
 };
@@ -76,6 +76,7 @@ const ReceiverListItem: React.FC<ReceiverSelectItemProps> = ({
     </ReceiverListItemContainer>
   );
 };
+
 const ReceiverSelectContainer = styled.div`
   display: flex;
   flex-direction: column;

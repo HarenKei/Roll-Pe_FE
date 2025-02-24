@@ -6,7 +6,8 @@ import React from "react";
 
 interface ButtonProps {
   text: string;
-  route: string;
+  onClickHandler?: () => void;
+  route?: string;
 }
 
 interface SubmitProps {
@@ -14,24 +15,40 @@ interface SubmitProps {
   isDisabled?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ text, route }) => {
+export const Button: React.FC<ButtonProps> = ({
+  text,
+  onClickHandler,
+  route,
+}) => {
   const router = useRouter();
-
-  const onClickHandler = () => {
-    router.push(route);
-  };
-
-  return <StyledButton onClick={onClickHandler}>{text}</StyledButton>;
+  return route && !onClickHandler ? (
+    <StyledButton
+      onClick={() => {
+        router.push(route);
+      }}
+    >
+      {text}
+    </StyledButton>
+  ) : (
+    <StyledButton onClick={onClickHandler}>{text}</StyledButton>
+  );
 };
 
-export const ButtonSecondary: React.FC<ButtonProps> = ({ text, route }) => {
+export const ButtonSecondary: React.FC<ButtonProps> = ({
+  text,
+  onClickHandler,
+  route,
+}) => {
   const router = useRouter();
-
-  const onClickHandler = () => {
-    router.push(route);
-  };
-
-  return (
+  return route && !onClickHandler ? (
+    <StyledButtonSecondary
+      onClick={() => {
+        router.push(route);
+      }}
+    >
+      {text}
+    </StyledButtonSecondary>
+  ) : (
     <StyledButtonSecondary onClick={onClickHandler}>
       {text}
     </StyledButtonSecondary>

@@ -55,7 +55,7 @@ const RollpeEditForm: React.FC = () => {
         </div>
 
         <div className={"button-wrapper"}>
-          <ButtonSecondary text={"롤페 종료하기"} route={""} />
+          <ButtonSecondary text={"롤페 종료하기"} onClickHandler={() => {}} />
           <ButtonSubmit text={"변경사항 저장"} />
         </div>
       </Form>
