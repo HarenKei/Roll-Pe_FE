@@ -25,3 +25,8 @@ export interface MainRollpeCardProps {
   code: string;
   theme: any[];
 }
+
+export interface userIntroResponse {
+  host: number;
+  heart: number;
+}

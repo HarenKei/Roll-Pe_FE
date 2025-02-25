@@ -1,7 +1,6 @@
+"use server";
 import axios from "axios";
 import { cookies } from "next/headers";
-import { getToken } from "../utils/getCookies";
-import { logOutOk } from "@/app/api/auth/log-out/route";
 
 // credentials가 필요 없는 요청
 export const axiosInstance = axios.create({
@@ -33,36 +32,32 @@ axiosInstanceAuth.interceptors.response.use(
     return response;
 
   }, async (error) => {
-    console.log("인터셉터 에러!!");
-    console.error(error.response);
-    const refreshToken = cookies().get("refreshToekn");
+    if (error.response.status === 401) {
+      const refreshToken = cookies().get("refreshToken");
 
-    if (refreshToken) {
-      try {
-        const response = await axiosInstanceAuth.post(`/user/token/refresh`, {
-          refresh: refreshToken.value,
-        }).then((res) => {
-          console.log("토큰 재발급 성공: ", res.data);
-          cookies().set("accessToken", res.data.data.access, {
+      if (refreshToken && !error.config._retry) {
+        error.config._retry = true; // 무한 루프 방지를 위한 플래그 설정
+        try {
+          const response = await axiosInstance.post("/user/token/refresh", { refresh: refreshToken.value });
+          console.log("토큰 재발급 성공");
+
+          cookies().set("accessToken", response.data.access, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
+            path: "/",
           });
-        })
-      } catch (error) {
-        try {
-          logOutOk().then((res) => {
-            console.log("로그아웃 성공");
-            console.log(res);
 
-          }).catch((error) => {
-            console.log("로그아웃 에러 자동1");
-          })
+          error.config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+
+          return axiosInstanceAuth(error.config);
         } catch (error) {
-          console.log("로그아웃 에러 자동2");
+          // 토큰 재발급 실패 시 쿠키에서 토큰 삭제
+          cookies().set("accessToken", "");
+          cookies().set("refreshToken", "");
+          return Promise.reject(error);
         }
       }
     }
-
   }
 )
