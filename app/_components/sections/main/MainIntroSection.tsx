@@ -6,8 +6,14 @@ import { MainContentSectionWrapper } from "../../ui/sections/MainSection";
 import { COLORS } from "@/public/styles/colors";
 import logo from "@/public/images/logos/logo.korean.png";
 import arrowDown from "@/public/images/icons/icon_arrow_down.svg";
+import { useSelector } from "react-redux";
+import { RootState } from "@/public/redux/store";
+import { useRouter } from "next/navigation";
 
 const MainIntroSection: React.FC = () => {
+  const router = useRouter();
+  const user = useSelector((state: RootState) => state.simpleUser);
+
   return (
     <MainIntroSectionWrapper>
       <MainIntroContentsContainer>
@@ -25,7 +31,16 @@ const MainIntroSection: React.FC = () => {
           <br />
           사랑하는 사람에게 전달해보세요
         </p>
-        <Button text={"롤페 시작하기"} route={"/main"} />
+        <Button
+          text={"롤페 시작하기"}
+          onClickHandler={() => {
+            if (!user.name && !user.email) {
+              router.push("/sign-up");
+            } else {
+              router.push("/main");
+            }
+          }}
+        />
       </MainIntroContentsContainer>
       <div className={"scroll-down"}>
         <Image src={arrowDown} width={15} height={15} alt={"scroll down"} />

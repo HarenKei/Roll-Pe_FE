@@ -10,5 +10,7 @@ const slideMenuState = createSlice({
   }
 })
 
+
+
 export const { setSlide } = slideMenuState.actions;
 export default slideMenuState.reducer;

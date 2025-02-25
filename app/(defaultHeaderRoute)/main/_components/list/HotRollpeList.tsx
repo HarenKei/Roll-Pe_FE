@@ -1,6 +1,6 @@
 "use client";
 import { useTransition, useEffect, useState } from "react";
-import { hotList } from "@/app/api/main/hot-list/route";
+import { hotList } from "@/app/api/main/main-page/route";
 import MainRollpeCard from "@/app/_components/ui/card/main-rollpe-list/MainRollpeCard";
 import styled from "styled-components";
 import { MainRollpeCardProps } from "@/public/utils/types";
