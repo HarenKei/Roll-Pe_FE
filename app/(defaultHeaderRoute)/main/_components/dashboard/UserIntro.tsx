@@ -1,14 +1,11 @@
 "use client";
 import { useSelector } from "react-redux";
-import { userDashboard } from "@/app/api/main/main-page/route";
+import { getUserRollpe } from "@/app/api/rollpe/route";
 import { useEffect, useState, useTransition } from "react";
 import { RootState } from "@/public/redux/store";
 import Loading from "@/app/_components/ui/loading/Loading";
+import { userIntroResponse } from "@/public/utils/types";
 
-interface userIntroResponse {
-  host: number;
-  heart: number;
-}
 const UserIntro: React.FC = () => {
   const [isPending, startTransition] = useTransition();
   const [userIntroInfo, setUserIntroInfo] = useState<userIntroResponse>({
@@ -18,14 +15,13 @@ const UserIntro: React.FC = () => {
 
   const getUserIntroInfo = () => {
     startTransition(async () => {
-      try {
-        const response = userDashboard().then((res) => {
+      await getUserRollpe("main")
+        .then((res) => {
           setUserIntroInfo(res);
+        })
+        .catch((error) => {
+          throw new Error();
         });
-      } catch (error) {
-        console.error(error);
-        throw new Error();
-      }
     });
   };
 

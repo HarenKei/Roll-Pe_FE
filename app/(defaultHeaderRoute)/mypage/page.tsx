@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import Apple from "@/public/images/icons/icon_apple.svg";
@@ -11,10 +11,18 @@ import { useTransition } from "react";
 import { logOutOk } from "@/app/api/auth/log-out/route";
 import Loading from "@/app/_components/ui/loading/Loading";
 import { persistor } from "@/public/redux/store";
+import { useRouter } from "next/navigation";
+import { getUserRollpe } from "@/app/api/rollpe/route";
+import { userIntroResponse } from "@/public/utils/types";
 
 const MyPage: React.FC = () => {
   const [isPending, startTransition] = useTransition();
   const user = useSelector((state: RootState) => state.simpleUser);
+  const [userRollpeCount, setUserRollpeCount] = useState<userIntroResponse>({
+    heart: 0,
+    host: 0,
+  });
+  const router = useRouter();
 
   const logOutHandler = async () => {
     startTransition(async () => {
@@ -22,12 +30,39 @@ const MyPage: React.FC = () => {
         .then((res) => {
           persistor.purge();
           alert("로그아웃 되었습니다.");
+          router.push("/");
         })
         .catch((error) => {
           console.log(error);
         });
     });
   };
+
+  const getUserIntroInfo = () => {
+    startTransition(async () => {
+      await getUserRollpe("main")
+        .then((res) => {
+          setUserRollpeCount(res);
+        })
+        .catch((error) => {
+          // throw new Error();
+          console.log(error);
+        });
+    });
+  };
+
+  useEffect(() => {
+    const notLoginHandler = () => {
+      if (!user.name) {
+        alert("로그인이 필요한 페이지입니다.\n로그인 페이지로 이동합니다.");
+        router.push("/sign-in");
+      } else {
+        getUserIntroInfo();
+      }
+    };
+
+    notLoginHandler();
+  }, []);
 
   return isPending ? (
     <Loading />
@@ -50,12 +85,12 @@ const MyPage: React.FC = () => {
                   />
                 </button>
               </div>
-              <p className={"user-id"}>tenga_Kim0601</p>
+              <p className={"user-id"}>{user.email}</p>
             </div>
 
             <div className={"user-rollpe-status-container"}>
-              <p>15개의 롤페를 만드셨어요.</p>
-              <p>15개의 마음을 작성하셨어요.</p>
+              <p>{userRollpeCount.host}개의 롤페를 만드셨어요.</p>
+              <p>{userRollpeCount.heart}개의 마음을 작성하셨어요.</p>
             </div>
           </div>
         </MyPageProfileWrapper>

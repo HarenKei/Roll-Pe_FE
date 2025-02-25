@@ -3,6 +3,9 @@ import { COLORS } from "@/public/styles/colors";
 import styled from "styled-components";
 import { RollpeListItemProps } from "@/public/utils/types";
 import { RollpeList } from "@/app/_components/ui/list/RollpeList";
+import { useEffect, useState, useTransition } from "react";
+import { getUserRollpe } from "@/app/api/rollpe/route";
+import Loading from "@/app/_components/ui/loading/Loading";
 
 const DUMMY_ROLLPE_LIST: RollpeListItemProps[] = [
   {
@@ -53,7 +56,29 @@ const DUMMY_ROLLPE_LIST: RollpeListItemProps[] = [
 ];
 
 const MyRollpePage: React.FC = () => {
-  return (
+  const [isPending, startTransition] = useTransition();
+  const [myRollpeList, setMyRollpeList] = useState<RollpeListItemProps[]>([]);
+
+  const getMyRollpeList = () => {
+    startTransition(async () => {
+      await getUserRollpe("my")
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.error(error);
+          throw new Error();
+        });
+    });
+  };
+
+  useEffect(() => {
+    getMyRollpeList();
+  }, []);
+
+  return isPending ? (
+    <Loading />
+  ) : (
     <MyRollpeWrapper>
       <MyRollpeContainer>
         <div className={"title-wrapper"}>

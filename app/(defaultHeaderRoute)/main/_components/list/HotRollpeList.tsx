@@ -1,6 +1,6 @@
 "use client";
 import { useTransition, useEffect, useState } from "react";
-import { hotList } from "@/app/api/main/main-page/route";
+import { getHotRollpeList } from "@/app/api/rollpe/route";
 import MainRollpeCard from "@/app/_components/ui/card/main-rollpe-list/MainRollpeCard";
 import styled from "styled-components";
 import { MainRollpeCardProps } from "@/public/utils/types";
@@ -11,7 +11,7 @@ const HotRollpeList: React.FC = () => {
   const getList = () => {
     startTransition(async () => {
       try {
-        const result = await hotList().then((res) => {
+        const result = await getHotRollpeList().then((res) => {
           setHotRollpeList(res.data);
         });
       } catch (error) {
