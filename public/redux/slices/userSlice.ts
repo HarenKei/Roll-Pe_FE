@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { PURGE } from "redux-persist";
 
 interface SimpleUser {
   name: string;
@@ -22,8 +22,13 @@ const simpleUserSlice = createSlice({
     initUser: (state) => {
       state = initialState;
     }
-  }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => initialState);
+  },
 })
+
+
 
 export const { setUser, initUser } = simpleUserSlice.actions;
 export default simpleUserSlice.reducer;

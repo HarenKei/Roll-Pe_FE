@@ -1,21 +1,37 @@
 "use client";
+
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import Apple from "@/public/images/icons/icon_apple.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/public/redux/store";
-import { useEffect } from "react";
+import { useTransition } from "react";
+import { logOutOk } from "@/app/api/auth/log-out/route";
+import Loading from "@/app/_components/ui/loading/Loading";
+import { persistor } from "@/public/redux/store";
 
 const MyPage: React.FC = () => {
+  const [isPending, startTransition] = useTransition();
   const user = useSelector((state: RootState) => state.simpleUser);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  const logOutHandler = async () => {
+    startTransition(async () => {
+      await logOutOk()
+        .then((res) => {
+          persistor.purge();
+          alert("로그아웃 되었습니다.");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+  };
 
-  return (
+  return isPending ? (
+    <Loading />
+  ) : (
     <MyPageWrapper>
       <MyPageContainer>
         <h1>마이페이지</h1>
@@ -57,7 +73,16 @@ const MyPage: React.FC = () => {
           <li>
             <Link href={"/mypage/invited-rollpe"}>초대받은 롤페</Link>
           </li>
-          <li>로그아웃</li>
+          <li>
+            <button
+              className={"logout"}
+              onClick={() => {
+                logOutHandler();
+              }}
+            >
+              로그아웃
+            </button>
+          </li>
           <li>회원탈퇴</li>
         </MyPageMenuContainer>
       </MyPageContainer>
@@ -172,6 +197,11 @@ const MyPageMenuContainer = styled.ul`
 
     & > a {
       all: unset;
+    }
+
+    & > button {
+      all: unset;
+      cursor: pointer;
     }
   }
 
