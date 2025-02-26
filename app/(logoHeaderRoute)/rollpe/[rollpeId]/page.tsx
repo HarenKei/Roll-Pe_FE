@@ -15,7 +15,7 @@ import RollpeEditForm from "@/app/_components/ui/modal/modal-contents/rollpe-edi
 import ShareRollpe from "@/app/_components/ui/modal/modal-contents/share-rollpe/ShareRollpe";
 
 const RollpeDetailPage: React.FC = () => {
-  const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(true);
+  const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(false);
   const [isParticipantsModalOpen, setIsParticipantsModalOpen] =
     useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
