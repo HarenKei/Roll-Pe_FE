@@ -9,14 +9,16 @@ import {
   Button,
   ButtonSecondary,
 } from "@/app/_components/ui/button/StyledButton";
-import { Modal } from "@/app/_components/ui/modal/Modal";
+import { Modal, BottomModal } from "@/app/_components/ui/modal/Modal";
 import ParticipantsList from "@/app/_components/ui/modal/modal-contents/participants-list/ParticipantsList";
 import RollpeEditForm from "@/app/_components/ui/modal/modal-contents/rollpe-edit/RollpeEditForm";
+import ShareRollpe from "@/app/_components/ui/modal/modal-contents/share-rollpe/ShareRollpe";
 
 const RollpeDetailPage: React.FC = () => {
+  const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(true);
   const [isParticipantsModalOpen, setIsParticipantsModalOpen] =
     useState<boolean>(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(true);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const rollpeId = useParams().rollpeId;
 
   const onClickParticipantListOpen = () => {
@@ -25,6 +27,10 @@ const RollpeDetailPage: React.FC = () => {
 
   const onClickEditOpen = () => {
     setIsEditModalOpen(true);
+  };
+
+  const onClickShareOpen = () => {
+    setIsShareModalOpen(true);
   };
 
   return (
@@ -61,7 +67,12 @@ const RollpeDetailPage: React.FC = () => {
           </div>
 
           <div className={"menu-button-container"}>
-            <Button text={"공유하기"} route={""} />
+            <Button
+              text={"공유하기"}
+              onClickHandler={() => {
+                onClickShareOpen();
+              }}
+            />
             <ButtonSecondary text={"수정하기"} route={""} />
           </div>
         </RollpeDetailPageContainer>
@@ -78,6 +89,13 @@ const RollpeDetailPage: React.FC = () => {
           title={"수정하기"}
           children={<RollpeEditForm />}
           setModalState={setIsEditModalOpen}
+        />
+      )}
+      {isShareModalOpen && (
+        <BottomModal
+          title={"공유하기"}
+          children={<ShareRollpe />}
+          setModalState={setIsShareModalOpen}
         />
       )}
     </>
