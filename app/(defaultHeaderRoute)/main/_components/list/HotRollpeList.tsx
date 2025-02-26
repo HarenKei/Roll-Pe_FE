@@ -4,10 +4,25 @@ import { getHotRollpeList } from "@/app/api/rollpe/route";
 import MainRollpeCard from "@/app/_components/ui/card/main-rollpe-list/MainRollpeCard";
 import styled from "styled-components";
 import { MainRollpeCardProps } from "@/public/utils/types";
+import { useSelector } from "react-redux";
+import { RootState } from "@/public/redux/store";
+import { useRouter } from "next/navigation";
 
 const HotRollpeList: React.FC = () => {
   const [isPending, startTransition] = useTransition();
   const [hotRollpeList, setHotRollpeList] = useState<MainRollpeCardProps[]>([]);
+  const user = useSelector((state: RootState) => state.simpleUser);
+  const router = useRouter();
+
+  const notLoginHandler = () => {
+    if (!user.name) {
+      alert("로그인이 필요한 페이지입니다.\n로그인 페이지로 이동합니다.");
+      router.push("/sign-in");
+    } else {
+      getList();
+    }
+  };
+
   const getList = () => {
     startTransition(async () => {
       try {
@@ -22,7 +37,7 @@ const HotRollpeList: React.FC = () => {
   };
 
   useEffect(() => {
-    getList();
+    notLoginHandler();
   }, []);
 
   return (
