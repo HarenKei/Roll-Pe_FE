@@ -18,7 +18,7 @@ const Main: React.FC = () => {
         <DashboardWrapper>
           <UserIntro />
           <div className={"button-wrapper"}>
-            <Button text={"초대받은 롤페"} route={"#"} />
+            <Button text={"초대받은 롤페"} route={"/mypage/invited-rollpe"} />
             <ButtonSecondary text={"롤페 만들기"} route={"/rollpe/create"} />
           </div>
         </DashboardWrapper>

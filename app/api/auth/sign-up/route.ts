@@ -1,6 +1,5 @@
 "use server";
-
-import axios from "axios";
+import { axiosInstance } from "@/public/axios/axiosInstance";
 
 interface SignUpInputs {
   name: string;
@@ -12,17 +11,9 @@ interface SignUpInputs {
 }
 
 export const signUp = async (requestBody: SignUpInputs) => {
-  try {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/signup`, {
-      ...requestBody,
-    });
-
-    if (response.status === 200) {
-      console.log("회원가입 API 응답: ", response.data);
-    }
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-
+  return await axiosInstance.post("/user/signup", { ...requestBody }).then((response) => {
+    return Promise.resolve(response.data);
+  }).catch((error) => {
+    return Promise.reject(error);
+  });
 }

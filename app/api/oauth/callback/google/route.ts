@@ -1,11 +1,12 @@
 "use server";
 import { cookies } from "next/headers";
-import axios from "axios";
 import { axiosInstance } from "@/public/axios/axiosInstance";
 
-export const signIn = async (email: string, password: string) => {
-  return await axiosInstance.post("/user/signin", { email, password }).then((response) => {
-    if (response.data.data) {
+export const googleLogin = async (code: string) => {
+  return await axiosInstance.post("/user/social/login/google", { code: code }).then((response) => {
+    console.log(response.data);
+    if (response.data.data && response.data.data) {
+
       cookies().set("accessToken", response.data.data.access, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
@@ -20,9 +21,9 @@ export const signIn = async (email: string, password: string) => {
         path: "/",
       });
     }
+    return Promise.resolve(response.data);
   }).catch((error) => {
-    if (axios.isAxiosError(error) && error.response) {
-      return Promise.reject(error.response.data.message);
-    }
+    console.log(error.response);
+    return Promise.reject(error);
   });
-};
+}

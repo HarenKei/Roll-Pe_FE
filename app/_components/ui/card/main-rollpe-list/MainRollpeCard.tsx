@@ -89,6 +89,7 @@ const CardContainer = styled.button`
       font-weight: 400;
       font-style: normal;
       line-height: normal;
+
     }
 
     & > .card-user {
