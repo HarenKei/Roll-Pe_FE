@@ -10,8 +10,15 @@ import Google from "@/public/images/icons/icon_google.svg";
 import SignInForm from "./SignInForm";
 
 const KAKAO_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
-const redirectURI = "http://localhost:3000/oauth/callback/kakao";
-export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_API_KEY}&redirect_uri=${redirectURI}&scope=account_email`;
+const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_KEY;
+
+const REDIRECT_URI = {
+  kakao: "http://localhost:3000/oauth/callback/kakao",
+  google: "http://localhost:3000/oauth/callback/google",
+};
+
+export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_API_KEY}&redirect_uri=${REDIRECT_URI.kakao}&scope=account_email`;
+export const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI.google}&response_type=code&scope=email profile`;
 
 const SignIn: React.FC = () => {
   return (
@@ -49,20 +56,18 @@ const SignIn: React.FC = () => {
         </div>
 
         <div className={"social-login-container"}>
-          <Link href={KAKAO_AUTH_URL}>
-            <button className={"social-item kakao"}>
-              <Image
-                src={KakaoLogo}
-                width={20}
-                height={17.5}
-                alt={"카카오 로그인"}
-              />
-            </button>
+          <Link href={KAKAO_AUTH_URL} className={"social-item kakao"}>
+            <Image
+              src={KakaoLogo}
+              width={20}
+              height={17.5}
+              alt={"카카오 로그인"}
+            />
           </Link>
 
-          <button className={"social-item google"}>
+          <Link href={GOOGLE_AUTH_URL} className={"social-item google"}>
             <Image src={Google} width={20} height={20} alt={"Google 로그인"} />
-          </button>
+          </Link>
         </div>
 
         <div className={"account-menu-container service-menu-container"}>

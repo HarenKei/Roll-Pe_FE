@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { kakaoLogin } from "@/app/api/oauth/callback/kakao/route";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/public/redux/slices/userSlice";
+import { googleLogin } from "@/app/api/oauth/callback/google/route";
 
-const KakaoAuthHandler = () => {
+const GoogleAuthHandler = () => {
   const [code, setCode] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
@@ -21,7 +21,8 @@ const KakaoAuthHandler = () => {
   useEffect(() => {
     if (code) {
       startTransition(async () => {
-        kakaoLogin(code).then((res) => {
+        googleLogin(code).then((res) => {
+          console.log(res);
           dispatch(
             setUser({ name: res.data.user.name, email: res.data.user.email })
           );
@@ -36,4 +37,4 @@ const KakaoAuthHandler = () => {
   return null;
 };
 
-export default KakaoAuthHandler;
+export default GoogleAuthHandler;
