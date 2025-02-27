@@ -35,7 +35,7 @@ const MainIntroSection: React.FC = () => {
           text={"롤페 시작하기"}
           onClickHandler={() => {
             if (!user.name && !user.email) {
-              router.push("/sign-up");
+              router.push("/sign-in");
             } else {
               router.push("/main");
             }
