@@ -49,6 +49,7 @@ export default function RootLayout({
                 }}
               >
                 <SlideMenu />
+
                 {children}
                 <Footer />
               </div>
