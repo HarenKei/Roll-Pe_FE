@@ -1,13 +1,17 @@
 "use client";
+import Link from "next/link";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
 import logo from "@/public/images/logos/logo.korean.png";
-import Kakao from "@/public/images/icons/icon_kakao.svg";
+import KakaoLogo from "@/public/images/icons/icon_kakao.svg";
 import Google from "@/public/images/icons/icon_google.svg";
-import Apple from "@/public/images/icons/icon_apple.svg";
-import Link from "next/link";
 import SignInForm from "./SignInForm";
+
+const KAKAO_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
+const redirectURI = "http://localhost:3000/oauth/callback/kakao";
+export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_API_KEY}&redirect_uri=${redirectURI}&scope=account_email`;
 
 const SignIn: React.FC = () => {
   return (
@@ -45,9 +49,16 @@ const SignIn: React.FC = () => {
         </div>
 
         <div className={"social-login-container"}>
-          <button className={"social-item kakao"}>
-            <Image src={Kakao} width={20} height={17.5} alt={"카카오 로그인"} />
-          </button>
+          <Link href={KAKAO_AUTH_URL}>
+            <button className={"social-item kakao"}>
+              <Image
+                src={KakaoLogo}
+                width={20}
+                height={17.5}
+                alt={"카카오 로그인"}
+              />
+            </button>
+          </Link>
 
           <button className={"social-item google"}>
             <Image src={Google} width={20} height={20} alt={"Google 로그인"} />
