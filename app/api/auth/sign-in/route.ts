@@ -1,17 +1,11 @@
 "use server";
 import { cookies } from "next/headers";
 import axios from "axios";
+import { axiosInstance } from "@/public/axios/axiosInstance";
 
 export const signIn = async (email: string, password: string) => {
-
-  try {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/signin`, {
-      email,
-      password,
-    });
-
-    if (response.data.data && response.data.data) {
-
+  return await axiosInstance.post("/user/signin", { email, password }).then((response) => {
+    if (response.data.data) {
       cookies().set("accessToken", response.data.data.access, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
@@ -26,9 +20,9 @@ export const signIn = async (email: string, password: string) => {
         path: "/",
       });
     }
-
-    return response.data.data.user;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) throw new Error(error.response.data.message);
-  }
+  }).catch((error) => {
+    if (axios.isAxiosError(error) && error.response) {
+      return Promise.reject(error.response.data.message);
+    }
+  });
 };
