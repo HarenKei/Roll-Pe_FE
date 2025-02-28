@@ -98,7 +98,7 @@ const RollpeDetailPage: React.FC = () => {
       {isShareModalOpen && (
         <BottomModal
           title={"공유하기"}
-          children={<ShareRollpe />}
+          children={<ShareRollpe close={setIsShareModalOpen} />}
           setModalState={setIsShareModalOpen}
         />
       )}
