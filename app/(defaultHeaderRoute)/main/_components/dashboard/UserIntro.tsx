@@ -2,11 +2,13 @@
 import { useSelector } from "react-redux";
 import { getUserRollpe } from "@/app/api/rollpe/route";
 import { useEffect, useState, useTransition } from "react";
-import { RootState } from "@/public/redux/store";
+import { persistor, RootState } from "@/public/redux/store";
 import Loading from "@/app/_components/ui/loading/Loading";
 import { userIntroResponse } from "@/public/utils/types";
+import { useRouter } from "next/navigation";
 
 const UserIntro: React.FC = () => {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [userIntroInfo, setUserIntroInfo] = useState<userIntroResponse>({
     host: 0,
@@ -20,7 +22,11 @@ const UserIntro: React.FC = () => {
           setUserIntroInfo(res);
         })
         .catch((error) => {
-          throw new Error();
+          persistor.purge();
+          alert("시간이 경과되어 로그아웃 되었습니다.\n다시 로그인해주세요.");
+          setTimeout(() => {
+            router.push("/sign-in");
+          }, 500);
         });
     });
   };

@@ -77,7 +77,10 @@ const RollpeDetailPage: React.FC = () => {
                 onClickShareOpen();
               }}
             />
-            <ButtonSecondary text={"수정하기"} route={""} />
+            <ButtonSecondary
+              text={"수정하기"}
+              onClickHandler={onClickEditOpen}
+            />
           </div>
         </RollpeDetailPageContainer>
       </RollpeDetailPageWrapper>
