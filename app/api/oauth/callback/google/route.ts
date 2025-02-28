@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { axiosInstance } from "@/public/axios/axiosInstance";
 
 export const googleLogin = async (code: string) => {
-  return await axiosInstance.post("/user/social/login/google", { code: code }).then((response) => {
+  return await axiosInstance.post("/api/user/social/login/google", { code: code }).then((response) => {
     console.log(response.data);
     if (response.data.data && response.data.data) {
 

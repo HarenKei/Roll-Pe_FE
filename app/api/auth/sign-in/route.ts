@@ -4,7 +4,7 @@ import axios from "axios";
 import { axiosInstance } from "@/public/axios/axiosInstance";
 
 export const signIn = async (email: string, password: string) => {
-  return await axiosInstance.post("/user/signin", { email, password }).then((response) => {
+  return await axiosInstance.post("/api/user/signin", { email, password }).then((response) => {
     if (response.data.data) {
       cookies().set("accessToken", response.data.data.access, {
         httpOnly: true,

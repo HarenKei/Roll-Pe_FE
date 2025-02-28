@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { axiosInstance } from "@/public/axios/axiosInstance";
 
 export const kakaoLogin = async (code: string) => {
-  return await axiosInstance.post("/user/social/login/kakao", { code: code }).then((response) => {
+  return await axiosInstance.post("/api/user/social/login/kakao", { code: code }).then((response) => {
     if (response.data.data && response.data.data) {
 
       cookies().set("accessToken", response.data.data.access, {
