@@ -9,6 +9,7 @@ import {
   Button,
   ButtonSecondary,
 } from "@/app/_components/ui/button/StyledButton";
+import Marquee from "react-fast-marquee";
 
 const RollpeDetailPage: React.FC = () => {
   const rollpeId = useParams().rollpeId;
@@ -17,9 +18,12 @@ const RollpeDetailPage: React.FC = () => {
     <>
       <RollpeDetailPageWrapper>
         <RollpeDetailPageContainer>
-          <div className={"title-wrapper"}>
-            <h1>제목영역 롤페 아이디: {rollpeId}</h1>
-          </div>
+          <Marquee
+            style={{ width: "100%", marginBottom: "3.25rem" }}
+            pauseOnHover={true}
+          >
+            <h1 className={"title"}>제목영역 롤페 아이디:{rollpeId}</h1>
+          </Marquee>
 
           <div className={"preview-wrapper"}>
             <div className={"preview-image-wrapper"}>
@@ -70,13 +74,7 @@ const RollpeDetailPageContainer = styled.div`
   align-items: center;
   width: 100%;
 
-  & > .title-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 3.25rem;
-
+  .title {
     font-size: 2rem;
   }
 

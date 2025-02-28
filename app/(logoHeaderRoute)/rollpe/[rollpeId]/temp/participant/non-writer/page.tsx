@@ -11,8 +11,8 @@ const NonWriterPage: React.FC = () => {
         <div className={"logo-wrapper"}>
           <Image src={Logo} alt={"로고"} layout="responsive" />
         </div>
-        <p>아쉽게도 롤페는 초대되지 않은 상태면 작성할 수 없어요.</p>
-        <p>이미 초대 받으셨다면 로그인 후 작성해주세요.</p>
+        <p>초대되지 않은 상태거나,</p>
+        <p>로그인이 필요합니다.</p>
         <Button text={"로그인하러가기"} route="/sign-in" />
       </ContentsContainer>
     </NonWriterPageWrapper>
