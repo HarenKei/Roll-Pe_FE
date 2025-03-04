@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSlide } from "@/public/redux/redux";
 import { AppDispatch, RootState } from "@/public/redux/store";
 import { COLORS } from "@/public/styles/colors";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Close from "@/public/images/icons/icon_close.svg";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,92 +37,78 @@ const MENU_ITEMS: SlideMenuItem[] = [
   },
 ];
 
-const SlideMenu: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const isSlideOpen = useSelector((state: RootState) => state.slideMenu.isOpen);
-  const slideRef = useRef<HTMLDivElement>(null);
+interface SlideMenuProps {
+  isSlideOpen: boolean;
+  setIsSlideOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  useEffect(() => {
-    const slideHandler = () => {
-      if (!slideRef || !slideRef.current) return;
-
-      const slideStyle = slideRef.current.style;
-
-      if (isSlideOpen) {
-        slideStyle.right = "0";
-        slideStyle.transition = "all 0.2s ease";
-      } else {
-        slideStyle.right = "-90%";
-        // slideStyle.transition = "all 0.2s ease";
-      }
-    };
-
-    slideHandler();
-  }, [isSlideOpen, slideRef]);
-
+const SlideMenu: React.FC<SlideMenuProps> = ({
+  isSlideOpen,
+  setIsSlideOpen,
+}) => {
   const closeHandler = () => {
-    dispatch(setSlide(false));
+    setIsSlideOpen(false);
   };
 
   return (
-    <SlideMenuWrapper isOpen={isSlideOpen}>
-      <SlideMenuContainer ref={slideRef}>
-        {isSlideOpen && (
-          <>
-            <CloseButtonWrapper>
-              <CloseButton onClick={() => closeHandler()}>
-                <Image
-                  src={Close}
-                  layout="responsive"
-                  width={28}
-                  height={28}
-                  alt="닫기"
-                />
-              </CloseButton>
-            </CloseButtonWrapper>
+    <SlideMenuPageWrapper isOpen={isSlideOpen}>
+      <SlideMenuContainer isOpen={isSlideOpen}>
+        <CloseButtonWrapper>
+          <CloseButton onClick={() => closeHandler()}>
+            <Image
+              src={Close}
+              layout="responsive"
+              width={28}
+              height={28}
+              alt="닫기"
+            />
+          </CloseButton>
+        </CloseButtonWrapper>
 
-            <MenuContainer>
-              {MENU_ITEMS.map((item: SlideMenuItem, index: number) => (
-                <li key={index}>
-                  <Link href={item.link}>{item.name}</Link>
-                </li>
-              ))}
-            </MenuContainer>
+        <MenuContainer>
+          {MENU_ITEMS.map((item: SlideMenuItem, index: number) => (
+            <li key={index}>
+              <Link href={item.link}>{item.name}</Link>
+            </li>
+          ))}
+        </MenuContainer>
 
-            <OtherMenuContainer>
-              <li>서비스이용약관</li>
-              <li>개인정보처리방침</li>
-            </OtherMenuContainer>
-          </>
-        )}
+        <OtherMenuContainer>
+          <li>서비스이용약관</li>
+          <li>개인정보처리방침</li>
+        </OtherMenuContainer>
       </SlideMenuContainer>
-    </SlideMenuWrapper>
+    </SlideMenuPageWrapper>
   );
 };
 
-const SlideMenuWrapper = styled.div<{ isOpen: boolean }>`
+const SlideMenuPageWrapper = styled.div<{ isOpen: boolean }>`
+  ${(props) => (props.isOpen ? "display: flex;" : "display: none;")};
   position: absolute;
   z-index: 4;
   top: 0;
 
-  display: flex;
+  /* display: flex; */
   justify-content: flex-end;
 
-  ${(props) => (props.isOpen ? "position:fixed" : "")};
-  width: ${(props) => (props.isOpen ? "100%" : "0")};
+  width: 100%;
   height: 100svh;
-  background: ${(props) => (props.isOpen ? "rgba(0, 0, 0, 0.5)" : "")};
+  background: rgba(0, 0, 0, 0.5);
 `;
 
-const SlideMenuContainer = styled.div`
-  position: relative;
+const SlideMenuContainer = styled.div<{ isOpen: boolean }>`
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  right: ${(props) => (props.isOpen ? "0" : "-90%")};
+
   padding: 2rem 1.25rem 1.25rem 2.5rem;
   width: calc(80% - 2.5rem);
   height: calc(100% - 3.3rem);
   background: ${COLORS.ROLLPE_PRIMARY};
   border-radius: 1rem 0rem 0rem 1rem;
 
-  transition: all 0.2s ease-in;
+  transition: right 0.2s ease-in;
 `;
 
 const CloseButtonWrapper = styled.div`

@@ -33,32 +33,44 @@ export interface userIntroResponse {
   heart: number;
 }
 
-// ! User 관련
-export interface User {
-  id: string; //uuid
-  name: string;
-  email: string;
-  register: "Apple" | "Google" | "Kakao" | "Email";
-}
-
 //! Rollpe 관련
 export interface Rollpe {
   id: string;
+  code: string;
   title: string;
   host: User;
-  startDate: string;
-  endDate: string;
+  createdAt: string;
+  receivingDate: string;
+  receivingStatus: string;
+  receiver: User;
   isPublic: boolean;
-  writers: User[];
+  hearts: Heart[];
+  authors: User[];
   theme: string;
   size: string;
+  ratio: string;
+  isVip: boolean;
+  version: string;
 }
 
 //! Heart 관련
 export interface Heart {
   id: string;
   index: number;
-  writer: User;
+  author: User;
   content: string;
-  creratedAt: string;
+  createdAt: string;
+  color: string;
+  version: string;
 }
+
+// ! User 관련
+export interface User {
+  id: number;
+  code: string;
+  identifyCode: string;
+  name: string;
+  email: string;
+  provider: "Apple" | "Google" | "Kakao" | "Email";
+}
+
