@@ -39,7 +39,7 @@ export interface Rollpe {
   code: string;
   title: string;
   host: User;
-  createdAt: string;
+  createdAt: Date;
   receivingDate: string;
   receivingStatus: string;
   receiver: User;

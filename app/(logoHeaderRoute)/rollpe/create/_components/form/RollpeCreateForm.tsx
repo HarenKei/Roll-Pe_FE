@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useTransition } from "react";
+import { ChangeEvent, useEffect, useState, useTransition } from "react";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import { StyledInput } from "@/app/_components/ui/input/Input";
@@ -21,6 +21,19 @@ import ReceiverSelect from "@/app/_components/ui/modal/modal-contents/receiver-s
 import { getRollpeCreateDetail } from "@/app/api/rollpe/route";
 import { logOutOk } from "@/app/api/auth/log-out/route";
 import Loading from "@/app/_components/ui/loading/Loading";
+import { set } from "react-hook-form";
+
+interface RollpeRequestBody {
+  rerceiverFK: number;
+  hostFK: number;
+  receivingDate: Date;
+  title: string;
+  description: string;
+  password: string;
+  themeFK: number;
+  sizeFK: number;
+  ratioFK: number;
+}
 
 interface Option {
   id: number;
@@ -44,6 +57,7 @@ interface SizeOption extends Option {
 
 const RollpeCreateForm: React.FC = () => {
   const [isPending, startTransition] = useTransition();
+  const [title, setTitle] = useState<string>("");
   const [ratioSelected, setRatioSelected] = useState<number>(1);
   const [themeSelected, setThemeSelected] = useState<number>(1);
   const [sizeSelected, setSizeSelected] = useState<number>(1);
@@ -51,12 +65,23 @@ const RollpeCreateForm: React.FC = () => {
   const [receiveUser, setReceiveUser] =
     useState<string>("전달할 사람을 지정해주세요.");
   const [receiveModalOpen, setReceiveModalOpen] = useState<boolean>(false);
-  const [optionList, setOptionList] = useState<any[]>([]);
 
   const [ratioList, setLatioList] = useState<RatioOption[] | null>(null);
   const [themeList, setThemeList] = useState<ThemeOption[]>([]);
   const [sizeList, setSizeList] = useState<SizeOption[]>([]);
   const [colorList, setColorList] = useState<Option[]>([]);
+
+  const [requestBody, setRequestBody] = useState<RollpeRequestBody>({
+    rerceiverFK: 0,
+    hostFK: 0,
+    receivingDate: new Date(),
+    title: "",
+    description: "",
+    password: "",
+    themeFK: 0,
+    sizeFK: 0,
+    ratioFK: 0,
+  });
 
   const onPublicClickHandler = () => {
     setIsPublic(!isPublic);
@@ -97,8 +122,8 @@ const RollpeCreateForm: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log(themeList);
-  }, [themeList]);
+    console.log(requestBody);
+  }, [requestBody]);
 
   return (
     <>
@@ -111,7 +136,13 @@ const RollpeCreateForm: React.FC = () => {
 
           <div className={"title-input-container"}>
             <h3>제목을 입력하세요</h3>
-            <StyledInput type={"text"} placeholder="제목 입력" />
+            <StyledInput
+              type={"text"}
+              placeholder="제목 입력"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setTitle(e.target.value);
+              }}
+            />
           </div>
 
           <div className={"ratio-select-container"}>
@@ -239,7 +270,23 @@ const RollpeCreateForm: React.FC = () => {
             </div>
           </div>
 
-          <Button text={"만들기"} route={""} />
+          <Button
+            text={"만들기"}
+            route={""}
+            onClickHandler={() => {
+              setRequestBody({
+                title: title,
+                ratioFK: ratioSelected,
+                themeFK: themeSelected,
+                sizeFK: sizeSelected,
+                receivingDate: new Date(),
+                rerceiverFK: 1,
+                hostFK: 123,
+                description: "",
+                password: "",
+              });
+            }}
+          />
         </RollpeCreatePageContainer>
       </RollpeCreatePageWrapper>
       {receiveModalOpen && (
