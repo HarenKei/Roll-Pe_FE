@@ -23,3 +23,11 @@ export const getUserRollpe = async (queryParam: "my" | "main" | "inviting") => {
     return Promise.reject(error);
   });
 }
+
+export const getRollpeCreateDetail = async (type: "all" | "theme" | "size" | "ratio") => {
+  return await axiosInstance.get(`/api/index?type=${type}`).then((response) => {
+    return Promise.resolve(response.data);
+  }).catch((error) => {
+    return Promise.reject(error.response);
+  })
+}

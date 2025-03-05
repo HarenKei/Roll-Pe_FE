@@ -5,7 +5,6 @@ import { COLORS } from "@/public/styles/colors";
 
 interface CreateRollpeCardProps {
   id: number;
-  exam: React.ReactNode;
   isSelected: number;
   setIsSelected: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -26,9 +25,51 @@ export interface SizeSwiperCardProps {
   max: number;
 }
 
+interface Exam {
+  [key: string]: { exam: React.ReactNode };
+}
+
+const RATIO_EXAM: Exam = {
+  가로: {
+    exam: (
+      <div
+        style={{
+          width: "5rem",
+          height: "3.438rem",
+          boxShadow: "0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25)",
+          background: `${COLORS.ROLLPE_PRIMARY}`,
+        }}
+      ></div>
+    ),
+  },
+  세로: {
+    exam: (
+      <div
+        style={{
+          width: "3.438rem",
+          height: "5rem",
+          boxShadow: "0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25)",
+          background: `${COLORS.ROLLPE_PRIMARY}`,
+        }}
+      ></div>
+    ),
+  },
+};
+
+const THEME_EXAM: Exam = {
+  생일: {
+    exam: <></>,
+  },
+  화이트: {
+    exam: <></>,
+  },
+  블랙: {
+    exam: <></>,
+  },
+};
+
 export const RatioSwiperCard: React.FC<RatioSwiperCardProps> = ({
   id,
-  exam,
   title,
   isSelected,
   setIsSelected,
@@ -42,7 +83,7 @@ export const RatioSwiperCard: React.FC<RatioSwiperCardProps> = ({
       isActive={isSelected === id}
       onClick={() => onClickHandler()}
     >
-      {exam}
+      {RATIO_EXAM[title].exam}
       <p className={"title"}>{title}</p>
     </RatioCardContainer>
   );
@@ -50,7 +91,6 @@ export const RatioSwiperCard: React.FC<RatioSwiperCardProps> = ({
 
 export const ThemeSwiperCard: React.FC<ThemeSwiperCardProps> = ({
   id,
-  exam,
   isSelected,
   title,
   setIsSelected,
@@ -65,7 +105,7 @@ export const ThemeSwiperCard: React.FC<ThemeSwiperCardProps> = ({
         isActive={isSelected === id}
         onClick={() => onClickHandler()}
       >
-        {exam}
+        {THEME_EXAM[title].exam}
       </ThemeCardContainer>
       <p>{title}</p>
     </ThemeCardWrpper>

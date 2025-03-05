@@ -38,7 +38,7 @@ axiosInstanceAuth.interceptors.response.use(
       if (refreshToken && !error.config._retry) {
         error.config._retry = true; // 무한 루프 방지를 위한 플래그 설정
         try {
-          const response = await axiosInstance.post("/user/token/refresh", { refresh: refreshToken.value });
+          const response = await axiosInstance.post("/api/user/token/refresh", { refresh: refreshToken.value });
           console.log("토큰 재발급 성공");
 
           cookies().set("accessToken", response.data.access, {
