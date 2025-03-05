@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
+import { User } from "@/public/utils/types";
 
-interface SimpleUser {
-  name: string;
-  email: string;
-}
 
-const initialState: SimpleUser = {
+const initialState: User = {
+  id: 0,
   name: "",
   email: "",
+  identifyCode: "",
+  provider: null,
+
 }
 
 const simpleUserSlice = createSlice({
@@ -16,8 +17,11 @@ const simpleUserSlice = createSlice({
   initialState: initialState,
   reducers: {
     setUser: (state, action) => {
+      state.id = action.payload.id;
       state.name = action.payload.name;
       state.email = action.payload.email;
+      state.identifyCode = action.payload.identifyCode;
+      state.provider = action.payload.provider;
     },
     initUser: (state) => {
       state = initialState;

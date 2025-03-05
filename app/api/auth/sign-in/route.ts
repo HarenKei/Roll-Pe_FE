@@ -20,6 +20,7 @@ export const signIn = async (email: string, password: string) => {
         path: "/",
       });
     }
+    return Promise.resolve(response.data.data);
   }).catch((error) => {
     if (axios.isAxiosError(error) && error.response) {
       return Promise.reject(error.response.data.message);

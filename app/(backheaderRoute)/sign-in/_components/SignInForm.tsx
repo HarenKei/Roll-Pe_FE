@@ -10,6 +10,7 @@ import { StyledInput } from "@/app/_components/ui/input/Input";
 import { useDispatch, UseDispatch } from "react-redux";
 import { setUser } from "@/public/redux/slices/userSlice";
 import Loading from "@/app/_components/ui/loading/Loading";
+import constructWithOptions from "styled-components/dist/constructors/constructWithOptions";
 
 interface SignInInputs {
   email: string;
@@ -29,17 +30,28 @@ const SignInForm: React.FC = () => {
 
   const onSubmit: SubmitHandler<SignInInputs> = async (data) => {
     startTransition(async () => {
-      try {
-        const result = await signIn(data.email, data.password).then((res) => {
-          dispatch(setUser({ name: res.name, email: res.email }));
-          router.push("/main");
+      await signIn(data.email, data.password)
+        .then((res) => {
+          console.log(res);
+          dispatch(
+            setUser({
+              id: res.user.id,
+              name: res.user.name,
+              email: res.user.email,
+              identifyCode: res.user.identifyCode,
+              proovider: res.user.provider,
+            })
+          );
+          setTimeout(() => {
+            router.push("/main");
+          }, 500);
+        })
+        .catch((err) => {
+          if (err instanceof Error) {
+            // console.log(err.message);
+            alert(err.message);
+          }
         });
-      } catch (err) {
-        if (err instanceof Error) {
-          // console.log(err.message);
-          alert(err.message);
-        }
-      }
     });
   };
 

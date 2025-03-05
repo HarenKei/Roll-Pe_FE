@@ -19,6 +19,7 @@ const UserIntro: React.FC = () => {
     startTransition(async () => {
       await getUserRollpe("main")
         .then((res) => {
+          console.log(res);
           setUserIntroInfo(res);
         })
         .catch((error) => {

@@ -67,10 +67,10 @@ export interface Heart {
 // ! User 관련
 export interface User {
   id: number;
-  code: string;
+  code?: string;
   identifyCode: string;
   name: string;
   email: string;
-  provider: "Apple" | "Google" | "Kakao" | "Email";
+  provider: "Apple" | "Google" | "Kakao" | "Email" | null;
 }
 
