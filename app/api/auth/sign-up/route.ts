@@ -11,7 +11,7 @@ interface SignUpInputs {
 }
 
 export const signUp = async (requestBody: SignUpInputs) => {
-  return await axiosInstance.post("/user/signup", { ...requestBody }).then((response) => {
+  return await axiosInstance.post("/api/user/signup", { ...requestBody }).then((response) => {
     return Promise.resolve(response.data);
   }).catch((error) => {
     return Promise.reject(error);

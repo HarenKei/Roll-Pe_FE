@@ -2,12 +2,12 @@
 import Image from "next/image";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
+import { RollpeRequestBody } from "@/app/(logoHeaderRoute)/rollpe/create/_components/form/RollpeCreateForm";
 
 interface CreateRollpeCardProps {
   id: number;
-  exam: React.ReactNode;
-  isSelected: number;
-  setIsSelected: React.Dispatch<React.SetStateAction<number>>;
+  isSelected: RollpeRequestBody;
+  setIsSelected: React.Dispatch<React.SetStateAction<RollpeRequestBody>>;
 }
 
 export interface RatioSwiperCardProps extends CreateRollpeCardProps {
@@ -18,31 +18,70 @@ export interface ThemeSwiperCardProps extends CreateRollpeCardProps {
   title: string;
 }
 
-export interface SizeSwiperCardProps {
-  id: number;
-  isSelected: number;
-  setIsSelected: React.Dispatch<React.SetStateAction<number>>;
+export interface SizeSwiperCardProps extends CreateRollpeCardProps {
   title: string;
   max: number;
 }
 
+interface Exam {
+  [key: string]: { exam: React.ReactNode };
+}
+
+const RATIO_EXAM: Exam = {
+  가로: {
+    exam: (
+      <div
+        style={{
+          width: "5rem",
+          height: "3.438rem",
+          boxShadow: "0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25)",
+          background: `${COLORS.ROLLPE_PRIMARY}`,
+        }}
+      ></div>
+    ),
+  },
+  세로: {
+    exam: (
+      <div
+        style={{
+          width: "3.438rem",
+          height: "5rem",
+          boxShadow: "0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25)",
+          background: `${COLORS.ROLLPE_PRIMARY}`,
+        }}
+      ></div>
+    ),
+  },
+};
+
+const THEME_EXAM: Exam = {
+  생일: {
+    exam: <></>,
+  },
+  화이트: {
+    exam: <></>,
+  },
+  블랙: {
+    exam: <></>,
+  },
+};
+
 export const RatioSwiperCard: React.FC<RatioSwiperCardProps> = ({
   id,
-  exam,
   title,
   isSelected,
   setIsSelected,
 }) => {
   const onClickHandler = () => {
-    setIsSelected(id);
+    setIsSelected((prevState) => ({ ...prevState, ratioFK: id }));
   };
 
   return (
     <RatioCardContainer
-      isActive={isSelected === id}
+      isActive={isSelected.ratioFK === id}
       onClick={() => onClickHandler()}
     >
-      {exam}
+      {RATIO_EXAM[title].exam}
       <p className={"title"}>{title}</p>
     </RatioCardContainer>
   );
@@ -50,22 +89,21 @@ export const RatioSwiperCard: React.FC<RatioSwiperCardProps> = ({
 
 export const ThemeSwiperCard: React.FC<ThemeSwiperCardProps> = ({
   id,
-  exam,
   isSelected,
   title,
   setIsSelected,
 }) => {
   const onClickHandler = () => {
-    setIsSelected(id);
+    setIsSelected((prevState) => ({ ...prevState, themeFK: id }));
   };
 
   return (
     <ThemeCardWrpper>
       <ThemeCardContainer
-        isActive={isSelected === id}
+        isActive={isSelected.themeFK === id}
         onClick={() => onClickHandler()}
       >
-        {exam}
+        {THEME_EXAM[title].exam}
       </ThemeCardContainer>
       <p>{title}</p>
     </ThemeCardWrpper>
@@ -80,12 +118,12 @@ export const SizeSwiperCard: React.FC<SizeSwiperCardProps> = ({
   max,
 }) => {
   const onClickHandler = () => {
-    setIsSelected(id);
+    setIsSelected((prevState) => ({ ...prevState, sizeFK: id }));
   };
 
   return (
     <SizeSwiperCardWrapper
-      isActive={isSelected === id}
+      isActive={isSelected.sizeFK === id}
       onClick={() => onClickHandler()}
     >
       <div className={"size-swiper-container"}>

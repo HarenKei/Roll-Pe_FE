@@ -9,13 +9,14 @@ import { AppDispatch } from "@/public/redux/store";
 import { RootState } from "@/public/redux/store";
 import { setSlide } from "@/public/redux/redux";
 import { useRouter } from "next/navigation";
+import SlideMenu from "./SlideMenu";
+import { useState } from "react";
 
 export const HeaderDefault: React.FC = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const isMenuOpen = useSelector((state: any) => state.slideMenu.isOpen);
+  const [isSlideOpen, setIsSlideOpen] = useState<boolean>(false);
 
   const onClickMenuHandler = () => {
-    dispatch(setSlide(!isMenuOpen));
+    setIsSlideOpen(true);
   };
 
   return (
@@ -31,6 +32,7 @@ export const HeaderDefault: React.FC = () => {
           />
         </MenuButton>
       </HeaderWrapper>
+      {<SlideMenu isSlideOpen={isSlideOpen} setIsSlideOpen={setIsSlideOpen} />}
     </>
   );
 };
@@ -59,11 +61,10 @@ export const HeaderBack: React.FC = () => {
 
 export const HeaderMenuLogo: React.FC = () => {
   const router = useRouter();
-  const dispatch: AppDispatch = useDispatch();
-  const isMenuOpen = useSelector((state: RootState) => state.slideMenu.isOpen);
+  const [isSlideOpen, setIsSlideOpen] = useState<boolean>(false);
 
   const onClickMenuHandler = () => {
-    dispatch(setSlide(!isMenuOpen));
+    setIsSlideOpen(true);
   };
 
   const onClickBackHandler = () => {
@@ -103,6 +104,7 @@ export const HeaderMenuLogo: React.FC = () => {
           alt={"메뉴 아이콘"}
         />
       </MenuButton>
+      {<SlideMenu isSlideOpen={isSlideOpen} setIsSlideOpen={setIsSlideOpen} />}
     </LogoHeaderWrapper>
   );
 };

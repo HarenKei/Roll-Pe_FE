@@ -6,7 +6,7 @@ export const logOutOk = async () => {
   const refreshToken = cookies().get("refreshToken");
 
   if (refreshToken) {
-    return await axiosInstanceAuth.post("/user/logout", { refresh: refreshToken.value }).then((res) => {
+    return await axiosInstanceAuth.post("/api/user/logout", { refresh: refreshToken.value }).then((res) => {
       cookies().set("accessToken", "");
       cookies().set("refreshToken", "");
 

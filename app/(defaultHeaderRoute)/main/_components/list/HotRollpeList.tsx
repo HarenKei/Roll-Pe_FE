@@ -15,10 +15,7 @@ const HotRollpeList: React.FC = () => {
   const router = useRouter();
 
   const notLoginHandler = () => {
-    if (!user.name) {
-      alert("로그인이 필요한 페이지입니다.\n로그인 페이지로 이동합니다.");
-      router.push("/sign-in");
-    } else {
+    if (user.name) {
       getList();
     }
   };

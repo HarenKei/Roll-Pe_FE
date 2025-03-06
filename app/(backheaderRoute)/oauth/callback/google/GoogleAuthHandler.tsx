@@ -24,7 +24,13 @@ const GoogleAuthHandler = () => {
         googleLogin(code).then((res) => {
           console.log(res);
           dispatch(
-            setUser({ name: res.data.user.name, email: res.data.user.email })
+            setUser({
+              id: res.user.id,
+              name: res.user.name,
+              email: res.user.email,
+              identifyCode: res.user.identifyCode,
+              proovider: res.user.provider,
+            })
           );
           setTimeout(() => {
             router.push("/main");
