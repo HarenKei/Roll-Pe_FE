@@ -97,7 +97,8 @@ const RollpeCreateForm: React.FC = () => {
           }, 500);
         })
         .catch((err) => {
-          console.error(err);
+          // console.error(err);
+          alert(err.message);
         });
     });
   };
@@ -131,10 +132,6 @@ const RollpeCreateForm: React.FC = () => {
     });
   }, []);
 
-  useEffect(() => {
-    console.log(requestBody);
-  }, [requestBody]);
-
   return (
     <>
       {isPending && <Loading />}
@@ -150,7 +147,10 @@ const RollpeCreateForm: React.FC = () => {
               type={"text"}
               placeholder="제목 입력"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                setRequestBody({ ...requestBody, title: e.target.value });
+                setRequestBody((prevState) => ({
+                  ...prevState,
+                  title: e.target.value,
+                }));
               }}
             />
           </div>
