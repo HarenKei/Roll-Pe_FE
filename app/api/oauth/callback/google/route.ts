@@ -4,7 +4,6 @@ import { axiosInstance } from "@/public/axios/axiosInstance";
 
 export const googleLogin = async (code: string) => {
   return await axiosInstance.post("/api/user/social/login/google", { code: code }).then((response) => {
-    console.log(response.data);
     if (response.data.data && response.data.data) {
 
       cookies().set("accessToken", response.data.data.access, {
@@ -21,9 +20,8 @@ export const googleLogin = async (code: string) => {
         path: "/",
       });
     }
-    return Promise.resolve(response.data);
+    return Promise.resolve(response.data.data);
   }).catch((error) => {
-    console.log(error.response);
     return Promise.reject(error);
   });
 }

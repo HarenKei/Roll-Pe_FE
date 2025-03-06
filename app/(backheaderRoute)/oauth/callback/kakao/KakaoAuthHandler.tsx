@@ -21,20 +21,24 @@ const KakaoAuthHandler = () => {
   useEffect(() => {
     if (code) {
       startTransition(async () => {
-        kakaoLogin(code).then((res) => {
-          dispatch(
-            setUser({
-              id: res.user.id,
-              name: res.user.name,
-              email: res.user.email,
-              identifyCode: res.user.identifyCode,
-              proovider: res.user.provider,
-            })
-          );
-          setTimeout(() => {
-            router.push("/main");
-          }, 500);
-        });
+        kakaoLogin(code)
+          .then((res) => {
+            dispatch(
+              setUser({
+                id: res.user.id,
+                name: res.user.name,
+                email: res.user.email,
+                identifyCode: res.user.identifyCode,
+                provider: res.user.provider,
+              })
+            );
+            setTimeout(() => {
+              router.push("/main");
+            }, 500);
+          })
+          .catch((err) => {
+            return Promise.reject(err);
+          });
       });
     }
   }, [code]);
