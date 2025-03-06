@@ -1,4 +1,5 @@
 "use server";
+import { RollpeRequestBody } from "@/app/(logoHeaderRoute)/rollpe/create/_components/form/RollpeCreateForm";
 import { axiosInstance, axiosInstanceAuth } from "@/public/axios/axiosInstance";
 
 export const getHotRollpeList = async () => {
@@ -28,6 +29,17 @@ export const getRollpeCreateDetail = async (type: "all" | "theme" | "size" | "ra
   return await axiosInstance.get(`/api/index?type=${type}`).then((response) => {
     return Promise.resolve(response.data);
   }).catch((error) => {
+    return Promise.reject(error.response);
+  })
+}
+
+export const postCreateRollpe = async (data: RollpeRequestBody) => {
+  return await axiosInstanceAuth.post('/api/paper', { ...data }).then((response) => {
+    console.log("실행한드아아아아");
+    console.log(data);
+    return Promise.resolve(response.data);
+  }).catch((error) => {
+    console.error(error.config);
     return Promise.reject(error.response);
   })
 }

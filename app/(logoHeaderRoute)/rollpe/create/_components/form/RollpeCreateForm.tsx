@@ -21,15 +21,18 @@ import ReceiverSelect from "@/app/_components/ui/modal/modal-contents/receiver-s
 import { getRollpeCreateDetail } from "@/app/api/rollpe/route";
 import { logOutOk } from "@/app/api/auth/log-out/route";
 import Loading from "@/app/_components/ui/loading/Loading";
-import { set } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { RootState } from "@/public/redux/store";
+import { postCreateRollpe } from "@/app/api/rollpe/route";
+import { useRouter } from "next/navigation";
 
-interface RollpeRequestBody {
-  rerceiverFK: number;
+export interface RollpeRequestBody {
+  receiverFK: number;
   hostFK: number;
-  receivingDate: Date;
+  receivingDate: string;
   title: string;
   description: string;
-  password: string;
+  password: string | null;
   themeFK: number;
   sizeFK: number;
   ratioFK: number;
@@ -56,11 +59,9 @@ interface SizeOption extends Option {
 }
 
 const RollpeCreateForm: React.FC = () => {
+  const user = useSelector((state: RootState) => state.simpleUser);
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const [title, setTitle] = useState<string>("");
-  const [ratioSelected, setRatioSelected] = useState<number>(1);
-  const [themeSelected, setThemeSelected] = useState<number>(1);
-  const [sizeSelected, setSizeSelected] = useState<number>(1);
   const [isPublic, setIsPublic] = useState<boolean>(true);
   const [receiveUser, setReceiveUser] =
     useState<string>("전달할 사람을 지정해주세요.");
@@ -69,12 +70,11 @@ const RollpeCreateForm: React.FC = () => {
   const [ratioList, setLatioList] = useState<RatioOption[] | null>(null);
   const [themeList, setThemeList] = useState<ThemeOption[]>([]);
   const [sizeList, setSizeList] = useState<SizeOption[]>([]);
-  const [colorList, setColorList] = useState<Option[]>([]);
 
   const [requestBody, setRequestBody] = useState<RollpeRequestBody>({
-    rerceiverFK: 0,
-    hostFK: 0,
-    receivingDate: new Date(),
+    receiverFK: 2,
+    hostFK: user.id,
+    receivingDate: "",
     title: "",
     description: "",
     password: "",
@@ -85,6 +85,21 @@ const RollpeCreateForm: React.FC = () => {
 
   const onPublicClickHandler = () => {
     setIsPublic(!isPublic);
+  };
+
+  const onCreateHandler = () => {
+    startTransition(() => {
+      postCreateRollpe(requestBody)
+        .then((res) => {
+          alert(res.message);
+          setTimeout(() => {
+            router.push("/main");
+          }, 500);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    });
   };
 
   useEffect(() => {
@@ -99,11 +114,6 @@ const RollpeCreateForm: React.FC = () => {
           setSizeList(
             res.data.filter((option: Option) => {
               return option.type === "SIZE";
-            })
-          );
-          setColorList(
-            res.data.filter((option: Option) => {
-              return option.type === "COLOR";
             })
           );
 
@@ -140,7 +150,7 @@ const RollpeCreateForm: React.FC = () => {
               type={"text"}
               placeholder="제목 입력"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                setTitle(e.target.value);
+                setRequestBody({ ...requestBody, title: e.target.value });
               }}
             />
           </div>
@@ -161,8 +171,8 @@ const RollpeCreateForm: React.FC = () => {
                       <RatioSwiperCard
                         id={cardData.id}
                         title={cardData.name}
-                        isSelected={ratioSelected}
-                        setIsSelected={setRatioSelected}
+                        isSelected={requestBody}
+                        setIsSelected={setRequestBody}
                       />
                     </SwiperSlide>
                   ))}
@@ -185,8 +195,8 @@ const RollpeCreateForm: React.FC = () => {
                     <ThemeSwiperCard
                       id={cardData.id}
                       title={cardData.name}
-                      isSelected={themeSelected}
-                      setIsSelected={setThemeSelected}
+                      isSelected={requestBody}
+                      setIsSelected={setRequestBody}
                     />
                   </SwiperSlide>
                 ))}
@@ -210,8 +220,8 @@ const RollpeCreateForm: React.FC = () => {
                       id={cardData.id}
                       title={cardData.name}
                       max={13}
-                      isSelected={sizeSelected}
-                      setIsSelected={setSizeSelected}
+                      isSelected={requestBody}
+                      setIsSelected={setRequestBody}
                     />
                   </SwiperSlide>
                 ))}
@@ -239,7 +249,13 @@ const RollpeCreateForm: React.FC = () => {
               </button>
             </Tab>
             {isPublic || (
-              <StyledInput type={"password"} placeholder={"비밀번호"} />
+              <StyledInput
+                type={"password"}
+                placeholder={"비밀번호"}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setRequestBody({ ...requestBody, password: e.target.value });
+                }}
+              />
             )}
           </div>
 
@@ -248,6 +264,14 @@ const RollpeCreateForm: React.FC = () => {
             <StyledInput
               type={"datetime-local"}
               placeholder={"종료일을 선택해주세요"}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setRequestBody((prevState) => ({
+                  ...prevState,
+                  receivingDate: new Date(e.target.value)
+                    .toISOString()
+                    .split("T")[0],
+                }));
+              }}
             />
           </div>
 
@@ -274,17 +298,7 @@ const RollpeCreateForm: React.FC = () => {
             text={"만들기"}
             route={""}
             onClickHandler={() => {
-              setRequestBody({
-                title: title,
-                ratioFK: ratioSelected,
-                themeFK: themeSelected,
-                sizeFK: sizeSelected,
-                receivingDate: new Date(),
-                rerceiverFK: 1,
-                hostFK: 123,
-                description: "",
-                password: "",
-              });
+              onCreateHandler();
             }}
           />
         </RollpeCreatePageContainer>

@@ -2,11 +2,12 @@
 import Image from "next/image";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
+import { RollpeRequestBody } from "@/app/(logoHeaderRoute)/rollpe/create/_components/form/RollpeCreateForm";
 
 interface CreateRollpeCardProps {
   id: number;
-  isSelected: number;
-  setIsSelected: React.Dispatch<React.SetStateAction<number>>;
+  isSelected: RollpeRequestBody;
+  setIsSelected: React.Dispatch<React.SetStateAction<RollpeRequestBody>>;
 }
 
 export interface RatioSwiperCardProps extends CreateRollpeCardProps {
@@ -17,10 +18,7 @@ export interface ThemeSwiperCardProps extends CreateRollpeCardProps {
   title: string;
 }
 
-export interface SizeSwiperCardProps {
-  id: number;
-  isSelected: number;
-  setIsSelected: React.Dispatch<React.SetStateAction<number>>;
+export interface SizeSwiperCardProps extends CreateRollpeCardProps {
   title: string;
   max: number;
 }
@@ -75,12 +73,12 @@ export const RatioSwiperCard: React.FC<RatioSwiperCardProps> = ({
   setIsSelected,
 }) => {
   const onClickHandler = () => {
-    setIsSelected(id);
+    setIsSelected((prevState) => ({ ...prevState, ratioFK: id }));
   };
 
   return (
     <RatioCardContainer
-      isActive={isSelected === id}
+      isActive={isSelected.ratioFK === id}
       onClick={() => onClickHandler()}
     >
       {RATIO_EXAM[title].exam}
@@ -96,13 +94,13 @@ export const ThemeSwiperCard: React.FC<ThemeSwiperCardProps> = ({
   setIsSelected,
 }) => {
   const onClickHandler = () => {
-    setIsSelected(id);
+    setIsSelected((prevState) => ({ ...prevState, themeFK: id }));
   };
 
   return (
     <ThemeCardWrpper>
       <ThemeCardContainer
-        isActive={isSelected === id}
+        isActive={isSelected.themeFK === id}
         onClick={() => onClickHandler()}
       >
         {THEME_EXAM[title].exam}
@@ -120,12 +118,12 @@ export const SizeSwiperCard: React.FC<SizeSwiperCardProps> = ({
   max,
 }) => {
   const onClickHandler = () => {
-    setIsSelected(id);
+    setIsSelected((prevState) => ({ ...prevState, sizeFK: id }));
   };
 
   return (
     <SizeSwiperCardWrapper
-      isActive={isSelected === id}
+      isActive={isSelected.sizeFK === id}
       onClick={() => onClickHandler()}
     >
       <div className={"size-swiper-container"}>
