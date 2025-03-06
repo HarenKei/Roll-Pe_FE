@@ -16,41 +16,44 @@ export interface RollpeListProps {
   resultText: string;
 }
 
-
-export interface MainRollpeCardProps {
-  id: number;
-  title: string;
-  viewStat: boolean;
-  receivingStat: number;
-  receivingDate: string;
-  hostName: string;
-  code: string;
-  theme: any[];
-}
-
 export interface userIntroResponse {
   host: number;
   heart: number;
 }
 
 //! Rollpe 관련
+// export interface Rollpe {
+//   id: string;
+//   code: string;
+//   title: string;
+//   host: User;
+//   createdAt: Date;
+//   receivingDate: string;
+//   receivingStatus: string;
+//   receiver: User;
+//   isPublic: boolean;
+//   hearts: Heart[];
+//   authors: User[];
+//   theme: string;
+//   size: string;
+//   ratio: string;
+//   isVip: boolean;
+//   version: string;
+// }
+
 export interface Rollpe {
-  id: string;
   code: string;
-  title: string;
+  createdAt: string;
   host: User;
-  createdAt: Date;
-  receivingDate: string;
-  receivingStatus: string;
-  receiver: User;
-  isPublic: boolean;
-  hearts: Heart[];
-  authors: User[];
-  theme: string;
-  size: string;
+  id: number;
   ratio: string;
-  isVip: boolean;
-  version: string;
+  receiver: User;
+  receivingDate: string;
+  receivingStat: number;
+  size: string;
+  theme: string;
+  title: string;
+  viewStat: boolean;
 }
 
 //! Heart 관련

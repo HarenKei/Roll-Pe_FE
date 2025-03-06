@@ -3,16 +3,15 @@ import { useTransition, useEffect, useState } from "react";
 import { getHotRollpeList } from "@/app/api/rollpe/route";
 import MainRollpeCard from "@/app/_components/ui/card/main-rollpe-list/MainRollpeCard";
 import styled from "styled-components";
-import { MainRollpeCardProps } from "@/public/utils/types";
 import { useSelector } from "react-redux";
 import { RootState } from "@/public/redux/store";
 import { useRouter } from "next/navigation";
+import { Rollpe } from "@/public/utils/types";
 
 const HotRollpeList: React.FC = () => {
   const [isPending, startTransition] = useTransition();
-  const [hotRollpeList, setHotRollpeList] = useState<MainRollpeCardProps[]>([]);
+  const [hotRollpeList, setHotRollpeList] = useState<Rollpe[]>([]);
   const user = useSelector((state: RootState) => state.simpleUser);
-  const router = useRouter();
 
   const notLoginHandler = () => {
     if (user.name) {
@@ -41,7 +40,14 @@ const HotRollpeList: React.FC = () => {
     <ListContainer>
       {hotRollpeList &&
         hotRollpeList.map((rollpe) => (
-          <MainRollpeCard key={rollpe.id} {...rollpe} />
+          <MainRollpeCard
+            key={rollpe.id}
+            receivingDate={rollpe.receivingDate}
+            title={rollpe.title}
+            host={rollpe.host}
+            id={rollpe.id}
+            theme={rollpe.theme}
+          />
         ))}
     </ListContainer>
   );

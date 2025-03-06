@@ -2,28 +2,43 @@
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
-import { MainRollpeCardProps } from "@/public/utils/types";
+import { User } from "@/public/utils/types";
+import { useRouter } from "next/navigation";
 
-const MainRollpeCard: React.FC<MainRollpeCardProps> = (
-  data: MainRollpeCardProps
-) => {
-  const {
-    id,
-    title,
-    viewStat,
-    receivingStat,
-    receivingDate,
-    hostName,
-    code,
-    theme,
-  } = data;
+interface MainRollpeCardProps {
+  receivingDate: string;
+  title: string;
+  host: User;
+  id: number;
+  theme: string;
+}
+
+const MainRollpeCard: React.FC<MainRollpeCardProps> = ({
+  receivingDate,
+  title,
+  host,
+  id,
+  theme,
+}: MainRollpeCardProps) => {
+  const today = new Date();
+  const targetDate = new Date(receivingDate);
+  const timeDifference = targetDate.getTime() - today.getTime();
+  const dDay = Math.ceil(timeDifference / (1000 * 3600 * 24));
+
+  const router = useRouter();
+
+  //TODO: theme에 따른 배경색 지정
+
+  const onClickCardHandler = () => {
+    router.push(`/rollpe/${id}`);
+  };
 
   return (
     <CardWrapper>
-      <CardContainer>
+      <CardContainer onClick={onClickCardHandler}>
         <div className={"card-image"}>
           <Badge>
-            <p>D-30</p>
+            <p>D-{dDay}</p>
           </Badge>
 
           <Image
@@ -35,7 +50,7 @@ const MainRollpeCard: React.FC<MainRollpeCardProps> = (
         </div>
         <div className={"card-contents"}>
           <h3 className={"card-title"}>{title}</h3>
-          <p className={"card-user"}>{hostName}</p>
+          <p className={"card-user"}>{host.name}</p>
         </div>
       </CardContainer>
     </CardWrapper>
@@ -89,7 +104,6 @@ const CardContainer = styled.button`
       font-weight: 400;
       font-style: normal;
       line-height: normal;
-
     }
 
     & > .card-user {
