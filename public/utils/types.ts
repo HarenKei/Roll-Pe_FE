@@ -24,18 +24,20 @@ export interface userIntroResponse {
 //! Rollpe 관련
 
 export interface Rollpe {
+  id: number;
   code: string;
   createdAt: string;
   host: User;
-  id: number;
-  ratio: string;
-  receiver: User;
-  receivingDate: string;
-  receivingStat: number;
+  ratio: "가로" | "세로";
+  receive: {
+    receivingDate: string;
+    receivingStat: number;
+    receiver: User;
+  };
   size: string;
-  theme: string;
   title: string;
   viewStat: boolean;
+  theme: string;
 }
 
 //! Heart 관련
@@ -59,7 +61,7 @@ export interface User {
   provider: "Apple" | "Google" | "Kakao" | "Email" | null;
 }
 
-export interface RollpeInstance{
+export interface RollpeInstance {
   id: number;
   name: string;
   query: Object;

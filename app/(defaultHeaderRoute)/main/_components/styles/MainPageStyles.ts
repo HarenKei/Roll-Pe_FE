@@ -78,11 +78,6 @@ export const RecentRollpeWrapper = styled.section`
       font-weight: 400;
       line-height: normal;
     }
-
-    & > .list-container {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: 1fr 1fr;
-    }
+    
   }
 `;

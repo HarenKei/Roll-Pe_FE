@@ -21,14 +21,13 @@ const HotRollpeList: React.FC = () => {
 
   const getList = () => {
     startTransition(async () => {
-      try {
-        const result = await getHotRollpeList().then((res) => {
+      await getHotRollpeList()
+        .then((res) => {
           setHotRollpeList(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
     });
   };
 
@@ -36,13 +35,17 @@ const HotRollpeList: React.FC = () => {
     notLoginHandler();
   }, []);
 
+  useEffect(() => {
+    console.log(hotRollpeList[1]);
+  }, [hotRollpeList]);
+
   return (
     <ListContainer>
       {hotRollpeList &&
         hotRollpeList.map((rollpe) => (
           <MainRollpeCard
             key={rollpe.id}
-            receivingDate={rollpe.receivingDate}
+            receivingDate={rollpe.receive.receivingDate}
             title={rollpe.title}
             host={rollpe.host}
             id={rollpe.id}
@@ -58,6 +61,7 @@ const ListContainer = styled.ul`
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr;
+  width: 100%;
 `;
 
 export default HotRollpeList;

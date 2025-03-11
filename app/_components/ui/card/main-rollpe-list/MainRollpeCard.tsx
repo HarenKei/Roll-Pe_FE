@@ -32,6 +32,10 @@ const MainRollpeCard: React.FC<MainRollpeCardProps> = ({
 
   //TODO: theme에 따른 배경색 지정
 
+  useEffect(() => {
+    console.log(receivingDate);
+  }, [receivingDate]);
+
   const onClickCardHandler = () => {
     router.push(`/rollpe/${code}`);
   };
@@ -52,7 +56,9 @@ const MainRollpeCard: React.FC<MainRollpeCardProps> = ({
           />
         </div>
         <div className={"card-contents"}>
-          <h3 className={"card-title"}>{title}</h3>
+          <div className={"card-title"}>
+            <p>{title}</p>
+          </div>
           <p className={"card-user"}>{host.name}</p>
         </div>
       </CardContainer>
@@ -98,15 +104,22 @@ const CardContainer = styled.button`
     padding: 0.75rem;
 
     width: calc(100% - 1.5rem);
-    /* height: 3.313rem; */
 
     background-color: ${COLORS.ROLLPE_PRIMARY};
 
     & > .card-title {
-      font-size: 1rem;
-      font-weight: 400;
-      font-style: normal;
-      line-height: normal;
+      width: 100%;
+      overflow: hidden;
+
+      & > p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 1rem;
+        font-weight: 400;
+        font-style: normal;
+        line-height: normal;
+      }
     }
 
     & > .card-user {

@@ -4,8 +4,7 @@ import { axiosInstance } from "@/public/axios/axiosInstance";
 
 export const kakaoLogin = async (code: string) => {
   return await axiosInstance.post("/api/user/social/login/kakao", { code: code }).then((response) => {
-    if (response.data.data && response.data.data) {
-
+    if (response.data.data) {
       cookies().set("accessToken", response.data.data.access, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
