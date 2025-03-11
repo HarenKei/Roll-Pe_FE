@@ -35,10 +35,6 @@ const HotRollpeList: React.FC = () => {
     notLoginHandler();
   }, []);
 
-  useEffect(() => {
-    console.log(hotRollpeList[1]);
-  }, [hotRollpeList]);
-
   return (
     <ListContainer>
       {hotRollpeList &&
@@ -57,11 +53,10 @@ const HotRollpeList: React.FC = () => {
   );
 };
 
-const ListContainer = styled.ul`
+const ListContainer = styled.div`
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr;
-  width: 100%;
 `;
 
 export default HotRollpeList;

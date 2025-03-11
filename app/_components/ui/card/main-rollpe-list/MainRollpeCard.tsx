@@ -32,41 +32,33 @@ const MainRollpeCard: React.FC<MainRollpeCardProps> = ({
 
   //TODO: theme에 따른 배경색 지정
 
-  useEffect(() => {
-    console.log(receivingDate);
-  }, [receivingDate]);
-
   const onClickCardHandler = () => {
     router.push(`/rollpe/${code}`);
   };
 
   return (
-    <CardWrapper>
-      <CardContainer onClick={onClickCardHandler}>
-        <div className={"card-image"}>
-          <Badge>
-            <p>D-{dDay}</p>
-          </Badge>
+    <CardContainer onClick={onClickCardHandler}>
+      <div className={"card-image"}>
+        <Badge>
+          <p>D-{dDay}</p>
+        </Badge>
 
-          <Image
-            src={"/images/image/image_dummy_cake.png"}
-            width={50}
-            height={46}
-            alt={""}
-          />
+        <Image
+          src={"/images/image/image_dummy_cake.png"}
+          width={50}
+          height={46}
+          alt={""}
+        />
+      </div>
+      <div className={"card-contents"}>
+        <div className={"card-title"}>
+          <p>{title}</p>
         </div>
-        <div className={"card-contents"}>
-          <div className={"card-title"}>
-            <p>{title}</p>
-          </div>
-          <p className={"card-user"}>{host.name}</p>
-        </div>
-      </CardContainer>
-    </CardWrapper>
+        <p className={"card-user"}>{host.name}</p>
+      </div>
+    </CardContainer>
   );
 };
-
-const CardWrapper = styled.li``;
 
 const CardContainer = styled.button`
   all: unset;
@@ -76,7 +68,7 @@ const CardContainer = styled.button`
   align-items: center;
 
   width: 100%;
-  min-height: 9.188rem;
+  max-height: 9.188rem;
 
   border-radius: 1rem;
   overflow: hidden;
@@ -100,6 +92,7 @@ const CardContainer = styled.button`
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
+    height: 3.3125rem;
 
     padding: 0.75rem;
 
@@ -109,12 +102,14 @@ const CardContainer = styled.button`
 
     & > .card-title {
       width: 100%;
-      overflow: hidden;
+      height: 1rem;
 
       & > p {
-        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+        height: 100%;
         font-size: 1rem;
         font-weight: 400;
         font-style: normal;
