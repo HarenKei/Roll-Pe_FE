@@ -22,24 +22,6 @@ export interface userIntroResponse {
 }
 
 //! Rollpe 관련
-// export interface Rollpe {
-//   id: string;
-//   code: string;
-//   title: string;
-//   host: User;
-//   createdAt: Date;
-//   receivingDate: string;
-//   receivingStatus: string;
-//   receiver: User;
-//   isPublic: boolean;
-//   hearts: Heart[];
-//   authors: User[];
-//   theme: string;
-//   size: string;
-//   ratio: string;
-//   isVip: boolean;
-//   version: string;
-// }
 
 export interface Rollpe {
   code: string;
@@ -75,5 +57,12 @@ export interface User {
   name: string;
   email: string;
   provider: "Apple" | "Google" | "Kakao" | "Email" | null;
+}
+
+export interface RollpeInstance{
+  id: number;
+  name: string;
+  query: Object;
+  type: "THEME" | "SIZE" | "RATIO";
 }
 

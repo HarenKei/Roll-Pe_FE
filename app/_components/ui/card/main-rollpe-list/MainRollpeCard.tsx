@@ -4,12 +4,14 @@ import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
 import { User } from "@/public/utils/types";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface MainRollpeCardProps {
   receivingDate: string;
   title: string;
   host: User;
   id: number;
+  code: string;
   theme: string;
 }
 
@@ -19,6 +21,7 @@ const MainRollpeCard: React.FC<MainRollpeCardProps> = ({
   host,
   id,
   theme,
+  code,
 }: MainRollpeCardProps) => {
   const today = new Date();
   const targetDate = new Date(receivingDate);
@@ -30,7 +33,7 @@ const MainRollpeCard: React.FC<MainRollpeCardProps> = ({
   //TODO: theme에 따른 배경색 지정
 
   const onClickCardHandler = () => {
-    router.push(`/rollpe/${id}`);
+    router.push(`/rollpe/${code}`);
   };
 
   return (

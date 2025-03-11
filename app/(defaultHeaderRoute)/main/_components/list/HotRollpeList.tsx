@@ -46,6 +46,7 @@ const HotRollpeList: React.FC = () => {
             title={rollpe.title}
             host={rollpe.host}
             id={rollpe.id}
+            code={rollpe.code}
             theme={rollpe.theme}
           />
         ))}

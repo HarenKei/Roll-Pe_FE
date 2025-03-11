@@ -43,3 +43,11 @@ export const postCreateRollpe = async (data: RollpeRequestBody) => {
     return Promise.reject(error.response);
   })
 }
+
+export const getRollpeDetail = async (pcode: string) => {
+  return await axiosInstanceAuth.get(`/api/paper?pcode=${pcode}`).then((response) => {
+    return Promise.resolve(response.data);
+  }).catch((error) => {
+    return Promise.reject(error);
+  })
+}
