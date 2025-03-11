@@ -15,30 +15,10 @@ import ParticipantsList from "@/app/_components/ui/modal/modal-contents/particip
 import RollpeEditForm from "@/app/_components/ui/modal/modal-contents/rollpe-edit/RollpeEditForm";
 import ShareRollpe from "@/app/_components/ui/modal/modal-contents/share-rollpe/ShareRollpe";
 import Marquee from "react-fast-marquee";
-import { User, RollpeInstance } from "@/public/utils/types";
+import { User, Rollpe } from "@/public/utils/types";
 import { getRollpeDetail } from "@/app/api/rollpe/route";
 import Loading from "@/app/_components/ui/loading/Loading";
 import { useRouter } from "next/navigation";
-
-interface RollpeDetailResponse {
-  host: User;
-  receiver: {
-    id: User;
-    name: string;
-    tel: null | string;
-    date: string;
-    stat: number;
-    is_user: boolean;
-  };
-  theme: RollpeInstance;
-  size: RollpeInstance;
-  ratio: RollpeInstance;
-  viewStat: boolean;
-  title: string;
-  description: string;
-  invitingUser: User[];
-  createdAt: string;
-}
 
 const RollpeDetailPage: React.FC = () => {
   const [isPending, startTransition] = useTransition();
@@ -47,9 +27,7 @@ const RollpeDetailPage: React.FC = () => {
     useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [rollpeCode, setRollpeCode] = useState<string>("");
-  const [rollpeDetail, setRollpeDetail] = useState<RollpeDetailResponse | null>(
-    null
-  );
+  const [rollpeDetail, setRollpeDetail] = useState<Rollpe | null>(null);
   const rollpeId = useParams().rollpeId;
   const router = useRouter();
 
@@ -81,6 +59,7 @@ const RollpeDetailPage: React.FC = () => {
       startTransition(async () => {
         getRollpeDetail(rollpeCode)
           .then((res) => {
+            console.log(res.data);
             setRollpeDetail(res.data);
           })
           .catch((err) => {
@@ -94,7 +73,7 @@ const RollpeDetailPage: React.FC = () => {
       });
   }, [rollpeCode]);
 
-  return isPending ? (
+  return isPending || !rollpeDetail ? (
     <Loading />
   ) : (
     <>
@@ -115,7 +94,7 @@ const RollpeDetailPage: React.FC = () => {
           </div>
 
           <div className={"writer-wrapper"}>
-            <h4>작성자({rollpeDetail?.invitingUser.length}/13)</h4>
+            <h4>작성자({rollpeDetail}/13)</h4>
             <ul className={"writer-container"}>
               {rollpeDetail?.invitingUser ? (
                 // TODO : authors로 변경되어야 함.
