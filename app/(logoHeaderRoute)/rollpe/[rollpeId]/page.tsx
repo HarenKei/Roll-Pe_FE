@@ -73,7 +73,6 @@ const RollpeDetailPage: React.FC = () => {
           pcode += item;
         });
       setRollpeCode(pcode);
-      console.log(pcode);
     }
   }, [rollpeId]);
 
@@ -82,7 +81,6 @@ const RollpeDetailPage: React.FC = () => {
       startTransition(async () => {
         getRollpeDetail(rollpeCode)
           .then((res) => {
-            console.log(res.data);
             setRollpeDetail(res.data);
           })
           .catch((err) => {
