@@ -44,7 +44,6 @@ export const postCreateRollpe = async (data: RollpeRequestBody) => {
 
 export const getRollpeDetail = async (pcode: string) => {
   return await axiosInstanceAuth.get(`/api/paper?pcode=${pcode}`).then((response) => {
-    console.log(response.data);
     return Promise.resolve(response.data);
   }).catch((error) => {
     return Promise.reject(error);
@@ -54,14 +53,12 @@ export const getRollpeDetail = async (pcode: string) => {
 export const getSearchRollpeList = async (searchText: string) => {
   return await axiosInstanceAuth.get(`/api/engine/serach?k=${searchText}`).then((response) => {
     if (response) {
-      console.log(response.data.data);
       return Promise.resolve(response.data.data);
     } else {
       throw new Error("검색 결과가 없습니다.");
     }
 
   }).catch((error) => {
-    console.log(error);
     return Promise.reject(error);
   })
 }
