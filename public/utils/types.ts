@@ -43,6 +43,8 @@ export interface Rollpe {
   title: string;
   viewStat: boolean;
   theme: string;
+  hearts: Heart[];
+  invitingUser: User[];
 }
 
 //! Heart 관련
@@ -59,7 +61,6 @@ export interface Heart {
 // ! User 관련
 export interface User {
   id: number;
-  code?: string;
   identifyCode: string;
   name: string;
   email: string;

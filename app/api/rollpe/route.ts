@@ -35,8 +35,6 @@ export const getRollpeCreateDetail = async (type: "all" | "theme" | "size" | "ra
 
 export const postCreateRollpe = async (data: RollpeRequestBody) => {
   return await axiosInstanceAuth.post('/api/paper', { ...data }).then((response) => {
-    console.log("실행한드아아아아");
-    console.log(data);
     return Promise.resolve(response.data);
   }).catch((error) => {
     console.error(error.config);
@@ -46,6 +44,7 @@ export const postCreateRollpe = async (data: RollpeRequestBody) => {
 
 export const getRollpeDetail = async (pcode: string) => {
   return await axiosInstanceAuth.get(`/api/paper?pcode=${pcode}`).then((response) => {
+    console.log(response.data);
     return Promise.resolve(response.data);
   }).catch((error) => {
     return Promise.reject(error);

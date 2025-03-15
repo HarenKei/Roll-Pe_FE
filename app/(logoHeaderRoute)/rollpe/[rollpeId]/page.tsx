@@ -94,9 +94,9 @@ const RollpeDetailPage: React.FC = () => {
           </div>
 
           <div className={"writer-wrapper"}>
-            <h4>작성자({rollpeDetail}/13)</h4>
+            <h4>작성자({rollpeDetail.invitingUser.length}/13)</h4>
             <ul className={"writer-container"}>
-              {rollpeDetail?.invitingUser ? (
+              {rollpeDetail.invitingUser.length !== 0 ? (
                 // TODO : authors로 변경되어야 함.
                 // TODO : invitingUser는 참여자 목록.
                 rollpeDetail.invitingUser.map((user: User, _: number) => (
