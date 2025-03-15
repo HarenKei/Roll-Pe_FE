@@ -16,16 +16,9 @@ export interface RollpeListProps {
   resultText: string;
 }
 
-
-export interface MainRollpeCardProps {
-  id: number;
-  title: string;
-  viewStat: boolean;
-  receivingStat: number;
-  receivingDate: string;
-  hostName: string;
-  code: string;
-  theme: any[];
+export interface SearchRollpeProps {
+  rollpeList: Rollpe[] | undefined;
+  resultText: string;
 }
 
 export interface userIntroResponse {
@@ -34,23 +27,24 @@ export interface userIntroResponse {
 }
 
 //! Rollpe 관련
+
 export interface Rollpe {
-  id: string;
+  id: number;
   code: string;
-  title: string;
+  createdAt: string;
   host: User;
-  createdAt: Date;
-  receivingDate: string;
-  receivingStatus: string;
-  receiver: User;
-  isPublic: boolean;
-  hearts: Heart[];
-  authors: User[];
-  theme: string;
+  ratio: "가로" | "세로";
+  receive: {
+    receivingDate: string;
+    receivingStat: number;
+    receiver: User;
+  };
   size: string;
-  ratio: string;
-  isVip: boolean;
-  version: string;
+  title: string;
+  viewStat: boolean;
+  theme: string;
+  hearts: Heart[];
+  invitingUser: User[];
 }
 
 //! Heart 관련
@@ -67,10 +61,23 @@ export interface Heart {
 // ! User 관련
 export interface User {
   id: number;
-  code?: string;
   identifyCode: string;
   name: string;
   email: string;
   provider: "Apple" | "Google" | "Kakao" | "Email" | null;
 }
 
+export interface RollpeInstance {
+  id: number;
+  name: string;
+  query: Object;
+  type: "THEME" | "SIZE" | "RATIO";
+}
+
+//! Rollpe Search
+export interface RollpeSearchListData {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Rollpe[];
+}

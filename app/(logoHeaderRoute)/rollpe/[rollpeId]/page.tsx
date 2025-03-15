@@ -1,8 +1,9 @@
 "use client";
+import { useTransition } from "react";
 import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import DUMMY from "@/public/images/image/image_templete.png";
 import {
@@ -14,13 +15,21 @@ import ParticipantsList from "@/app/_components/ui/modal/modal-contents/particip
 import RollpeEditForm from "@/app/_components/ui/modal/modal-contents/rollpe-edit/RollpeEditForm";
 import ShareRollpe from "@/app/_components/ui/modal/modal-contents/share-rollpe/ShareRollpe";
 import Marquee from "react-fast-marquee";
+import { User, Rollpe } from "@/public/utils/types";
+import { getRollpeDetail } from "@/app/api/rollpe/route";
+import Loading from "@/app/_components/ui/loading/Loading";
+import { useRouter } from "next/navigation";
 
 const RollpeDetailPage: React.FC = () => {
+  const [isPending, startTransition] = useTransition();
   const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(false);
   const [isParticipantsModalOpen, setIsParticipantsModalOpen] =
     useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [rollpeCode, setRollpeCode] = useState<string>("");
+  const [rollpeDetail, setRollpeDetail] = useState<Rollpe | null>(null);
   const rollpeId = useParams().rollpeId;
+  const router = useRouter();
 
   const onClickParticipantListOpen = () => {
     setIsParticipantsModalOpen(true);
@@ -34,7 +43,39 @@ const RollpeDetailPage: React.FC = () => {
     setIsShareModalOpen(true);
   };
 
-  return (
+  useEffect(() => {
+    if (rollpeId) {
+      let pcode = "";
+      typeof rollpeId === "string" &&
+        rollpeId.split("-").forEach((item: string) => {
+          pcode += item;
+        });
+      setRollpeCode(pcode);
+    }
+  }, [rollpeId]);
+
+  useEffect(() => {
+    rollpeCode &&
+      startTransition(async () => {
+        getRollpeDetail(rollpeCode)
+          .then((res) => {
+            console.log(res.data);
+            setRollpeDetail(res.data);
+          })
+          .catch((err) => {
+            if (err) {
+              alert("해당 롤페에 대한 접근 권한이 없습니다.");
+              setTimeout(() => {
+                router.back();
+              });
+            }
+          });
+      });
+  }, [rollpeCode]);
+
+  return isPending || !rollpeDetail ? (
+    <Loading />
+  ) : (
     <>
       <RollpeDetailPageWrapper>
         <RollpeDetailPageContainer>
@@ -42,7 +83,7 @@ const RollpeDetailPage: React.FC = () => {
             style={{ width: "100%", marginBottom: "3.25rem" }}
             pauseOnHover={true}
           >
-            <h1 className={"title"}>제목영역 롤페 아이디:{rollpeId}</h1>
+            <h1 className={"title"}>{rollpeDetail?.title}</h1>
           </Marquee>
 
           <div className={"preview-wrapper"}>
@@ -53,11 +94,19 @@ const RollpeDetailPage: React.FC = () => {
           </div>
 
           <div className={"writer-wrapper"}>
-            <h4>작성자(3/13)</h4>
+            <h4>작성자({rollpeDetail.invitingUser.length}/13)</h4>
             <ul className={"writer-container"}>
-              <li>김텐가(TengaSuki)</li>
-              <li>김텐가(TengaSuki)</li>
-              <li>김텐가(TengaSuki)</li>
+              {rollpeDetail.invitingUser.length !== 0 ? (
+                // TODO : authors로 변경되어야 함.
+                // TODO : invitingUser는 참여자 목록.
+                rollpeDetail.invitingUser.map((user: User, _: number) => (
+                  <li>
+                    {user.name} ({user.identifyCode})
+                  </li>
+                ))
+              ) : (
+                <li>아직 참여한 유저가 없습니다.</li>
+              )}
             </ul>
           </div>
 
@@ -87,7 +136,9 @@ const RollpeDetailPage: React.FC = () => {
       {isParticipantsModalOpen && (
         <Modal
           title={"참여자 목록"}
-          children={<ParticipantsList />}
+          children={
+            <ParticipantsList invitingUser={rollpeDetail?.invitingUser} />
+          }
           setModalState={setIsParticipantsModalOpen}
         />
       )}
@@ -101,7 +152,9 @@ const RollpeDetailPage: React.FC = () => {
       {isShareModalOpen && (
         <BottomModal
           title={"공유하기"}
-          children={<ShareRollpe close={setIsShareModalOpen} />}
+          children={
+            <ShareRollpe close={setIsShareModalOpen} pcode={rollpeId} />
+          }
           setModalState={setIsShareModalOpen}
         />
       )}

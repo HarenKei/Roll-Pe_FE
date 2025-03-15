@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
 import DUMMY from "@/public/images/image/image_dummy_thumb.png";
-import { RollpeListItemProps } from "@/public/utils/types";
+import { Rollpe, RollpeListItemProps } from "@/public/utils/types";
+import { useRouter } from "next/navigation";
 
 export const RollpeListItem: React.FC<RollpeListItemProps> = ({
   rollpeId,
@@ -43,17 +44,22 @@ export const RollpeListItem: React.FC<RollpeListItemProps> = ({
   );
 };
 
-export const RollpeSearchListItem: React.FC<RollpeListItemProps> = ({
-  rollpeId,
-  rollpeTitle,
-  rollpeOwner,
-  createdAt,
-  dDay,
-  isPublic,
-  thumbnail,
-}) => {
+export const RollpeSearchListItem: React.FC<Rollpe> = (data: Rollpe) => {
+  const { code, receive, host, title, createdAt } = data;
+  const today = new Date();
+  const targetDate = new Date(receive.receivingDate);
+  const timeDifference = targetDate.getTime() - today.getTime();
+  const dDay = Math.ceil(timeDifference / (1000 * 3600 * 24));
+  const createdDate = new Date(createdAt).toLocaleDateString();
+
+  const router = useRouter();
+
+  const onClickHandler = () => {
+    router.push(`/rollpe/${code}`);
+  };
+
   return (
-    <RollpeListItemWrapper>
+    <RollpeListItemWrapper onClick={onClickHandler}>
       <div className={"info-wrapper"}>
         <div className={"thumb-wrapper"}>
           <Image
@@ -69,10 +75,10 @@ export const RollpeSearchListItem: React.FC<RollpeListItemProps> = ({
             <div className={"badge-container"}>
               <span className={"badge-item d-day"}>D-{dDay}</span>
             </div>
-            {rollpeTitle}
+            <p className={"title-text"}>{title}</p>
           </div>
           <p className={"desc"}>
-            {rollpeOwner} 주최 | {createdAt} 생성
+            {host.name} 주최 | {createdDate} 생성
           </p>
         </div>
       </div>
@@ -90,6 +96,7 @@ const RollpeListItemWrapper = styled.li`
   border-bottom: 2px solid ${COLORS.ROLLPE_GRAY};
 
   .badge-container {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     gap: 0.25rem;
@@ -129,6 +136,7 @@ const RollpeListItemWrapper = styled.li`
     gap: 0.75rem;
 
     & > .thumb-wrapper {
+      flex-shrink: 0;
       width: 3rem;
       height: 3rem;
       border-radius: 50%;
@@ -149,12 +157,18 @@ const RollpeListItemWrapper = styled.li`
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        width: calc(100% - 1.5rem);
 
-        color: ${COLORS.ROLLPE_SECONDARY};
-        font-size: 1.25rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
+        & > .title-text {
+          color: ${COLORS.ROLLPE_SECONDARY};
+          font-size: 1.25rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
 
       & > .desc {

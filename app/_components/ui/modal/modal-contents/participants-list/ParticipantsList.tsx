@@ -4,66 +4,46 @@ import Image from "next/image";
 import Block from "@/public/images/icons/icon_block.svg";
 import Report from "@/public/images/icons/icon_siren.svg";
 import { COLORS } from "@/public/styles/colors";
+import { User } from "@/public/utils/types";
 
-const ParticipantsList: React.FC = () => {
+interface ParticipantsProps {
+  invitingUser: User[] | undefined;
+}
+
+const ParticipantsList: React.FC<ParticipantsProps> = ({
+  invitingUser,
+}: ParticipantsProps) => {
   return (
     <ListWrapper>
       <List>
-        <li>
-          <p>
-            김테스트<span>(test1)</span>
-          </p>
-          <div className={"report-container"}>
-            <button className="report-button">
-              <Image src={Block} alt={"이 사용자 차단"} layout="responsive" />
-            </button>
-            <button className="report-button">
-              <Image src={Report} alt={"이 사용자 신고"} layout="responsive" />
-            </button>
-          </div>
-        </li>
-
-        <li>
-          <p>
-            김테스트<span>(test1)</span>
-          </p>
-          <div className={"report-container"}>
-            <button className="report-button">
-              <Image src={Block} alt={"이 사용자 차단"} layout="responsive" />
-            </button>
-            <button className="report-button">
-              <Image src={Report} alt={"이 사용자 신고"} layout="responsive" />
-            </button>
-          </div>
-        </li>
-
-        <li>
-          <p>
-            김테스트<span>(test1)</span>
-          </p>
-          <div className={"report-container"}>
-            <button className="report-button">
-              <Image src={Block} alt={"이 사용자 차단"} layout="responsive" />
-            </button>
-            <button className="report-button">
-              <Image src={Report} alt={"이 사용자 신고"} layout="responsive" />
-            </button>
-          </div>
-        </li>
-
-        <li>
-          <p>
-            김테스트<span>(test1)</span>
-          </p>
-          <div className={"report-container"}>
-            <button className="report-button">
-              <Image src={Block} alt={"이 사용자 차단"} layout="responsive" />
-            </button>
-            <button className="report-button">
-              <Image src={Report} alt={"이 사용자 신고"} layout="responsive" />
-            </button>
-          </div>
-        </li>
+        {invitingUser ? (
+          invitingUser.map((user: User) => (
+            <li>
+              <p>
+                {user.name}
+                <span>({user.identifyCode})</span>
+              </p>
+              <div className={"report-container"}>
+                <button className="report-button">
+                  <Image
+                    src={Block}
+                    alt={"이 사용자 차단"}
+                    layout="responsive"
+                  />
+                </button>
+                <button className="report-button">
+                  <Image
+                    src={Report}
+                    alt={"이 사용자 신고"}
+                    layout="responsive"
+                  />
+                </button>
+              </div>
+            </li>
+          ))
+        ) : (
+          <li>아직 초대한 사용자가 없습니다.</li>
+        )}
       </List>
     </ListWrapper>
   );

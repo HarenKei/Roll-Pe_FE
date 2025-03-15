@@ -2,47 +2,63 @@
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
-import { MainRollpeCardProps } from "@/public/utils/types";
+import { User } from "@/public/utils/types";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-const MainRollpeCard: React.FC<MainRollpeCardProps> = (
-  data: MainRollpeCardProps
-) => {
-  const {
-    id,
-    title,
-    viewStat,
-    receivingStat,
-    receivingDate,
-    hostName,
-    code,
-    theme,
-  } = data;
+interface MainRollpeCardProps {
+  receivingDate: string;
+  title: string;
+  host: User;
+  id: number;
+  code: string;
+  theme: string;
+}
+
+const MainRollpeCard: React.FC<MainRollpeCardProps> = ({
+  receivingDate,
+  title,
+  host,
+  id,
+  theme,
+  code,
+}: MainRollpeCardProps) => {
+  const today = new Date();
+  const targetDate = new Date(receivingDate);
+  const timeDifference = targetDate.getTime() - today.getTime();
+  const dDay = Math.ceil(timeDifference / (1000 * 3600 * 24));
+
+  const router = useRouter();
+
+  //TODO: theme에 따른 배경색 지정
+
+  const onClickCardHandler = () => {
+    router.push(`/rollpe/${code}`);
+  };
 
   return (
-    <CardWrapper>
-      <CardContainer>
-        <div className={"card-image"}>
-          <Badge>
-            <p>D-30</p>
-          </Badge>
+    <CardContainer onClick={onClickCardHandler}>
+      <div className={"card-image"}>
+        <Badge>
+          <p>D-{dDay}</p>
+        </Badge>
 
-          <Image
-            src={"/images/image/image_dummy_cake.png"}
-            width={50}
-            height={46}
-            alt={""}
-          />
+        <Image
+          src={"/images/image/image_dummy_cake.png"}
+          width={50}
+          height={46}
+          alt={""}
+        />
+      </div>
+      <div className={"card-contents"}>
+        <div className={"card-title"}>
+          <p>{title}</p>
         </div>
-        <div className={"card-contents"}>
-          <h3 className={"card-title"}>{title}</h3>
-          <p className={"card-user"}>{hostName}</p>
-        </div>
-      </CardContainer>
-    </CardWrapper>
+        <p className={"card-user"}>{host.name}</p>
+      </div>
+    </CardContainer>
   );
 };
-
-const CardWrapper = styled.li``;
 
 const CardContainer = styled.button`
   all: unset;
@@ -52,7 +68,7 @@ const CardContainer = styled.button`
   align-items: center;
 
   width: 100%;
-  min-height: 9.188rem;
+  max-height: 9.188rem;
 
   border-radius: 1rem;
   overflow: hidden;
@@ -76,20 +92,29 @@ const CardContainer = styled.button`
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
+    height: 3.3125rem;
 
     padding: 0.75rem;
 
     width: calc(100% - 1.5rem);
-    /* height: 3.313rem; */
 
     background-color: ${COLORS.ROLLPE_PRIMARY};
 
     & > .card-title {
-      font-size: 1rem;
-      font-weight: 400;
-      font-style: normal;
-      line-height: normal;
+      width: 100%;
+      height: 1rem;
 
+      & > p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+        height: 100%;
+        font-size: 1rem;
+        font-weight: 400;
+        font-style: normal;
+        line-height: normal;
+      }
     }
 
     & > .card-user {

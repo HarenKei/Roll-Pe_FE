@@ -31,14 +31,13 @@ const SignInForm: React.FC = () => {
     startTransition(async () => {
       await signIn(data.email, data.password)
         .then((res) => {
-          console.log(res.user);
           dispatch(
             setUser({
               id: res.user.id,
               name: res.user.name,
               email: res.user.email,
               identifyCode: res.user.identifyCode,
-              proovider: res.user.provider,
+              provider: res.user.provider,
             })
           );
           setTimeout(() => {

@@ -9,8 +9,9 @@ import Image from "next/image";
 
 interface ShareRollpeProps {
   close: React.Dispatch<React.SetStateAction<boolean>>;
+  pcode: string | string[];
 }
-const ShareRollpe: React.FC<ShareRollpeProps> = ({ close }) => {
+const ShareRollpe: React.FC<ShareRollpeProps> = ({ close, pcode }) => {
   return (
     <ShareRollpeWrapper>
       <div className={"title-wrapper"}>
@@ -20,7 +21,7 @@ const ShareRollpe: React.FC<ShareRollpeProps> = ({ close }) => {
           <Image src={Close} alt={"닫기"} layout="responsive" />
         </button>
       </div>
-      <p className={"rollpe-code"}>codea-codeb-codec-codee</p>
+      <p className={"rollpe-code"}>{pcode}</p>
       <div className={"share-button-wrapper"}>
         <button className={"share"}>
           <div className={"image-wrapper"}>

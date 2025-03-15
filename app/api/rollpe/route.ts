@@ -35,11 +35,30 @@ export const getRollpeCreateDetail = async (type: "all" | "theme" | "size" | "ra
 
 export const postCreateRollpe = async (data: RollpeRequestBody) => {
   return await axiosInstanceAuth.post('/api/paper', { ...data }).then((response) => {
-    console.log("실행한드아아아아");
-    console.log(data);
     return Promise.resolve(response.data);
   }).catch((error) => {
     console.error(error.config);
     return Promise.reject(error.response);
+  })
+}
+
+export const getRollpeDetail = async (pcode: string) => {
+  return await axiosInstanceAuth.get(`/api/paper?pcode=${pcode}`).then((response) => {
+    return Promise.resolve(response.data);
+  }).catch((error) => {
+    return Promise.reject(error);
+  })
+}
+
+export const getSearchRollpeList = async (searchText: string) => {
+  return await axiosInstanceAuth.get(`/api/engine/serach?k=${searchText}`).then((response) => {
+    if (response) {
+      return Promise.resolve(response.data.data);
+    } else {
+      throw new Error("검색 결과가 없습니다.");
+    }
+
+  }).catch((error) => {
+    return Promise.reject(error);
   })
 }
