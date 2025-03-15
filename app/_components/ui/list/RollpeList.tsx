@@ -2,8 +2,15 @@
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 
-import { RollpeListItemProps, RollpeListProps } from "@/public/utils/types";
+import {
+  Rollpe,
+  RollpeListItemProps,
+  RollpeListProps,
+  SearchRollpeProps,
+} from "@/public/utils/types";
 import { RollpeListItem, RollpeSearchListItem } from "./RollpeListItem";
+import Image from "next/image";
+import NoneList from "@/public/images/icons/icon_non_list.svg";
 
 export const RollpeList: React.FC<RollpeListProps> = ({
   rollpeList,
@@ -34,7 +41,7 @@ export const RollpeList: React.FC<RollpeListProps> = ({
   );
 };
 
-export const RollpeSearchList: React.FC<RollpeListProps> = ({
+export const RollpeSearchList: React.FC<SearchRollpeProps> = ({
   rollpeList,
   resultText,
 }) => {
@@ -42,22 +49,28 @@ export const RollpeSearchList: React.FC<RollpeListProps> = ({
     <RollpeListWrapper>
       <div className={"count-wrapper"}>
         <em>
-          총 {rollpeList.length}개{resultText}
+          총 {rollpeList?.length}개{resultText}
         </em>
       </div>
       <RollpeListContainer>
-        {rollpeList.map((rollpe: RollpeListItemProps, _: number) => (
-          <RollpeSearchListItem
-            key={rollpe.rollpeId}
-            rollpeId={rollpe.rollpeId}
-            rollpeTitle={rollpe.rollpeTitle}
-            rollpeOwner={rollpe.rollpeOwner}
-            createdAt={rollpe.createdAt}
-            dDay={rollpe.dDay}
-            isPublic={rollpe.isPublic}
-            thumbnail={rollpe.thumbnail}
-          />
-        ))}
+        {rollpeList?.length !== 0 ? (
+          rollpeList?.map((rollpe: Rollpe, _: number) => (
+            <RollpeSearchListItem key={rollpe.id} {...rollpe} />
+          ))
+        ) : (
+          <NonRollpeListContainer>
+            <div className={"contents"}>
+              <div className={"img-container"}>
+                <Image
+                  src={NoneList}
+                  alt={"icon_non_list"}
+                  layout="responsive"
+                />
+              </div>
+              <p>검색 결과가 없습니다.</p>
+            </div>
+          </NonRollpeListContainer>
+        )}
       </RollpeListContainer>
     </RollpeListWrapper>
   );
@@ -89,4 +102,35 @@ const RollpeListContainer = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 36rem;
+`;
+
+const NonRollpeListContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 36rem;
+
+  & > .contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+
+    & > .img-container {
+      width: 4rem;
+      height: 4rem;
+    }
+
+    & > p {
+      font-family: var(--font-hakgyoansim);
+      color: ${COLORS.ROLLPE_GRAY};
+      text-align: center;
+      font-size: 1.25rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
 `;

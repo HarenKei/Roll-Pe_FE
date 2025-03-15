@@ -16,6 +16,11 @@ export interface RollpeListProps {
   resultText: string;
 }
 
+export interface SearchRollpeProps {
+  rollpeList: Rollpe[] | undefined;
+  resultText: string;
+}
+
 export interface userIntroResponse {
   host: number;
   heart: number;
@@ -68,3 +73,10 @@ export interface RollpeInstance {
   type: "THEME" | "SIZE" | "RATIO";
 }
 
+//! Rollpe Search
+export interface RollpeSearchListData {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Rollpe[];
+}

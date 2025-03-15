@@ -4,6 +4,7 @@ import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
 import SearchIcon from "@/public/images/icons/icon_search.svg";
 import Link from "next/link";
+import { useState } from "react";
 
 interface CheckboxProps {
   checkboxId: string;
@@ -13,14 +14,26 @@ interface CheckboxProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const SearchInput: React.FC = () => {
-  const onClikcHandler = () => {
-    alert("검색 기능 구현을 해야된다!");
+interface SearchInputProps {
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const SearchInput: React.FC<SearchInputProps> = ({ setSearchText }) => {
+  const [inputText, setInputText] = useState<string>("");
+  const onClickHandler = () => {
+    setSearchText(inputText);
   };
+
   return (
     <SearchInputWrapper>
-      <input type={"text"} placeholder={"검색어를 입력하세요."} />
-      <button onClick={() => onClikcHandler()}>
+      <input
+        type={"text"}
+        placeholder={"검색어를 입력하세요."}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setInputText(e.target.value);
+        }}
+      />
+      <button onClick={onClickHandler}>
         <Image
           src={SearchIcon}
           alt={"검색"}
