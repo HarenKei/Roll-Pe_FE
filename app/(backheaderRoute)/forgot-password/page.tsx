@@ -5,9 +5,11 @@ import { Button } from "@/app/_components/ui/button/StyledButton";
 import Image from "next/image";
 import Logo from "@/public/images/logos/logo.korean.png";
 import { COLORS } from "@/public/styles/colors";
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { postForgotPassword } from "@/app/api/auth/forgot-password/route";
 
 const ForgotPasswordPage: React.FC = () => {
+  const [isPending, startTransition] = useTransition();
   const [email, setEmail] = useState<string>("");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -18,6 +20,20 @@ const ForgotPasswordPage: React.FC = () => {
   const onClickHandler = () => {
     if (!emailRegex.test(email)) {
       alert("이메일 형식을 확인해주세요.");
+    } else {
+      startTransition(() => {
+        postForgotPassword(email)
+          .then((res) => {
+            setTimeout(() => {
+              alert(res);
+            }, 500);
+          })
+          .catch((err) => {
+            setTimeout(() => {
+              alert("오류가 발생했습니다. 다시 시도해주세요.");
+            }, 500);
+          });
+      });
     }
   };
 
