@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import { ButtonSubmit } from "@/app/_components/ui/button/StyledButton";
@@ -12,6 +12,9 @@ import {
   ForgotPasswordContainer,
   IntroWrapper,
 } from "../page";
+import { useParams, useRouter } from "next/navigation";
+import { patchChangePassword } from "@/app/api/auth/forgot-password/route";
+import Loading from "@/app/_components/ui/loading/Loading";
 
 interface ChangePasswordInputs {
   password: string;
@@ -19,6 +22,8 @@ interface ChangePasswordInputs {
 }
 
 const ForgotChangePasswordPage: React.FC = () => {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const {
     register,
     handleSubmit,
@@ -28,6 +33,7 @@ const ForgotChangePasswordPage: React.FC = () => {
   const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,}$/;
   const [passwordError, setPasswordError] = useState<string>("");
   const [passwordCheckError, setPasswordCheckError] = useState<string>("");
+  const identifyCode = useParams().identifyCode;
 
   const passwordChangeHandler = (password: string) => {
     if (password && !passwordRegex.test(password)) {
@@ -39,12 +45,33 @@ const ForgotChangePasswordPage: React.FC = () => {
     }
   };
 
+  const submitHandler = () => {
+    identifyCode &&
+      startTransition(async () => {
+        await patchChangePassword(identifyCode, watch("password"))
+          .then((res) => {
+            setTimeout(() => {
+              alert(res);
+              router.push("/sign-in");
+            }, 500);
+          })
+          .catch((err) => {
+            setTimeout(() => {
+              alert(
+                "비밀번호 변경 중 오류가 발생했습니다.\n다시 시도해주세요."
+              );
+            });
+          });
+      });
+  };
+
   useEffect(() => {
     passwordChangeHandler(watch("password"));
   }, [watch("password"), passwordChangeHandler]);
 
   return (
     <ForgotPasswordWrapper>
+      {isPending && <Loading />}
       <ForgotPasswordContainer>
         <IntroWrapper>
           <div className={"img-wrapper"}>
@@ -52,7 +79,7 @@ const ForgotChangePasswordPage: React.FC = () => {
           </div>
           <p>비밀번호 찾기</p>
         </IntroWrapper>
-        <EmailForm>
+        <EmailForm onSubmit={handleSubmit(submitHandler)}>
           <div className={"input-container"}>
             <StyledInput
               type={"password"}
