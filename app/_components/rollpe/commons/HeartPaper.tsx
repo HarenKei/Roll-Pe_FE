@@ -59,8 +59,10 @@ const HeartPaperPreviewContainer = styled.div<{
   width: 90%;
   height: 90%;
   min-width: 3.5em;
-  min-height: 4em;
-  max-height: 10em;
+  @media (min-width: 768px) {
+    max-height: 10em;
+  }
+  max-height: 4em;
 
   transform: rotate(${(props) => props.deg}deg);
   background: ${(props) => props.color};
@@ -72,13 +74,27 @@ const ContentsWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1em;
-  width: calc(100% - 2em);
-  height: calc(100% - 2em);
+
+  padding: 0.5em;
+  width: calc(100% - 1em);
+  height: calc(100% - 1em);
+
+  @media (min-width: 768px) {
+    padding: 1em;
+    width: calc(100% - 2em);
+    height: calc(100% - 2em);
+  }
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   & > p {
+    display: inline-block;
     font-family: var(--font-nanumpen);
-    font-size: 1.25em;
+    @media (min-width: 768px) {
+      font-size: 1.25em;
+    }
+    font-size: 0.125em;
     color: ${COLORS.ROLLPE_SECONDARY};
     line-height: auto;
     text-align: center;

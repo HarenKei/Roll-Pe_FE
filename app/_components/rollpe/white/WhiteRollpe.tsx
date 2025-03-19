@@ -89,6 +89,8 @@ const PriviewWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  width: 100%;
   aspect-ratio: 297 / 210;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
@@ -133,13 +135,13 @@ const SecondRow = styled.div`
 
     & > p {
       text-align: center;
-      font-size: 1.35rem;
+      font-size: 1.25em;
       font-family: var(--font-jalnan);
       line-height: auto;
       word-break: keep-all;
 
       @media (min-width: 768px) {
-        font-size: 3.25rem;
+        font-size: 3.125em;
       }
     }
   }
