@@ -20,3 +20,15 @@ export const dunggeunmo = localFont({
   variable: "--font-dunggeunmo",
 }
 )
+
+export const jalnangothic = localFont({
+  src: "./JalnanGothicTTF.ttf",
+  display: "swap",
+  variable: "--font-jalnan",
+})
+
+export const nanumpen = localFont({
+  src: "./NanumPen.ttf",
+  display: "swap",
+  variable: "--font-nanumpen",
+})
