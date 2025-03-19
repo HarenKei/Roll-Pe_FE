@@ -19,6 +19,7 @@ import { User, Rollpe } from "@/public/utils/types";
 import { getRollpeDetail } from "@/app/api/rollpe/route";
 import Loading from "@/app/_components/ui/loading/Loading";
 import { useRouter } from "next/navigation";
+import { WhiteRollpePriview } from "@/app/_components/rollpe/white/WhiteRollpe";
 
 const RollpeDetailPage: React.FC = () => {
   const [isPending, startTransition] = useTransition();
@@ -88,7 +89,7 @@ const RollpeDetailPage: React.FC = () => {
 
           <div className={"preview-wrapper"}>
             <div className={"preview-image-wrapper"}>
-              <Image src={DUMMY} alt={"미리보기 이미지"} layout="responsive" />
+              <WhiteRollpePriview {...rollpeDetail} />
             </div>
             <p>롤페를 눌러 마음을 전달하세요!</p>
           </div>

@@ -7,7 +7,8 @@ export const WhiteRollpe: React.FC = () => {
   return <></>;
 };
 
-export const WhiteRollpePriview: React.FC = () => {
+export const WhiteRollpePriview: React.FC<Rollpe> = (data: Rollpe) => {
+  const { title } = data;
   return (
     <PriviewWrapper>
       <PreviewContainer>
@@ -45,7 +46,7 @@ export const WhiteRollpePriview: React.FC = () => {
             margin={"0em 0em 0.6em 0em"}
           />
           <div className={"title-wrapper"}>
-            <p>김테스트의 생일을 축하합니다!</p>
+            <p>{title}</p>
           </div>
           <HeartPaperPreview
             color={"#F228D3"}
