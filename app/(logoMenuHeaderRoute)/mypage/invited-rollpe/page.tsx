@@ -3,6 +3,9 @@ import { COLORS } from "@/public/styles/colors";
 import styled from "styled-components";
 import { RollpeListItemProps } from "@/public/utils/types";
 import { RollpeList } from "@/app/_components/ui/list/RollpeList";
+import { getRollpeList } from "@/app/api/rollpe/route";
+import { useTransition, useState, useEffect } from "react";
+import { Rollpe } from "@/public/utils/types";
 
 const DUMMY_ROLLPE_LIST: RollpeListItemProps[] = [
   {
@@ -53,6 +56,21 @@ const DUMMY_ROLLPE_LIST: RollpeListItemProps[] = [
 ];
 
 const InvitedRollpePage: React.FC = () => {
+  const [isPending, startTransition] = useTransition();
+  const [rollpeList, setRollpeList] = useState<Rollpe[]>([]);
+
+  useEffect(() => {
+    startTransition(async () => {
+      await getRollpeList("invited")
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }, []);
+
   return (
     <MyRollpeWrapper>
       <MyRollpeContainer>

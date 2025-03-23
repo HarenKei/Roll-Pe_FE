@@ -5,7 +5,6 @@ import MainRollpeCard from "@/app/_components/ui/card/main-rollpe-list/MainRollp
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { RootState } from "@/public/redux/store";
-import { useRouter } from "next/navigation";
 import { Rollpe } from "@/public/utils/types";
 
 const HotRollpeList: React.FC = () => {
@@ -23,7 +22,8 @@ const HotRollpeList: React.FC = () => {
     startTransition(async () => {
       await getHotRollpeList()
         .then((res) => {
-          setHotRollpeList(res.data);
+          console.log(res);
+          setHotRollpeList(res);
         })
         .catch((err) => {
           console.log(err);

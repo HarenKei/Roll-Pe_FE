@@ -45,7 +45,6 @@ const MyPage: React.FC = () => {
           setUserRollpeCount(res);
         })
         .catch((error) => {
-          // throw new Error();
           console.log("에러나따");
           persistor.purge();
           alert("시간이 경과되어 로그아웃 되었습니다.\n다시 로그인해주세요.");
