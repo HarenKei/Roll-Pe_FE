@@ -2,28 +2,33 @@
 import { RollpeRequestBody } from "@/app/(logoHeaderRoute)/rollpe/create/_components/form/RollpeCreateForm";
 import { axiosInstance, axiosInstanceAuth } from "@/public/axios/axiosInstance";
 
-export const getHotRollpeList = async () => {
-  try {
-    const response = await axiosInstance.get(`/api/paper/user?type=hot`);
 
-    if (response.status === 200) {
-      return response.data;
-    }
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+export const getRollpeList = async (queryParam: "invited" | "main") => {
+  return await axiosInstanceAuth.get(`/api/paper/user?type=${queryParam}`).then((response) => {
+    return Promise.resolve(response.data.data.result);
+  }).catch((error) => {
+    return Promise.reject(error);
+  })
 
 }
 
-
-export const getUserRollpe = async (queryParam: "my" | "main" | "invited" | "hot") => {
-  return await axiosInstanceAuth.get(`/api/paper/mypage?type=${queryParam}`).then((res) => {
-    return Promise.resolve(res.data.data);
+export const getHotRollpeList = async () => {
+  return await axiosInstance.get(`/api/paper/user?type=hot`).then((response) => {
+    return Promise.resolve(response.data.data);
   }).catch((error) => {
     return Promise.reject(error);
   });
 }
+
+export const getUserRollpe = async (queryParam: "my" | "main" | "invited" | "hot") => {
+  return await axiosInstanceAuth.get(`/api/paper/mypage?type=${queryParam}`).then((response) => {
+    return Promise.resolve(response.data.data);
+  }).catch((error) => {
+    return Promise.reject(error);
+  });
+}
+
+
 
 export const getRollpeCreateDetail = async (type: "all" | "theme" | "size" | "ratio") => {
   return await axiosInstance.get(`/api/index?type=${type}`).then((response) => {
@@ -64,3 +69,4 @@ export const getSearchRollpeList = async (searchText: string) => {
     return Promise.reject(error);
   })
 }
+
