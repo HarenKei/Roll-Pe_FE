@@ -8,6 +8,7 @@ import {
   dunggeunmo,
   jalnangothic,
   nanumpen,
+  nanummyeongjo,
 } from "@/public/fonts/fonts";
 import Footer from "./_components/ui/layouts/Footer";
 import ReduxProvider from "./_components/redux-provider/ReduxProvider";
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${hakgyoansim.variable} ${pretendard.variable} ${dunggeunmo.variable} ${jalnangothic.variable} ${nanumpen.variable}`}
+      className={`${hakgyoansim.variable} ${pretendard.variable} ${dunggeunmo.variable} ${jalnangothic.variable} ${nanumpen.variable} ${nanummyeongjo.variable}`}
     >
       <body>
         <ReduxProvider>

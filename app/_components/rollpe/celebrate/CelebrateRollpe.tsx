@@ -2,12 +2,9 @@
 import styled from "styled-components";
 import { HeartPaperPreview } from "../commons/HeartPaper";
 import { Rollpe } from "@/public/utils/types";
+import { COLORS } from "@/public/styles/colors";
 
-export const WhiteRollpe: React.FC = () => {
-  return <></>;
-};
-
-export const WhiteRollpePriview: React.FC = () => {
+export const CelebrateRollpe: React.FC = () => {
   return (
     <RollpeWrapper>
       <PreviewContainer>
@@ -51,7 +48,7 @@ export const WhiteRollpePriview: React.FC = () => {
             vertical={false}
           />
           <div className={"title-wrapper"}>
-            <p>하나둘셋넷다섯여섯일곱여덟아홉열열하나열둘열셋열</p>
+            <p>김테스트야 생일 축하해!!!</p>
           </div>
           <HeartPaperPreview
             color={"#F228D3"}
@@ -97,12 +94,12 @@ export const WhiteRollpePriview: React.FC = () => {
   );
 };
 
-export const VerticalRollpe: React.FC = () => {
+export const VerticalCelebrateRollpe: React.FC = () => {
   return (
     <VerticalWrapper>
       <VerticalContainer>
         <VerticalRollpeTitleWrapper>
-          <p>하나둘셋넷다섯여섯일곱여덟아홉열열하나열</p>
+          <p>김테스트야 생일 축하해!!!</p>
         </VerticalRollpeTitleWrapper>
         <VerticalHeartContainer>
           <VerticalHeartRow>
@@ -196,11 +193,15 @@ const RollpeWrapper = styled.div`
   position: relative;
   width: 100%;
   aspect-ratio: 297 / 210;
+  background-color: #ffc0f4;
+  background-image: url("/images/image/celebrate.png");
+  background-size: cover;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
 const VerticalWrapper = styled(RollpeWrapper)`
   aspect-ratio: 210 / 297;
+  background-image: none;
 `;
 
 const PreviewContainer = styled.div`
@@ -225,19 +226,27 @@ const VerticalContainer = styled.div`
 const VerticalRollpeTitleWrapper = styled.div`
   padding: 1em 2.5em;
   width: calc(100% - 5em);
+  /* height: 20%; */
 
   @media (min-width: 768px) {
     padding: 2em 5em;
     width: calc(100% - 10em);
   }
 
+  background-image: url("/images/image/celebrate.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
   & > p {
     width: 100%;
+
     font-family: var(--font-jalnan);
     line-height: 130%;
     font-size: 1.5em;
-    word-break: break-all;
+    word-break: keep-all;
     text-align: center;
+    color: ${COLORS.ROLLPE_PRIMARY};
 
     @media (min-width: 768px) {
       font-size: 3.25em;
@@ -287,18 +296,21 @@ const SecondRow = styled.div`
     align-items: center;
     justify-content: center;
 
-    padding: 0.25rem;
-    width: calc(100% - 0.5rem);
-    height: calc(100% - 0.5rem);
+    padding: 0.2em;
+    width: calc(100% - 0.4em);
+    height: calc(100% - 0.4em);
 
     & > p {
       text-align: center;
       font-size: 1.25em;
       font-family: var(--font-jalnan);
+      color: ${COLORS.ROLLPE_PRIMARY};
       line-height: auto;
+      word-break: break-all;
 
       @media (min-width: 768px) {
         font-size: 3.125em;
+        word-break: keep-all;
       }
     }
   }
