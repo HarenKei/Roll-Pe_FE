@@ -4,10 +4,6 @@ import { HeartPaperPreview } from "../commons/HeartPaper";
 import { Rollpe } from "@/public/utils/types";
 import { COLORS } from "@/public/styles/colors";
 
-export const WhiteRollpe: React.FC = () => {
-  return <></>;
-};
-
 export const RipRollpe: React.FC = () => {
   return (
     <RollpeWrapper>
@@ -98,35 +94,35 @@ export const RipRollpe: React.FC = () => {
   );
 };
 
-export const VerticalRollpe: React.FC = () => {
+export const VerticalRipRollpe: React.FC = () => {
   return (
     <VerticalWrapper>
       <VerticalContainer>
         <VerticalRollpeTitleWrapper>
-          <p>하나둘셋넷다섯여섯일곱여덟아홉열열하나열</p>
+          <p>**참사 희생자들을 추모합니다.</p>
         </VerticalRollpeTitleWrapper>
         <VerticalHeartContainer>
           <VerticalHeartRow>
             <HeartPaperPreview
-              color={"#F2EB28"}
+              color={"#999999"}
               deg={0.86}
               margin={"0em 0em 0.5em 0em"}
               vertical={true}
             />
             <HeartPaperPreview
-              color={"#28E8F2"}
+              color={"#999999"}
               deg={-0.26}
               margin={"0.5em 0em 0em 0em"}
               vertical={true}
             />
             <HeartPaperPreview
-              color={"#F228D3"}
+              color={"#999999"}
               deg={0.15}
               margin={"0em 0em 0.5em 0em"}
               vertical={true}
             />
             <HeartPaperPreview
-              color={"#F228D3"}
+              color={"#999999"}
               deg={0.42}
               margin={"1em 0em 0em 0em"}
               vertical={true}
@@ -134,25 +130,25 @@ export const VerticalRollpe: React.FC = () => {
           </VerticalHeartRow>
           <VerticalHeartRow>
             <HeartPaperPreview
-              color={"#F228D3"}
+              color={"#999999"}
               deg={-0.07}
               margin={"0em 0em 0em 0em"}
               vertical={true}
             />
             <HeartPaperPreview
-              color={"#F2EB28"}
+              color={"#999999"}
               deg={0.86}
               margin={"1em 0em 0em 0em"}
               vertical={true}
             />
             <HeartPaperPreview
-              color={"#F2EB28"}
+              color={"#D3D3D3"}
               deg={-0.74}
               margin={"0em 0em 0em 0em"}
               vertical={true}
             />
             <HeartPaperPreview
-              color={"#F228D3"}
+              color={"#D3D3D3"}
               deg={0.76}
               margin={"1em 0em 0em 0em"}
               vertical={true}
@@ -160,25 +156,25 @@ export const VerticalRollpe: React.FC = () => {
           </VerticalHeartRow>
           <VerticalHeartRow>
             <HeartPaperPreview
-              color={"#28E8F2"}
+              color={"#999999"}
               deg={1.45}
               margin={"1em 0em 0em 0em"}
               vertical={true}
             />
             <HeartPaperPreview
-              color={"#28E8F2"}
+              color={"#D3D3D3"}
               deg={-0.11}
               margin={"0em 0em 0em 0em"}
               vertical={true}
             />
             <HeartPaperPreview
-              color={"#F228D3"}
+              color={"#999999"}
               deg={1.23}
               margin={"1em 0em 0em 0em"}
               vertical={true}
             />
             <HeartPaperPreview
-              color={"#F2EB28"}
+              color={"#999999"}
               deg={-0.66}
               margin={"0em 0em 0em 0em"}
               vertical={true}
@@ -227,19 +223,26 @@ const VerticalContainer = styled.div`
 const VerticalRollpeTitleWrapper = styled.div`
   padding: 1em 2.5em;
   width: calc(100% - 5em);
+  /* height: 20%; */
 
   @media (min-width: 768px) {
     padding: 2em 5em;
     width: calc(100% - 10em);
   }
+  background-image: url("/images/image/rip.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 
   & > p {
     width: 100%;
+
     font-family: var(--font-nanummyeongjo);
     line-height: 130%;
     font-size: 1.5em;
-    word-break: break-all;
+    word-break: keep-all;
     text-align: center;
+    color: ${COLORS.ROLLPE_PRIMARY};
 
     @media (min-width: 768px) {
       font-size: 3.25em;
