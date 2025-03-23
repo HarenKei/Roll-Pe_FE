@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { HeartPaperPreview } from "../commons/HeartPaper";
 import { Rollpe } from "@/public/utils/types";
+import { COLORS } from "@/public/styles/colors";
 
 export const WhiteRollpe: React.FC = () => {
   return <></>;
@@ -51,7 +52,7 @@ export const RipRollpe: React.FC = () => {
             vertical={false}
           />
           <div className={"title-wrapper"}>
-            <p>하나둘셋넷다섯여섯일곱여덟아홉열열하나열둘열셋열</p>
+            <p>삼가고인의 명복을 빕니다.</p>
           </div>
           <HeartPaperPreview
             color={"#d3d3d3"}
@@ -196,6 +197,7 @@ const RollpeWrapper = styled.div`
   position: relative;
   width: 100%;
   aspect-ratio: 297 / 210;
+  background-color: #393939;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
@@ -233,7 +235,7 @@ const VerticalRollpeTitleWrapper = styled.div`
 
   & > p {
     width: 100%;
-    font-family: var(--font-jalnan);
+    font-family: var(--font-nanummyeongjo);
     line-height: 130%;
     font-size: 1.5em;
     word-break: break-all;
@@ -287,15 +289,20 @@ const SecondRow = styled.div`
     align-items: center;
     justify-content: center;
 
-    padding: 0.25rem;
-    width: calc(100% - 0.5rem);
-    height: calc(100% - 0.5rem);
+    padding: 0.2em;
+    width: calc(100% - 0.4em);
+    height: calc(100% - 0.4em);
+
+    background-image: url("/images/image/rip.png");
+    background-size: cover;
 
     & > p {
       text-align: center;
       font-size: 1.25em;
-      font-family: var(--font-jalnan);
+      font-family: var(--font-nanummyeongjo);
+      color: ${COLORS.ROLLPE_PRIMARY};
       line-height: auto;
+      word-break: keep-all;
 
       @media (min-width: 768px) {
         font-size: 3.125em;
