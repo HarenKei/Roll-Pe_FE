@@ -9,6 +9,10 @@ import {
   RipRollpe,
   VerticalRipRollpe,
 } from "@/app/_components/rollpe/rip/RipRollpe";
+import {
+  CelebrateRollpe,
+  VerticalCelebrateRollpe,
+} from "@/app/_components/rollpe/celebrate/CelebrateRollpe";
 
 const TestPage: React.FC = () => {
   return (
@@ -18,6 +22,8 @@ const TestPage: React.FC = () => {
         <VerticalRollpe />
         <RipRollpe />
         <VerticalRipRollpe />
+        <CelebrateRollpe />
+        <VerticalCelebrateRollpe />
       </TestPageContainer>
     </TestPageWrapper>
   );
