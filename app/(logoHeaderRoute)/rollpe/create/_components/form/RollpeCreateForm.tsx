@@ -88,20 +88,24 @@ const RollpeCreateForm: React.FC = () => {
   };
 
   const onCreateHandler = () => {
-    startTransition(() => {
-      postCreateRollpe(requestBody)
-        .then((res) => {
-          alert(res.message);
-          setTimeout(() => {
-            router.push("/main");
-          }, 500);
-        })
-        .catch((err) => {
-          // console.error(err);
-          alert(err.message);
-        });
-    });
+    console.log(requestBody);
   };
+
+  // const onCreateHandler = () => {
+  //   startTransition(() => {
+  //     postCreateRollpe(requestBody)
+  //       .then((res) => {
+  //         alert(res.message);
+  //         setTimeout(() => {
+  //           router.push("/main");
+  //         }, 500);
+  //       })
+  //       .catch((err) => {
+  //         // console.error(err);
+  //         alert(err.message);
+  //       });
+  //   });
+  // };
 
   useEffect(() => {
     startTransition(() => {

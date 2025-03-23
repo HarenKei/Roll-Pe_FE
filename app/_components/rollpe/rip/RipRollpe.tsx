@@ -7,37 +7,37 @@ export const WhiteRollpe: React.FC = () => {
   return <></>;
 };
 
-export const WhiteRollpePriview: React.FC = () => {
+export const RipRollpe: React.FC = () => {
   return (
     <RollpeWrapper>
       <PreviewContainer>
         <FirstRow>
           <HeartPaperPreview
-            color={"#F228D3"}
+            color={"#999"}
             deg={-2.72}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
           />
           <HeartPaperPreview
-            color={"#F2EB28"}
+            color={"#D3D3D3"}
             deg={0}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
           />
           <HeartPaperPreview
-            color={"#F2EB28"}
+            color={"#999"}
             deg={5.39}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
           />
           <HeartPaperPreview
-            color={"#28E8F2"}
+            color={"#999"}
             deg={0.22}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
           />
           <HeartPaperPreview
-            color={"#F2EB28"}
+            color={"#999"}
             deg={-1.6}
             margin={"0em 0em 0.3em 0em"}
             vertical={false}
@@ -45,7 +45,7 @@ export const WhiteRollpePriview: React.FC = () => {
         </FirstRow>
         <SecondRow>
           <HeartPaperPreview
-            color={"#28E8F2"}
+            color={"#999"}
             deg={2.78}
             margin={"0em 0em 0.6em 0em"}
             vertical={false}
@@ -54,7 +54,7 @@ export const WhiteRollpePriview: React.FC = () => {
             <p>하나둘셋넷다섯여섯일곱여덟아홉열열하나열둘열셋열</p>
           </div>
           <HeartPaperPreview
-            color={"#F228D3"}
+            color={"#d3d3d3"}
             deg={3.1}
             margin={"0em 0em 0.98em 0em"}
             vertical={false}

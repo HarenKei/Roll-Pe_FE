@@ -27,6 +27,7 @@ export const getUserRollpe = async (queryParam: "my" | "main" | "inviting") => {
 
 export const getRollpeCreateDetail = async (type: "all" | "theme" | "size" | "ratio") => {
   return await axiosInstance.get(`/api/index?type=${type}`).then((response) => {
+
     return Promise.resolve(response.data);
   }).catch((error) => {
     return Promise.reject(error.response);
@@ -44,6 +45,7 @@ export const postCreateRollpe = async (data: RollpeRequestBody) => {
 
 export const getRollpeDetail = async (pcode: string) => {
   return await axiosInstanceAuth.get(`/api/paper?pcode=${pcode}`).then((response) => {
+    // console.log(response.data);
     return Promise.resolve(response.data);
   }).catch((error) => {
     return Promise.reject(error);
