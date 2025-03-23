@@ -32,3 +32,9 @@ export const nanumpen = localFont({
   display: "swap",
   variable: "--font-nanumpen",
 })
+
+export const nanummyeongjo = localFont({
+  src: "./NanumMyeongjo.ttf",
+  display: "swap",
+  variable: "--font-nanummyeongjo",
+})

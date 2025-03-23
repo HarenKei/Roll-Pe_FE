@@ -62,31 +62,31 @@ export const RipRollpe: React.FC = () => {
         </SecondRow>
         <ThirdRow>
           <HeartPaperPreview
-            color={"#F2EB28"}
+            color={"#999"}
             deg={-1.98}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
           />
           <HeartPaperPreview
-            color={"#28E8F2"}
+            color={"#D3D3D3"}
             deg={4.03}
             margin={"0.3em 0em 0em 0em"}
             vertical={false}
           />
           <HeartPaperPreview
-            color={"#F2EB28"}
+            color={"#999"}
             deg={-1.98}
             margin={"0em 0em 0.6em 0em"}
             vertical={false}
           />
           <HeartPaperPreview
-            color={"#F2EB28"}
+            color={"#D3D3D3"}
             deg={-0.5}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
           />
           <HeartPaperPreview
-            color={"#28E8F2"}
+            color={"#999"}
             deg={-2.83}
             margin={"0em 0em 0em 0.28em"}
             vertical={false}

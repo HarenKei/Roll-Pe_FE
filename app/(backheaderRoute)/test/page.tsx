@@ -5,6 +5,7 @@ import {
   VerticalRollpe,
   WhiteRollpePriview,
 } from "@/app/_components/rollpe/white/WhiteRollpe";
+import { RipRollpe } from "@/app/_components/rollpe/rip/RipRollpe";
 
 const TestPage: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const TestPage: React.FC = () => {
       <TestPageContainer>
         <WhiteRollpePriview />
         <VerticalRollpe />
+        <RipRollpe />
       </TestPageContainer>
     </TestPageWrapper>
   );
