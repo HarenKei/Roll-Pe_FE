@@ -7,9 +7,16 @@ import { useRouter } from "next/navigation";
 interface RollpeExpend {
   data: Rollpe;
   isExpend: boolean;
+  isEditOpen?: boolean;
+  isEditOpenHandler?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
+export const WhiteRollpe: React.FC<RollpeExpend> = ({
+  data,
+  isExpend,
+  isEditOpen,
+  isEditOpenHandler,
+}) => {
   const router = useRouter();
   const { code, id, title, ratio, hearts } = data;
 
@@ -31,6 +38,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
               vertical={true}
               data={hearts[0]}
               isExpend={isExpend}
+              isEditOpen={isEditOpen}
+              isEditOpenHandler={isEditOpenHandler}
             />
             <HeartPaper
               deg={-0.26}
@@ -38,6 +47,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
               vertical={true}
               data={hearts[1]}
               isExpend={isExpend}
+              isEditOpen={isEditOpen}
+              isEditOpenHandler={isEditOpenHandler}
             />
             <HeartPaper
               deg={0.15}
@@ -45,6 +56,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
               vertical={true}
               data={hearts[2]}
               isExpend={isExpend}
+              isEditOpen={isEditOpen}
+              isEditOpenHandler={isEditOpenHandler}
             />
             <HeartPaper
               deg={0.42}
@@ -52,6 +65,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
               vertical={true}
               data={hearts[3]}
               isExpend={isExpend}
+              isEditOpen={isEditOpen}
+              isEditOpenHandler={isEditOpenHandler}
             />
           </VerticalHeartRow>
           <VerticalHeartRow>
@@ -61,6 +76,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
               vertical={true}
               data={hearts[4]}
               isExpend={isExpend}
+              isEditOpen={isEditOpen}
+              isEditOpenHandler={isEditOpenHandler}
             />
             <HeartPaper
               deg={0.86}
@@ -68,6 +85,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
               vertical={true}
               data={hearts[5]}
               isExpend={isExpend}
+              isEditOpen={isEditOpen}
+              isEditOpenHandler={isEditOpenHandler}
             />
             <HeartPaper
               deg={-0.74}
@@ -75,6 +94,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
               vertical={true}
               data={hearts[6]}
               isExpend={isExpend}
+              isEditOpen={isEditOpen}
+              isEditOpenHandler={isEditOpenHandler}
             />
             <HeartPaper
               deg={0.76}
@@ -82,6 +103,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
               vertical={true}
               data={hearts[7]}
               isExpend={isExpend}
+              isEditOpen={isEditOpen}
+              isEditOpenHandler={isEditOpenHandler}
             />
           </VerticalHeartRow>
           <VerticalHeartRow>
@@ -91,6 +114,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
               vertical={true}
               data={hearts[8]}
               isExpend={isExpend}
+              isEditOpen={isEditOpen}
+              isEditOpenHandler={isEditOpenHandler}
             />
             <HeartPaper
               deg={-0.11}
@@ -98,6 +123,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
               vertical={true}
               data={hearts[9]}
               isExpend={isExpend}
+              isEditOpen={isEditOpen}
+              isEditOpenHandler={isEditOpenHandler}
             />
             <HeartPaper
               deg={1.23}
@@ -105,6 +132,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
               vertical={true}
               data={hearts[10]}
               isExpend={isExpend}
+              isEditOpen={isEditOpen}
+              isEditOpenHandler={isEditOpenHandler}
             />
             <HeartPaper
               deg={-0.66}
@@ -112,6 +141,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
               vertical={true}
               data={hearts[11]}
               isExpend={isExpend}
+              isEditOpen={isEditOpen}
+              isEditOpenHandler={isEditOpenHandler}
             />
           </VerticalHeartRow>
         </VerticalHeartContainer>
@@ -127,6 +158,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
             vertical={false}
             data={hearts[0]}
             isExpend={isExpend}
+            isEditOpen={isEditOpen}
+            isEditOpenHandler={isEditOpenHandler}
           />
           <HeartPaper
             deg={0}
@@ -134,6 +167,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
             vertical={false}
             data={hearts[1]}
             isExpend={isExpend}
+            isEditOpen={isEditOpen}
+            isEditOpenHandler={isEditOpenHandler}
           />
           <HeartPaper
             deg={5.39}
@@ -141,6 +176,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
             vertical={false}
             data={hearts[2]}
             isExpend={isExpend}
+            isEditOpen={isEditOpen}
+            isEditOpenHandler={isEditOpenHandler}
           />
           <HeartPaper
             deg={0.22}
@@ -148,6 +185,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
             vertical={false}
             data={hearts[3]}
             isExpend={isExpend}
+            isEditOpen={isEditOpen}
+            isEditOpenHandler={isEditOpenHandler}
           />
           <HeartPaper
             deg={-1.6}
@@ -155,6 +194,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
             vertical={false}
             data={hearts[4]}
             isExpend={isExpend}
+            isEditOpen={isEditOpen}
+            isEditOpenHandler={isEditOpenHandler}
           />
         </FirstRow>
         <SecondRow>
@@ -164,6 +205,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
             vertical={false}
             data={hearts[5]}
             isExpend={isExpend}
+            isEditOpen={isEditOpen}
+            isEditOpenHandler={isEditOpenHandler}
           />
           <div className={"title-wrapper"}>
             <p>{title}</p>
@@ -174,6 +217,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
             vertical={false}
             data={hearts[6]}
             isExpend={isExpend}
+            isEditOpen={isEditOpen}
+            isEditOpenHandler={isEditOpenHandler}
           />
         </SecondRow>
         <ThirdRow>
@@ -183,6 +228,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
             vertical={false}
             data={hearts[7]}
             isExpend={isExpend}
+            isEditOpen={isEditOpen}
+            isEditOpenHandler={isEditOpenHandler}
           />
           <HeartPaper
             deg={4.03}
@@ -190,6 +237,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
             vertical={false}
             data={hearts[8]}
             isExpend={isExpend}
+            isEditOpen={isEditOpen}
+            isEditOpenHandler={isEditOpenHandler}
           />
           <HeartPaper
             deg={-1.98}
@@ -197,6 +246,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
             vertical={false}
             data={hearts[9]}
             isExpend={isExpend}
+            isEditOpen={isEditOpen}
+            isEditOpenHandler={isEditOpenHandler}
           />
           <HeartPaper
             deg={-0.5}
@@ -204,6 +255,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
             vertical={false}
             data={hearts[10]}
             isExpend={isExpend}
+            isEditOpen={isEditOpen}
+            isEditOpenHandler={isEditOpenHandler}
           />
           <HeartPaper
             deg={-2.83}
@@ -211,6 +264,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
             vertical={false}
             data={hearts[11]}
             isExpend={isExpend}
+            isEditOpen={isEditOpen}
+            isEditOpenHandler={isEditOpenHandler}
           />
         </ThirdRow>
       </PreviewContainer>

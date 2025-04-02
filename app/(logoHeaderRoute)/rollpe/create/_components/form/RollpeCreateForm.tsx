@@ -88,24 +88,20 @@ const RollpeCreateForm: React.FC = () => {
   };
 
   const onCreateHandler = () => {
-    console.log(requestBody);
+    startTransition(() => {
+      postCreateRollpe(requestBody)
+        .then((res) => {
+          alert(res.message);
+          setTimeout(() => {
+            router.push("/main");
+          }, 500);
+        })
+        .catch((err) => {
+          // console.error(err);
+          alert(err.message);
+        });
+    });
   };
-
-  // const onCreateHandler = () => {
-  //   startTransition(() => {
-  //     postCreateRollpe(requestBody)
-  //       .then((res) => {
-  //         alert(res.message);
-  //         setTimeout(() => {
-  //           router.push("/main");
-  //         }, 500);
-  //       })
-  //       .catch((err) => {
-  //         // console.error(err);
-  //         alert(err.message);
-  //       });
-  //   });
-  // };
 
   useEffect(() => {
     startTransition(() => {
@@ -308,11 +304,9 @@ const RollpeCreateForm: React.FC = () => {
         </RollpeCreatePageContainer>
       </RollpeCreatePageWrapper>
       {receiveModalOpen && (
-        <Modal
-          title={"전달하기"}
-          children={<ReceiverSelect />}
-          setModalState={setReceiveModalOpen}
-        />
+        <Modal title={"전달하기"} setModalState={setReceiveModalOpen}>
+          <ReceiverSelect />
+        </Modal>
       )}
     </>
   );

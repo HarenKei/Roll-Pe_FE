@@ -10,6 +10,8 @@ interface HeartPaperProps {
   vertical: boolean;
   data: Heart;
   isExpend: boolean;
+  isEditOpen?: boolean;
+  isEditOpenHandler?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const HeartPaper: React.FC<HeartPaperProps> = ({
@@ -18,12 +20,19 @@ export const HeartPaper: React.FC<HeartPaperProps> = ({
   vertical,
   data,
   isExpend,
+  isEditOpen,
+  isEditOpenHandler,
 }) => {
-  const [isEditOpen, setIsEditOpen] = useState(); //롤페 크게보기용 상태
   const { author, content, color } = data || {};
 
+  const onClickHandler = () => {
+    if (isEditOpenHandler) {
+      isEditOpenHandler(!isEditOpen);
+    }
+  };
+
   return (
-    <HeartPaperWrapper isExpend={isExpend}>
+    <HeartPaperWrapper isExpend={isExpend} onClick={onClickHandler}>
       <HeartPaperPreviewContainer
         isActive={data ? true : false}
         color={color}
