@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
 import Close from "@/public/images/icons/icon_close.svg";
+import CloseWhite from "@/public/images/icons/icon_close_white.svg";
 import React from "react";
 
 interface ModalProps {
@@ -57,7 +58,7 @@ export const HeartModal: React.FC = () => {
     <HeartModalWrapper>
       <HeartModalHeader>
         <button className={"close-button"} onClick={onCloseHandler}>
-          <Image src={Close} alt={"닫기"} layout="responsive" />
+          <Image src={CloseWhite} alt={"닫기"} layout="responsive" />
         </button>
       </HeartModalHeader>
       <HeartEditWrapper>
@@ -82,8 +83,8 @@ const HeartModalHeader = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 2rem;
-    height: 2rem;
+    width: 1.2rem;
+    height: 1.2rem;
     cursor: pointer;
   }
 `;
