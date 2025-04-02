@@ -19,7 +19,7 @@ import { User, Rollpe } from "@/public/utils/types";
 import { getRollpeDetail } from "@/app/api/rollpe/route";
 import Loading from "@/app/_components/ui/loading/Loading";
 import { useRouter } from "next/navigation";
-import { WhiteRollpePriview } from "@/app/_components/rollpe/white/WhiteRollpe";
+import { WhiteRollpe } from "@/app/_components/rollpe/white/WhiteRollpe";
 
 const RollpeDetailPage: React.FC = () => {
   const [isPending, startTransition] = useTransition();
@@ -72,7 +72,7 @@ const RollpeDetailPage: React.FC = () => {
             }
           });
       });
-  }, [rollpeCode]);
+  }, [rollpeCode, router]);
 
   return isPending || !rollpeDetail ? (
     <Loading />
@@ -88,8 +88,8 @@ const RollpeDetailPage: React.FC = () => {
           </Marquee>
 
           <div className={"preview-wrapper"}>
-            <div className={"preview-image-wrapper"}>
-              <WhiteRollpePriview {...rollpeDetail} />
+            <div className={"rollpe-preview-wrapper"}>
+              <WhiteRollpe isExpend={false} data={rollpeDetail} />
             </div>
             <p>롤페를 눌러 마음을 전달하세요!</p>
           </div>
@@ -101,7 +101,7 @@ const RollpeDetailPage: React.FC = () => {
                 // TODO : authors로 변경되어야 함.
                 // TODO : invitingUser는 참여자 목록.
                 rollpeDetail.invitingUser.map((user: User, _: number) => (
-                  <li>
+                  <li key={_}>
                     {user.name} ({user.identifyCode})
                   </li>
                 ))
@@ -135,29 +135,19 @@ const RollpeDetailPage: React.FC = () => {
         </RollpeDetailPageContainer>
       </RollpeDetailPageWrapper>
       {isParticipantsModalOpen && (
-        <Modal
-          title={"참여자 목록"}
-          children={
-            <ParticipantsList invitingUser={rollpeDetail?.invitingUser} />
-          }
-          setModalState={setIsParticipantsModalOpen}
-        />
+        <Modal title={"참여자 목록"} setModalState={setIsParticipantsModalOpen}>
+          <ParticipantsList invitingUser={rollpeDetail?.invitingUser} />
+        </Modal>
       )}
       {isEditModalOpen && (
-        <Modal
-          title={"수정하기"}
-          children={<RollpeEditForm />}
-          setModalState={setIsEditModalOpen}
-        />
+        <Modal title={"수정하기"} setModalState={setIsEditModalOpen}>
+          <RollpeEditForm />
+        </Modal>
       )}
       {isShareModalOpen && (
-        <BottomModal
-          title={"공유하기"}
-          children={
-            <ShareRollpe close={setIsShareModalOpen} pcode={rollpeId} />
-          }
-          setModalState={setIsShareModalOpen}
-        />
+        <BottomModal title={"공유하기"} setModalState={setIsShareModalOpen}>
+          <ShareRollpe close={setIsShareModalOpen} pcode={rollpeId} />
+        </BottomModal>
       )}
     </>
   );
@@ -190,8 +180,10 @@ const RollpeDetailPageContainer = styled.div`
     gap: 1rem;
     width: 100%;
 
-    & > .preview-image-wrapper {
+    & > .rollpe-preview-wrapper {
       width: 100%;
+      aspect-ratio: 297 / 210;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     }
 
     & > p {

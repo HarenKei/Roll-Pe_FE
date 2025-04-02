@@ -5,27 +5,27 @@ import { COLORS } from "@/public/styles/colors";
 import { useState } from "react";
 
 interface HeartPaperProps {
-  color: string;
   deg: number;
   margin: React.CSSProperties["margin"];
   vertical: boolean;
+  data: Heart;
+  isExpend: boolean;
 }
 
-export const HeartPaper: React.FC = () => {
-  return <></>;
-};
-
-export const HeartPaperPreview: React.FC<HeartPaperProps> = ({
-  color,
+export const HeartPaper: React.FC<HeartPaperProps> = ({
   deg,
   margin,
   vertical,
+  data,
+  isExpend,
 }) => {
   const [isEditOpen, setIsEditOpen] = useState(); //롤페 크게보기용 상태
+  const { author, content, color } = data || {};
 
   return (
-    <HeartPaperPreviewWrapper>
+    <HeartPaperWrapper isExpend={isExpend}>
       <HeartPaperPreviewContainer
+        isActive={data ? true : false}
         color={color}
         deg={deg}
         style={{ margin: margin }}
@@ -33,31 +33,32 @@ export const HeartPaperPreview: React.FC<HeartPaperProps> = ({
       >
         <ContentsWrapper>
           <p className={"content"}>
-            김테스트야 생일 축하해, 우리 곁에 와줘서 고마워!!!!
-            <span>-태은</span>
+            {content}
+            <span>{data && `-${author.name}`}</span>
           </p>
         </ContentsWrapper>
       </HeartPaperPreviewContainer>
-    </HeartPaperPreviewWrapper>
+    </HeartPaperWrapper>
   );
 };
 
-const HeartPaperPreviewWrapper = styled.button`
+const HeartPaperWrapper = styled.button<{ isExpend: boolean }>`
   all: unset;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 90%;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  ${(props) => (props.isExpend ? "cursor: pointer;" : "")};
 
   &:hover {
-    transform: translateY(-10px);
+    transform: translateY(-0.5em);
+    transition: transform 0.3s ease-in-out;
   }
 `;
 
 const HeartPaperPreviewContainer = styled.div<{
+  isActive: boolean;
   color: string;
   deg: number;
   vertical: boolean;
@@ -67,7 +68,7 @@ const HeartPaperPreviewContainer = styled.div<{
   align-items: center;
 
   width: 90%;
-  height: 100%;
+  height: 90%;
   min-width: 3.5em;
 
   @media (min-width: 768px) {
@@ -77,9 +78,11 @@ const HeartPaperPreviewContainer = styled.div<{
   max-height: ${(props) => (props.vertical ? "12em" : "4em")};
 
   transform: rotate(${(props) => props.deg}deg);
-  background: ${(props) => props.color};
+  background: ${(props) => (props.isActive ? props.color : COLORS.ROLLPE_GRAY)};
+  ${(props) => (props.isActive ? "border: none" : `border: 1px dashed black`)};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   font-family: var(--font-hakgyoanshim);
+  opacity: ${(props) => (props.isActive ? 1 : 0.5)};
 `;
 
 const ContentsWrapper = styled.div`

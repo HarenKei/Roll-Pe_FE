@@ -1,95 +1,216 @@
 "use client";
 import styled from "styled-components";
-import { HeartPaperPreview } from "../commons/HeartPaper";
+import { HeartPaper } from "../commons/HeartPaper";
 import { Rollpe } from "@/public/utils/types";
+import { useRouter } from "next/navigation";
 
-export const WhiteRollpe: React.FC = () => {
-  return <></>;
-};
+interface RollpeExpend {
+  data: Rollpe;
+  isExpend: boolean;
+}
 
-export const WhiteRollpePriview: React.FC = () => {
-  return (
-    <RollpeWrapper>
+export const WhiteRollpe: React.FC<RollpeExpend> = ({ data, isExpend }) => {
+  const router = useRouter();
+  const { code, id, title, ratio, hearts } = data;
+
+  const rollpeClickedHandler = () => {
+    router.push(`/rollpe/whole/${code}`);
+  };
+
+  return ratio === "세로" ? (
+    <VerticalWrapper isExpend={isExpend} onClick={rollpeClickedHandler}>
+      <VerticalContainer>
+        <VerticalRollpeTitleWrapper>
+          <p>{title}</p>
+        </VerticalRollpeTitleWrapper>
+        <VerticalHeartContainer>
+          <VerticalHeartRow>
+            <HeartPaper
+              deg={0.86}
+              margin={"0em 0em 0.5em 0em"}
+              vertical={true}
+              data={hearts[0]}
+              isExpend={isExpend}
+            />
+            <HeartPaper
+              deg={-0.26}
+              margin={"0.5em 0em 0em 0em"}
+              vertical={true}
+              data={hearts[1]}
+              isExpend={isExpend}
+            />
+            <HeartPaper
+              deg={0.15}
+              margin={"0em 0em 0.5em 0em"}
+              vertical={true}
+              data={hearts[2]}
+              isExpend={isExpend}
+            />
+            <HeartPaper
+              deg={0.42}
+              margin={"1em 0em 0em 0em"}
+              vertical={true}
+              data={hearts[3]}
+              isExpend={isExpend}
+            />
+          </VerticalHeartRow>
+          <VerticalHeartRow>
+            <HeartPaper
+              deg={-0.07}
+              margin={"0em 0em 0em 0em"}
+              vertical={true}
+              data={hearts[4]}
+              isExpend={isExpend}
+            />
+            <HeartPaper
+              deg={0.86}
+              margin={"1em 0em 0em 0em"}
+              vertical={true}
+              data={hearts[5]}
+              isExpend={isExpend}
+            />
+            <HeartPaper
+              deg={-0.74}
+              margin={"0em 0em 0em 0em"}
+              vertical={true}
+              data={hearts[6]}
+              isExpend={isExpend}
+            />
+            <HeartPaper
+              deg={0.76}
+              margin={"1em 0em 0em 0em"}
+              vertical={true}
+              data={hearts[7]}
+              isExpend={isExpend}
+            />
+          </VerticalHeartRow>
+          <VerticalHeartRow>
+            <HeartPaper
+              deg={1.45}
+              margin={"1em 0em 0em 0em"}
+              vertical={true}
+              data={hearts[8]}
+              isExpend={isExpend}
+            />
+            <HeartPaper
+              deg={-0.11}
+              margin={"0em 0em 0em 0em"}
+              vertical={true}
+              data={hearts[9]}
+              isExpend={isExpend}
+            />
+            <HeartPaper
+              deg={1.23}
+              margin={"1em 0em 0em 0em"}
+              vertical={true}
+              data={hearts[10]}
+              isExpend={isExpend}
+            />
+            <HeartPaper
+              deg={-0.66}
+              margin={"0em 0em 0em 0em"}
+              vertical={true}
+              data={hearts[11]}
+              isExpend={isExpend}
+            />
+          </VerticalHeartRow>
+        </VerticalHeartContainer>
+      </VerticalContainer>
+    </VerticalWrapper>
+  ) : (
+    <RollpeWrapper isExpend={isExpend} onClick={rollpeClickedHandler}>
       <PreviewContainer>
         <FirstRow>
-          <HeartPaperPreview
-            color={"#F228D3"}
+          <HeartPaper
             deg={-2.72}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
+            data={hearts[0]}
+            isExpend={isExpend}
           />
-          <HeartPaperPreview
-            color={"#F2EB28"}
+          <HeartPaper
             deg={0}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
+            data={hearts[1]}
+            isExpend={isExpend}
           />
-          <HeartPaperPreview
-            color={"#F2EB28"}
+          <HeartPaper
             deg={5.39}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
+            data={hearts[2]}
+            isExpend={isExpend}
           />
-          <HeartPaperPreview
-            color={"#28E8F2"}
+          <HeartPaper
             deg={0.22}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
+            data={hearts[3]}
+            isExpend={isExpend}
           />
-          <HeartPaperPreview
-            color={"#F2EB28"}
+          <HeartPaper
             deg={-1.6}
             margin={"0em 0em 0.3em 0em"}
             vertical={false}
+            data={hearts[4]}
+            isExpend={isExpend}
           />
         </FirstRow>
         <SecondRow>
-          <HeartPaperPreview
-            color={"#28E8F2"}
+          <HeartPaper
             deg={2.78}
             margin={"0em 0em 0.6em 0em"}
             vertical={false}
+            data={hearts[5]}
+            isExpend={isExpend}
           />
           <div className={"title-wrapper"}>
-            <p>하나둘셋넷다섯여섯일곱여덟아홉열열하나열둘열셋열</p>
+            <p>{title}</p>
           </div>
-          <HeartPaperPreview
-            color={"#F228D3"}
+          <HeartPaper
             deg={3.1}
             margin={"0em 0em 0.98em 0em"}
             vertical={false}
+            data={hearts[6]}
+            isExpend={isExpend}
           />
         </SecondRow>
         <ThirdRow>
-          <HeartPaperPreview
-            color={"#F2EB28"}
+          <HeartPaper
             deg={-1.98}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
+            data={hearts[7]}
+            isExpend={isExpend}
           />
-          <HeartPaperPreview
-            color={"#28E8F2"}
+          <HeartPaper
             deg={4.03}
             margin={"0.3em 0em 0em 0em"}
             vertical={false}
+            data={hearts[8]}
+            isExpend={isExpend}
           />
-          <HeartPaperPreview
-            color={"#F2EB28"}
+          <HeartPaper
             deg={-1.98}
             margin={"0em 0em 0.6em 0em"}
             vertical={false}
+            data={hearts[9]}
+            isExpend={isExpend}
           />
-          <HeartPaperPreview
-            color={"#F2EB28"}
+          <HeartPaper
             deg={-0.5}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
+            data={hearts[10]}
+            isExpend={isExpend}
           />
-          <HeartPaperPreview
-            color={"#28E8F2"}
+          <HeartPaper
             deg={-2.83}
             margin={"0em 0em 0em 0.28em"}
             vertical={false}
+            data={hearts[11]}
+            isExpend={isExpend}
           />
         </ThirdRow>
       </PreviewContainer>
@@ -97,109 +218,110 @@ export const WhiteRollpePriview: React.FC = () => {
   );
 };
 
-export const VerticalRollpe: React.FC = () => {
-  return (
-    <VerticalWrapper>
-      <VerticalContainer>
-        <VerticalRollpeTitleWrapper>
-          <p>하나둘셋넷다섯여섯일곱여덟아홉열열하나열</p>
-        </VerticalRollpeTitleWrapper>
-        <VerticalHeartContainer>
-          <VerticalHeartRow>
-            <HeartPaperPreview
-              color={"#F2EB28"}
-              deg={0.86}
-              margin={"0em 0em 0.5em 0em"}
-              vertical={true}
-            />
-            <HeartPaperPreview
-              color={"#28E8F2"}
-              deg={-0.26}
-              margin={"0.5em 0em 0em 0em"}
-              vertical={true}
-            />
-            <HeartPaperPreview
-              color={"#F228D3"}
-              deg={0.15}
-              margin={"0em 0em 0.5em 0em"}
-              vertical={true}
-            />
-            <HeartPaperPreview
-              color={"#F228D3"}
-              deg={0.42}
-              margin={"1em 0em 0em 0em"}
-              vertical={true}
-            />
-          </VerticalHeartRow>
-          <VerticalHeartRow>
-            <HeartPaperPreview
-              color={"#F228D3"}
-              deg={-0.07}
-              margin={"0em 0em 0em 0em"}
-              vertical={true}
-            />
-            <HeartPaperPreview
-              color={"#F2EB28"}
-              deg={0.86}
-              margin={"1em 0em 0em 0em"}
-              vertical={true}
-            />
-            <HeartPaperPreview
-              color={"#F2EB28"}
-              deg={-0.74}
-              margin={"0em 0em 0em 0em"}
-              vertical={true}
-            />
-            <HeartPaperPreview
-              color={"#F228D3"}
-              deg={0.76}
-              margin={"1em 0em 0em 0em"}
-              vertical={true}
-            />
-          </VerticalHeartRow>
-          <VerticalHeartRow>
-            <HeartPaperPreview
-              color={"#28E8F2"}
-              deg={1.45}
-              margin={"1em 0em 0em 0em"}
-              vertical={true}
-            />
-            <HeartPaperPreview
-              color={"#28E8F2"}
-              deg={-0.11}
-              margin={"0em 0em 0em 0em"}
-              vertical={true}
-            />
-            <HeartPaperPreview
-              color={"#F228D3"}
-              deg={1.23}
-              margin={"1em 0em 0em 0em"}
-              vertical={true}
-            />
-            <HeartPaperPreview
-              color={"#F2EB28"}
-              deg={-0.66}
-              margin={"0em 0em 0em 0em"}
-              vertical={true}
-            />
-          </VerticalHeartRow>
-        </VerticalHeartContainer>
-      </VerticalContainer>
-    </VerticalWrapper>
-  );
-};
+// export const WhiteRollpePriview: React.FC = () => {
+//   const router = useRouter();
 
-const RollpeWrapper = styled.div`
+//   return (
+//     <RollpeWrapper onClick={() => router.push("rollpe/1")}>
+//       <PreviewContainer>
+//         <FirstRow>
+//           <HeartPaper
+//             color={"#F228D3"}
+//             deg={-2.72}
+//             margin={"0rem 0rem 0rem 0rem"}
+//             vertical={false}
+//           />
+//           <HeartPaper
+//             color={"#F2EB28"}
+//             deg={0}
+//             margin={"0rem 0rem 0rem 0rem"}
+//             vertical={false}
+//           />
+//           <HeartPaper
+//             color={"#F2EB28"}
+//             deg={5.39}
+//             margin={"0rem 0rem 0rem 0rem"}
+//             vertical={false}
+//           />
+//           <HeartPaper
+//             color={"#28E8F2"}
+//             deg={0.22}
+//             margin={"0rem 0rem 0rem 0rem"}
+//             vertical={false}
+//           />
+//           <HeartPaper
+//             color={"#F2EB28"}
+//             deg={-1.6}
+//             margin={"0em 0em 0.3em 0em"}
+//             vertical={false}
+//           />
+//         </FirstRow>
+//         <SecondRow>
+//           <HeartPaper
+//             color={"#28E8F2"}
+//             deg={2.78}
+//             margin={"0em 0em 0.6em 0em"}
+//             vertical={false}
+//           />
+//           <div className={"title-wrapper"}>
+//             <p>하나둘셋넷다섯여섯일곱여덟아홉열열하나열둘열셋열</p>
+//           </div>
+//           <HeartPaper
+//             color={"#F228D3"}
+//             deg={3.1}
+//             margin={"0em 0em 0.98em 0em"}
+//             vertical={false}
+//           />
+//         </SecondRow>
+//         <ThirdRow>
+//           <HeartPaper
+//             color={"#F2EB28"}
+//             deg={-1.98}
+//             margin={"0rem 0rem 0rem 0rem"}
+//             vertical={false}
+//           />
+//           <HeartPaper
+//             color={"#28E8F2"}
+//             deg={4.03}
+//             margin={"0.3em 0em 0em 0em"}
+//             vertical={false}
+//           />
+//           <HeartPaper
+//             color={"#F2EB28"}
+//             deg={-1.98}
+//             margin={"0em 0em 0.6em 0em"}
+//             vertical={false}
+//           />
+//           <HeartPaper
+//             color={"#F2EB28"}
+//             deg={-0.5}
+//             margin={"0rem 0rem 0rem 0rem"}
+//             vertical={false}
+//           />
+//           <HeartPaper
+//             color={"#28E8F2"}
+//             deg={-2.83}
+//             margin={"0em 0em 0em 0.28em"}
+//             vertical={false}
+//           />
+//         </ThirdRow>
+//       </PreviewContainer>
+//     </RollpeWrapper>
+//   );
+// };
+
+const RollpeWrapper = styled.div<{ isExpend: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 100%;
+  height: 100%;
   aspect-ratio: 297 / 210;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  ${(props) => (props.isExpend ? "cursor: pointer;" : "")}
 `;
 
 const VerticalWrapper = styled(RollpeWrapper)`
+  height: 100%;
   aspect-ratio: 210 / 297;
 `;
 
@@ -258,6 +380,7 @@ const VerticalHeartContainer = styled.div`
 const VerticalHeartRow = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  width: 100%;
   height: 100%;
   min-height: 6em;
   max-height: 15em;

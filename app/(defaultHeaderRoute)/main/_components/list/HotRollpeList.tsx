@@ -22,7 +22,6 @@ const HotRollpeList: React.FC = () => {
     startTransition(async () => {
       await getHotRollpeList()
         .then((res) => {
-          console.log(res);
           setHotRollpeList(res);
         })
         .catch((err) => {
