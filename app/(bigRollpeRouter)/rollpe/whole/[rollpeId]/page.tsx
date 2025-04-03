@@ -53,7 +53,7 @@ const RollpeEnterPage: React.FC = () => {
         isEditOpen={isHeartModalOpen}
         isEditOpenHandler={setIsHeartModalOpen}
       />
-      {isHeartModalOpen && <HeartModal />}
+      {isHeartModalOpen && <HeartModal setModalState={setIsHeartModalOpen} />}
     </RollpeEnterPageWrapper>
   );
 };
