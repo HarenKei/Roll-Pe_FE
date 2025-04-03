@@ -4,7 +4,7 @@ import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
 import Close from "@/public/images/icons/icon_close.svg";
 import CloseWhite from "@/public/images/icons/icon_close_white.svg";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface ModalProps {
   title: string;
@@ -50,8 +50,27 @@ export const BottomModal: React.FC<ModalProps> = ({
 };
 
 export const HeartModal: React.FC = () => {
+  const textRef = useRef<HTMLTextAreaElement>(null);
+  const [bgColor, setBgColor] = useState<string>("#f2eb28");
+
   const onCloseHandler = () => {
     console.log("close");
+  };
+
+  const changeColorHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const color = e.currentTarget.id;
+
+    if (color) {
+      setBgColor(color);
+    }
+  };
+
+  const resizeTextArea = () => {
+    if (textRef) {
+      textRef.current!.style.height = "auto";
+      let currentHeight = textRef.current!.scrollHeight;
+      textRef.current!.style.height = `${currentHeight}px`;
+    }
   };
 
   return (
@@ -62,11 +81,37 @@ export const HeartModal: React.FC = () => {
         </button>
       </HeartModalHeader>
       <HeartEditWrapper>
-        <HeartWrapper></HeartWrapper>
+        <HeartWrapper bgColor={bgColor}>
+          <textarea
+            maxLength={40}
+            placeholder={`내용을 입력해주세요.\n(최대 40자)`}
+            ref={textRef}
+            onKeyDown={resizeTextArea}
+            onKeyUp={resizeTextArea}
+          />
+        </HeartWrapper>
         <HeartColorPicker>
-          <div className={"yellow"}></div>
-          <div className={"blue"}></div>
-          <div className={"pink"}></div>
+          <button
+            className={"yellow"}
+            id={"#f2eb28"}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              changeColorHandler(e);
+            }}
+          ></button>
+          <button
+            className={"blue"}
+            id={"#28e8f2"}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              changeColorHandler(e);
+            }}
+          ></button>
+          <button
+            className={"pink"}
+            id={"#f228d3"}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              changeColorHandler(e);
+            }}
+          ></button>
         </HeartColorPicker>
       </HeartEditWrapper>
     </HeartModalWrapper>
@@ -89,13 +134,34 @@ const HeartModalHeader = styled.div`
   }
 `;
 
-const HeartWrapper = styled.div`
+const HeartWrapper = styled.div<{ bgColor: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 22rem;
-  height: 24rem;
-  background-color: white;
+  padding: 0.5rem;
+  width: 21.5rem;
+  height: 23.5rem;
+  background-color: ${(props) => props.bgColor};
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: var(--font-nanumpen);
+
+  & > textarea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    all: unset;
+    width: 100%;
+    max-height: 80%;
+
+    &::placeholder {
+      word-break: keep-all;
+      color: ${COLORS.ROLLPE_SECONDARY};
+    }
+
+    line-height: auto;
+    font-size: 3rem;
+    text-align: center;
+  }
 `;
 
 const ModalWrapper = styled.div`
@@ -132,22 +198,24 @@ const HeartColorPicker = styled.div`
   align-items: center;
   gap: 0.75rem;
 
-  & > div {
+  & > button {
+    all: unset;
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
+    cursor: pointer;
   }
 
   & > .yellow {
-    background-color: yellow;
+    background-color: #f2eb28;
   }
 
   & > .blue {
-    background-color: blue;
+    background-color: #28e8f2;
   }
 
   & > .pink {
-    background-color: pink;
+    background-color: #f228d3;
   }
 `;
 
