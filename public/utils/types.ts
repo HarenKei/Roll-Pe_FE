@@ -43,7 +43,7 @@ export interface Rollpe {
   title: string;
   viewStat: boolean;
   theme: string;
-  hearts: Heart[];
+  hearts: HeartList;
   invitingUser: User[];
 }
 
@@ -56,6 +56,11 @@ export interface Heart {
   createdAt: string;
   color: string;
   version: string;
+}
+
+export interface HeartList {
+  count: number;
+  data: Heart[];
 }
 
 // ! User 관련
@@ -80,4 +85,12 @@ export interface RollpeSearchListData {
   next: string | null;
   previous: string | null;
   results: Rollpe[];
+}
+
+//! Create Heart
+export interface HeartCreateRequestBody {
+  paperFk: number;
+  color: string; //#제외
+  context: string;
+  location: number;
 }

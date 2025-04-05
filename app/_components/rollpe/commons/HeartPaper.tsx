@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { Heart } from "@/public/utils/types";
 import { COLORS } from "@/public/styles/colors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface HeartPaperProps {
   deg: number;
@@ -12,6 +12,8 @@ interface HeartPaperProps {
   isExpend: boolean;
   isEditOpen?: boolean;
   isEditOpenHandler?: React.Dispatch<React.SetStateAction<boolean>>;
+  index: number;
+  setSelectedHeart?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const HeartPaper: React.FC<HeartPaperProps> = ({
@@ -22,14 +24,19 @@ export const HeartPaper: React.FC<HeartPaperProps> = ({
   isExpend,
   isEditOpen,
   isEditOpenHandler,
+  index,
+  setSelectedHeart,
 }) => {
   const { author, content, color } = data || {};
 
   const onClickHandler = () => {
-    if (isEditOpenHandler) {
-      isEditOpenHandler(!isEditOpen);
-    }
+    setSelectedHeart && setSelectedHeart(index);
+    isEditOpenHandler && isEditOpenHandler(!isEditOpen);
   };
+
+  useEffect(() => {
+    console.log(color);
+  }, [data]);
 
   return (
     <HeartPaperWrapper isExpend={isExpend} onClick={onClickHandler}>
@@ -87,7 +94,8 @@ const HeartPaperPreviewContainer = styled.div<{
   max-height: ${(props) => (props.vertical ? "12em" : "4em")};
 
   transform: rotate(${(props) => props.deg}deg);
-  background: ${(props) => (props.isActive ? props.color : COLORS.ROLLPE_GRAY)};
+  background: ${(props) =>
+    props.isActive ? `#${props.color}` : COLORS.ROLLPE_GRAY};
   ${(props) => (props.isActive ? "border: none" : `border: 1px dashed black`)};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   font-family: var(--font-hakgyoanshim);

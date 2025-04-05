@@ -1,21 +1,44 @@
 "use client";
-import { useState, useRef } from "react";
+import styled from "styled-components";
+import { useState, useRef, useTransition, useEffect } from "react";
 import { COLORS } from "@/public/styles/colors";
 import { ModalWrapper } from "./Modal";
 import CloseWhite from "@/public/images/icons/icon_close_white.svg";
 import Image from "next/image";
+import { HeartCreateRequestBody } from "@/public/utils/types";
+import { request } from "http";
+import { postCreateHeart } from "@/app/api/rollpe/heart/route";
 
 interface HeartModalProps {
+  paperFk: number;
   theme?: string;
+  location: number;
   setModalState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const HeartModal: React.FC<HeartModalProps> = ({ theme, setModalState }) => {
+const HeartModal: React.FC<HeartModalProps> = ({
+  paperFk,
+  theme,
+  setModalState,
+  location,
+}) => {
   const textRef = useRef<HTMLTextAreaElement>(null);
-  const [bgColor, setBgColor] = useState<string>("#f2eb28");
+  const [bgColor, setBgColor] = useState<string>("f2eb28");
+  const [isPending, startTransition] = useTransition();
+  const [requestBody, setRequestBody] =
+    useState<HeartCreateRequestBody | null>();
 
   const onCloseHandler = () => {
     setModalState(false);
+  };
+
+  const createRequestBody = () => {
+    setRequestBody({
+      paperFk: paperFk,
+      context: textRef.current?.value ? textRef.current?.value : "",
+      color: bgColor,
+      location: location,
+    });
   };
 
   const changeColorHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,13 +57,23 @@ const HeartModal: React.FC<HeartModalProps> = ({ theme, setModalState }) => {
     }
   };
 
+  useEffect(() => {
+    if (requestBody && requestBody.context !== "") {
+      startTransition(async () => {
+        await postCreateHeart(requestBody)
+          .then((res) => {})
+          .catch((err) => {});
+      });
+    }
+  }, [requestBody]);
+
   return (
     <HeartModalWrapper>
       <HeartModalHeader>
         <button className={"close-button"} onClick={onCloseHandler}>
           <Image src={CloseWhite} alt={"닫기"} layout="responsive" />
         </button>
-        <button className={"submit-button"}>
+        <button className={"submit-button"} onClick={createRequestBody}>
           <p>완료</p>
         </button>
       </HeartModalHeader>
@@ -57,21 +90,21 @@ const HeartModal: React.FC<HeartModalProps> = ({ theme, setModalState }) => {
         <HeartColorPicker>
           <button
             className={"yellow"}
-            id={"#f2eb28"}
+            id={"f2eb28"}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               changeColorHandler(e);
             }}
           ></button>
           <button
             className={"blue"}
-            id={"#28e8f2"}
+            id={"28e8f2"}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               changeColorHandler(e);
             }}
           ></button>
           <button
             className={"pink"}
-            id={"#f228d3"}
+            id={"f228d3"}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               changeColorHandler(e);
             }}
@@ -115,7 +148,7 @@ const HeartWrapper = styled.div<{ bgColor: string }>`
   padding: 0.5rem;
   width: 21.5rem;
   height: 23.5rem;
-  background-color: ${(props) => props.bgColor};
+  background-color: ${(props) => `#${props.bgColor}`};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   font-family: var(--font-nanumpen);
 
