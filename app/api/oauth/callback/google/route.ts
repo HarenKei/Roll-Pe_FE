@@ -1,6 +1,7 @@
 "use server";
 import { cookies } from "next/headers";
 import { axiosInstance } from "@/public/axios/axiosInstance";
+import axios from "axios";
 
 export const googleLogin = async (code: string) => {
   return await axiosInstance.post("/api/user/social/login/google", { code: code }).then((response) => {
@@ -22,6 +23,7 @@ export const googleLogin = async (code: string) => {
     }
     return Promise.resolve(response.data.data);
   }).catch((error) => {
-    return Promise.reject(error);
+    return Promise.reject({ message: error.response.data.message });
+
   });
 }

@@ -88,8 +88,8 @@ const RollpeCreateForm: React.FC = () => {
   };
 
   const onCreateHandler = () => {
-    startTransition(() => {
-      postCreateRollpe(requestBody)
+    startTransition(async () => {
+      await postCreateRollpe(requestBody)
         .then((res) => {
           alert(res.message);
           setTimeout(() => {
@@ -97,7 +97,6 @@ const RollpeCreateForm: React.FC = () => {
           }, 500);
         })
         .catch((err) => {
-          // console.error(err);
           alert(err.message);
         });
     });

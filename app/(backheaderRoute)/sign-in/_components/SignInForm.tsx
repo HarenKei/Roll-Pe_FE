@@ -46,7 +46,7 @@ const SignInForm: React.FC = () => {
         })
         .catch((err) => {
           if (err instanceof Error) {
-            // console.log(err.message);
+            console.log(err.message);
             alert(err.message);
           }
         });

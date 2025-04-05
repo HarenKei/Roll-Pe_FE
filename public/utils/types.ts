@@ -89,7 +89,7 @@ export interface RollpeSearchListData {
 
 //! Create Heart
 export interface HeartCreateRequestBody {
-  paperFk: number;
+  paperFK: number;
   color: string; //#제외
   context: string;
   location: number;

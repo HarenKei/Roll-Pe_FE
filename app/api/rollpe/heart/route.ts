@@ -2,12 +2,16 @@
 import { axiosInstance, axiosInstanceAuth } from "@/public/axios/axiosInstance";
 import { HeartCreateRequestBody } from "@/public/utils/types";
 
+
+
 export const postCreateHeart = async (data: HeartCreateRequestBody) => {
-  console.log(data);
-  return await axiosInstanceAuth.post("/api/heart", { data }).then((response) => {
+  return await axiosInstanceAuth.post('/api/heart', { ...data }).then((response) => {
     console.log(response);
+    return Promise.resolve(response.data);
   }).catch((error) => {
     console.log(error);
+    return Promise.reject(error.config);
   })
 
 }
+

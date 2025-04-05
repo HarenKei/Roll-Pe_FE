@@ -30,13 +30,13 @@ export const HeartPaper: React.FC<HeartPaperProps> = ({
   const { author, content, color } = data || {};
 
   const onClickHandler = () => {
-    setSelectedHeart && setSelectedHeart(index);
-    isEditOpenHandler && isEditOpenHandler(!isEditOpen);
+    if (content === undefined) {
+      setSelectedHeart && setSelectedHeart(index);
+      isEditOpenHandler && isEditOpenHandler(!isEditOpen);
+    } else {
+      alert("이미 작성된 마음입니다. 다른 위치를 선택해주세요.");
+    }
   };
-
-  useEffect(() => {
-    console.log(color);
-  }, [data]);
 
   return (
     <HeartPaperWrapper isExpend={isExpend} onClick={onClickHandler}>
@@ -64,7 +64,7 @@ const HeartPaperWrapper = styled.button<{ isExpend: boolean }>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 90%;
+  height: 100%;
   ${(props) => (props.isExpend ? "cursor: pointer;" : "")};
 
   &:hover {
@@ -91,7 +91,7 @@ const HeartPaperPreviewContainer = styled.div<{
     max-height: 15em;
   }
 
-  max-height: ${(props) => (props.vertical ? "12em" : "4em")};
+  /* max-height: ${(props) => (props.vertical ? "15em" : "4em")}; */
 
   transform: rotate(${(props) => props.deg}deg);
   background: ${(props) =>
@@ -126,9 +126,11 @@ const ContentsWrapper = styled.div`
     align-items: center;
     gap: 0.05em;
     font-family: var(--font-nanumpen);
+
     @media (min-width: 768px) {
       font-size: 1.25em;
     }
+
     font-size: 0.00125em;
     color: ${COLORS.ROLLPE_SECONDARY};
     line-height: auto;

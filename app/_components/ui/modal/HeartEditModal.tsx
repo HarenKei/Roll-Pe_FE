@@ -8,6 +8,8 @@ import Image from "next/image";
 import { HeartCreateRequestBody } from "@/public/utils/types";
 import { request } from "http";
 import { postCreateHeart } from "@/app/api/rollpe/heart/route";
+import { axiosInstanceAuth } from "@/public/axios/axiosInstance";
+import { Router } from "next/router";
 
 interface HeartModalProps {
   paperFk: number;
@@ -22,34 +24,33 @@ const HeartModal: React.FC<HeartModalProps> = ({
   setModalState,
   location,
 }) => {
-  const textRef = useRef<HTMLTextAreaElement>(null);
+  const textRef = useRef<HTMLTextAreaElement>(null); // textarea의 크기를 자동으로 조절하기 위해 참조
   const [bgColor, setBgColor] = useState<string>("f2eb28");
   const [isPending, startTransition] = useTransition();
-  const [requestBody, setRequestBody] =
-    useState<HeartCreateRequestBody | null>();
+  const [requestBody, setRequestBody] = useState<HeartCreateRequestBody>({
+    paperFK: paperFk,
+    context: "",
+    color: "f2eb28",
+    location: location,
+  });
 
   const onCloseHandler = () => {
+    // Heart 작성 모달 닫기
     setModalState(false);
   };
 
-  const createRequestBody = () => {
-    setRequestBody({
-      paperFk: paperFk,
-      context: textRef.current?.value ? textRef.current?.value : "",
-      color: bgColor,
-      location: location,
-    });
-  };
-
   const changeColorHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // 배경 색 및 requestBody 색상 핸들러
     const color = e.currentTarget.id;
 
     if (color) {
       setBgColor(color);
+      setRequestBody({ ...requestBody, color: color });
     }
   };
 
   const resizeTextArea = () => {
+    // 입력에 따른 textarea 크기 자동 조절
     if (textRef) {
       textRef.current!.style.height = "auto";
       let currentHeight = textRef.current!.scrollHeight;
@@ -57,14 +58,28 @@ const HeartModal: React.FC<HeartModalProps> = ({
     }
   };
 
-  useEffect(() => {
-    if (requestBody && requestBody.context !== "") {
+  const submitHeartHandler = () => {
+    // Heart 작성 요청
+    if (requestBody.context !== "") {
       startTransition(async () => {
         await postCreateHeart(requestBody)
-          .then((res) => {})
-          .catch((err) => {});
+          .then((res) => {
+            setTimeout(() => {
+              alert("정상적으로 생성되었습니다.");
+              setModalState(false);
+              window.location.reload();
+            }, 500);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
     }
+  };
+
+  useEffect(() => {
+    // test log
+    console.log(requestBody);
   }, [requestBody]);
 
   return (
@@ -73,7 +88,7 @@ const HeartModal: React.FC<HeartModalProps> = ({
         <button className={"close-button"} onClick={onCloseHandler}>
           <Image src={CloseWhite} alt={"닫기"} layout="responsive" />
         </button>
-        <button className={"submit-button"} onClick={createRequestBody}>
+        <button className={"submit-button"} onClick={submitHeartHandler}>
           <p>완료</p>
         </button>
       </HeartModalHeader>
@@ -85,6 +100,9 @@ const HeartModal: React.FC<HeartModalProps> = ({
             ref={textRef}
             onKeyDown={resizeTextArea}
             onKeyUp={resizeTextArea}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+              setRequestBody({ ...requestBody, context: e.target.value });
+            }}
           />
         </HeartWrapper>
         <HeartColorPicker>
@@ -94,21 +112,21 @@ const HeartModal: React.FC<HeartModalProps> = ({
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               changeColorHandler(e);
             }}
-          ></button>
+          />
           <button
             className={"blue"}
             id={"28e8f2"}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               changeColorHandler(e);
             }}
-          ></button>
+          />
           <button
             className={"pink"}
             id={"f228d3"}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               changeColorHandler(e);
             }}
-          ></button>
+          />
         </HeartColorPicker>
       </HeartEditWrapper>
     </HeartModalWrapper>
