@@ -21,21 +21,28 @@ const GoogleAuthHandler = () => {
   useEffect(() => {
     if (code) {
       startTransition(async () => {
-        googleLogin(code).then((res) => {
-          console.log(res);
-          dispatch(
-            setUser({
-              id: res.user.id,
-              name: res.user.name,
-              email: res.user.email,
-              identifyCode: res.user.identifyCode,
-              provider: res.user.provider,
-            })
-          );
-          setTimeout(() => {
-            router.push("/main");
-          }, 500);
-        });
+        await googleLogin(code)
+          .then((res) => {
+            console.log(res);
+            dispatch(
+              setUser({
+                id: res.user.id,
+                name: res.user.name,
+                email: res.user.email,
+                identifyCode: res.user.identifyCode,
+                provider: res.user.provider,
+              })
+            );
+            setTimeout(() => {
+              router.push("/main");
+            }, 500);
+          })
+          .catch((err) => {
+            setTimeout(() => {
+              alert("이미 다른 SNS로 가입된 이메일입니다.");
+              router.push("/sign-in");
+            }, 500);
+          });
       });
     }
   }, [code]);

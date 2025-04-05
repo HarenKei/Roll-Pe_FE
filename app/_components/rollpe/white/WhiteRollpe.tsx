@@ -3,12 +3,15 @@ import styled from "styled-components";
 import { HeartPaper } from "../commons/HeartPaper";
 import { Rollpe } from "@/public/utils/types";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface RollpeExpend {
   data: Rollpe;
   isExpend: boolean;
   isEditOpen?: boolean;
   isEditOpenHandler?: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedHeart?: number;
+  setSelectedHeart?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const WhiteRollpe: React.FC<RollpeExpend> = ({
@@ -16,6 +19,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
   isExpend,
   isEditOpen,
   isEditOpenHandler,
+  selectedHeart,
+  setSelectedHeart,
 }) => {
   const router = useRouter();
   const { code, id, title, ratio, hearts } = data;
@@ -23,6 +28,10 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
   const rollpeClickedHandler = () => {
     router.push(`/rollpe/whole/${code}`);
   };
+
+  useEffect(() => {
+    console.log(hearts);
+  }, [hearts]);
 
   return ratio === "세로" ? (
     <VerticalWrapper isExpend={isExpend} onClick={rollpeClickedHandler}>
@@ -36,37 +45,53 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               deg={0.86}
               margin={"0em 0em 0.5em 0em"}
               vertical={true}
-              data={hearts[0]}
+              data={
+                hearts && hearts.data.filter((heart) => heart.index === 0)[0]
+              }
+              index={0}
               isExpend={isExpend}
               isEditOpen={isEditOpen}
               isEditOpenHandler={isEditOpenHandler}
+              setSelectedHeart={setSelectedHeart}
             />
             <HeartPaper
               deg={-0.26}
               margin={"0.5em 0em 0em 0em"}
               vertical={true}
-              data={hearts[1]}
+              data={
+                hearts && hearts.data.filter((heart) => heart.index === 1)[0]
+              }
+              index={1}
               isExpend={isExpend}
               isEditOpen={isEditOpen}
               isEditOpenHandler={isEditOpenHandler}
+              setSelectedHeart={setSelectedHeart}
             />
             <HeartPaper
               deg={0.15}
               margin={"0em 0em 0.5em 0em"}
               vertical={true}
-              data={hearts[2]}
+              data={
+                hearts && hearts.data.filter((heart) => heart.index === 2)[0]
+              }
+              index={2}
               isExpend={isExpend}
               isEditOpen={isEditOpen}
               isEditOpenHandler={isEditOpenHandler}
+              setSelectedHeart={setSelectedHeart}
             />
             <HeartPaper
               deg={0.42}
               margin={"1em 0em 0em 0em"}
               vertical={true}
-              data={hearts[3]}
+              data={
+                hearts && hearts.data.filter((heart) => heart.index === 3)[0]
+              }
+              index={3}
               isExpend={isExpend}
               isEditOpen={isEditOpen}
               isEditOpenHandler={isEditOpenHandler}
+              setSelectedHeart={setSelectedHeart}
             />
           </VerticalHeartRow>
           <VerticalHeartRow>
@@ -74,37 +99,53 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               deg={-0.07}
               margin={"0em 0em 0em 0em"}
               vertical={true}
-              data={hearts[4]}
+              data={
+                hearts && hearts.data.filter((heart) => heart.index === 4)[0]
+              }
+              index={4}
               isExpend={isExpend}
               isEditOpen={isEditOpen}
               isEditOpenHandler={isEditOpenHandler}
+              setSelectedHeart={setSelectedHeart}
             />
             <HeartPaper
               deg={0.86}
               margin={"1em 0em 0em 0em"}
               vertical={true}
-              data={hearts[5]}
+              data={
+                hearts && hearts.data.filter((heart) => heart.index === 5)[0]
+              }
+              index={5}
               isExpend={isExpend}
               isEditOpen={isEditOpen}
               isEditOpenHandler={isEditOpenHandler}
+              setSelectedHeart={setSelectedHeart}
             />
             <HeartPaper
               deg={-0.74}
               margin={"0em 0em 0em 0em"}
               vertical={true}
-              data={hearts[6]}
+              data={
+                hearts && hearts.data.filter((heart) => heart.index === 6)[0]
+              }
+              index={6}
               isExpend={isExpend}
               isEditOpen={isEditOpen}
               isEditOpenHandler={isEditOpenHandler}
+              setSelectedHeart={setSelectedHeart}
             />
             <HeartPaper
               deg={0.76}
               margin={"1em 0em 0em 0em"}
               vertical={true}
-              data={hearts[7]}
+              data={
+                hearts && hearts.data.filter((heart) => heart.index === 7)[0]
+              }
+              index={7}
               isExpend={isExpend}
               isEditOpen={isEditOpen}
               isEditOpenHandler={isEditOpenHandler}
+              setSelectedHeart={setSelectedHeart}
             />
           </VerticalHeartRow>
           <VerticalHeartRow>
@@ -112,37 +153,53 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               deg={1.45}
               margin={"1em 0em 0em 0em"}
               vertical={true}
-              data={hearts[8]}
+              data={
+                hearts && hearts.data.filter((heart) => heart.index === 8)[0]
+              }
+              index={8}
               isExpend={isExpend}
               isEditOpen={isEditOpen}
               isEditOpenHandler={isEditOpenHandler}
+              setSelectedHeart={setSelectedHeart}
             />
             <HeartPaper
               deg={-0.11}
               margin={"0em 0em 0em 0em"}
               vertical={true}
-              data={hearts[9]}
+              data={
+                hearts && hearts.data.filter((heart) => heart.index === 9)[0]
+              }
+              index={9}
               isExpend={isExpend}
               isEditOpen={isEditOpen}
               isEditOpenHandler={isEditOpenHandler}
+              setSelectedHeart={setSelectedHeart}
             />
             <HeartPaper
               deg={1.23}
               margin={"1em 0em 0em 0em"}
               vertical={true}
-              data={hearts[10]}
+              data={
+                hearts && hearts.data.filter((heart) => heart.index === 10)[0]
+              }
+              index={10}
               isExpend={isExpend}
               isEditOpen={isEditOpen}
               isEditOpenHandler={isEditOpenHandler}
+              setSelectedHeart={setSelectedHeart}
             />
             <HeartPaper
               deg={-0.66}
               margin={"0em 0em 0em 0em"}
               vertical={true}
-              data={hearts[11]}
+              data={
+                hearts && hearts.data.filter((heart) => heart.index === 11)[0]
+              }
+              index={11}
               isExpend={isExpend}
               isEditOpen={isEditOpen}
               isEditOpenHandler={isEditOpenHandler}
+              setSelectedHeart={setSelectedHeart}
             />
           </VerticalHeartRow>
         </VerticalHeartContainer>
@@ -156,46 +213,56 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={-2.72}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
-            data={hearts[0]}
+            data={hearts && hearts.data.filter((heart) => heart.index === 0)[0]}
+            index={0}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
             isEditOpenHandler={isEditOpenHandler}
+            setSelectedHeart={setSelectedHeart}
           />
           <HeartPaper
             deg={0}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
-            data={hearts[1]}
+            data={hearts && hearts.data.filter((heart) => heart.index === 1)[0]}
+            index={1}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
             isEditOpenHandler={isEditOpenHandler}
+            setSelectedHeart={setSelectedHeart}
           />
           <HeartPaper
             deg={5.39}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
-            data={hearts[2]}
+            data={hearts && hearts.data.filter((heart) => heart.index === 2)[0]}
+            index={2}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
             isEditOpenHandler={isEditOpenHandler}
+            setSelectedHeart={setSelectedHeart}
           />
           <HeartPaper
             deg={0.22}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
-            data={hearts[3]}
+            data={hearts && hearts.data.filter((heart) => heart.index === 3)[0]}
+            index={3}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
             isEditOpenHandler={isEditOpenHandler}
+            setSelectedHeart={setSelectedHeart}
           />
           <HeartPaper
             deg={-1.6}
             margin={"0em 0em 0.3em 0em"}
             vertical={false}
-            data={hearts[4]}
+            data={hearts && hearts.data.filter((heart) => heart.index === 4)[0]}
+            index={4}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
             isEditOpenHandler={isEditOpenHandler}
+            setSelectedHeart={setSelectedHeart}
           />
         </FirstRow>
         <SecondRow>
@@ -203,10 +270,12 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={2.78}
             margin={"0em 0em 0.6em 0em"}
             vertical={false}
-            data={hearts[5]}
+            data={hearts && hearts.data.filter((heart) => heart.index === 5)[0]}
+            index={5}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
             isEditOpenHandler={isEditOpenHandler}
+            setSelectedHeart={setSelectedHeart}
           />
           <div className={"title-wrapper"}>
             <p>{title}</p>
@@ -215,10 +284,12 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={3.1}
             margin={"0em 0em 0.98em 0em"}
             vertical={false}
-            data={hearts[6]}
+            data={hearts && hearts.data.filter((heart) => heart.index === 6)[0]}
+            index={6}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
             isEditOpenHandler={isEditOpenHandler}
+            setSelectedHeart={setSelectedHeart}
           />
         </SecondRow>
         <ThirdRow>
@@ -226,144 +297,66 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={-1.98}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
-            data={hearts[7]}
+            data={hearts && hearts.data.filter((heart) => heart.index === 7)[0]}
+            index={7}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
             isEditOpenHandler={isEditOpenHandler}
+            setSelectedHeart={setSelectedHeart}
           />
           <HeartPaper
             deg={4.03}
             margin={"0.3em 0em 0em 0em"}
             vertical={false}
-            data={hearts[8]}
+            data={hearts && hearts.data.filter((heart) => heart.index === 8)[0]}
+            index={8}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
             isEditOpenHandler={isEditOpenHandler}
+            setSelectedHeart={setSelectedHeart}
           />
           <HeartPaper
             deg={-1.98}
             margin={"0em 0em 0.6em 0em"}
             vertical={false}
-            data={hearts[9]}
+            data={hearts && hearts.data.filter((heart) => heart.index === 9)[0]}
+            index={9}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
             isEditOpenHandler={isEditOpenHandler}
+            setSelectedHeart={setSelectedHeart}
           />
           <HeartPaper
             deg={-0.5}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
-            data={hearts[10]}
+            data={
+              hearts && hearts.data.filter((heart) => heart.index === 10)[0]
+            }
+            index={10}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
             isEditOpenHandler={isEditOpenHandler}
+            setSelectedHeart={setSelectedHeart}
           />
           <HeartPaper
             deg={-2.83}
             margin={"0em 0em 0em 0.28em"}
             vertical={false}
-            data={hearts[11]}
+            data={
+              hearts && hearts.data.filter((heart) => heart.index === 11)[0]
+            }
+            index={11}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
             isEditOpenHandler={isEditOpenHandler}
+            setSelectedHeart={setSelectedHeart}
           />
         </ThirdRow>
       </PreviewContainer>
     </RollpeWrapper>
   );
 };
-
-// export const WhiteRollpePriview: React.FC = () => {
-//   const router = useRouter();
-
-//   return (
-//     <RollpeWrapper onClick={() => router.push("rollpe/1")}>
-//       <PreviewContainer>
-//         <FirstRow>
-//           <HeartPaper
-//             color={"#F228D3"}
-//             deg={-2.72}
-//             margin={"0rem 0rem 0rem 0rem"}
-//             vertical={false}
-//           />
-//           <HeartPaper
-//             color={"#F2EB28"}
-//             deg={0}
-//             margin={"0rem 0rem 0rem 0rem"}
-//             vertical={false}
-//           />
-//           <HeartPaper
-//             color={"#F2EB28"}
-//             deg={5.39}
-//             margin={"0rem 0rem 0rem 0rem"}
-//             vertical={false}
-//           />
-//           <HeartPaper
-//             color={"#28E8F2"}
-//             deg={0.22}
-//             margin={"0rem 0rem 0rem 0rem"}
-//             vertical={false}
-//           />
-//           <HeartPaper
-//             color={"#F2EB28"}
-//             deg={-1.6}
-//             margin={"0em 0em 0.3em 0em"}
-//             vertical={false}
-//           />
-//         </FirstRow>
-//         <SecondRow>
-//           <HeartPaper
-//             color={"#28E8F2"}
-//             deg={2.78}
-//             margin={"0em 0em 0.6em 0em"}
-//             vertical={false}
-//           />
-//           <div className={"title-wrapper"}>
-//             <p>하나둘셋넷다섯여섯일곱여덟아홉열열하나열둘열셋열</p>
-//           </div>
-//           <HeartPaper
-//             color={"#F228D3"}
-//             deg={3.1}
-//             margin={"0em 0em 0.98em 0em"}
-//             vertical={false}
-//           />
-//         </SecondRow>
-//         <ThirdRow>
-//           <HeartPaper
-//             color={"#F2EB28"}
-//             deg={-1.98}
-//             margin={"0rem 0rem 0rem 0rem"}
-//             vertical={false}
-//           />
-//           <HeartPaper
-//             color={"#28E8F2"}
-//             deg={4.03}
-//             margin={"0.3em 0em 0em 0em"}
-//             vertical={false}
-//           />
-//           <HeartPaper
-//             color={"#F2EB28"}
-//             deg={-1.98}
-//             margin={"0em 0em 0.6em 0em"}
-//             vertical={false}
-//           />
-//           <HeartPaper
-//             color={"#F2EB28"}
-//             deg={-0.5}
-//             margin={"0rem 0rem 0rem 0rem"}
-//             vertical={false}
-//           />
-//           <HeartPaper
-//             color={"#28E8F2"}
-//             deg={-2.83}
-//             margin={"0em 0em 0em 0.28em"}
-//             vertical={false}
-//           />
-//         </ThirdRow>
-//       </PreviewContainer>
-//     </RollpeWrapper>
-//   );
-// };
 
 const RollpeWrapper = styled.div<{ isExpend: boolean }>`
   display: flex;

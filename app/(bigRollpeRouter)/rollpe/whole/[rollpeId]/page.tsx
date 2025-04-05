@@ -6,11 +6,12 @@ import { useEffect, useState, useTransition } from "react";
 import { getRollpeDetail } from "@/app/api/rollpe/route";
 import Loading from "@/app/_components/ui/loading/Loading";
 import { Rollpe } from "@/public/utils/types";
-import { HeartModal } from "@/app/_components/ui/modal/Modal";
+import HeartModal from "@/app/_components/ui/modal/HeartEditModal";
 
 const RollpeEnterPage: React.FC = () => {
   const [rollpeCode, setRollpeCode] = useState<string>("");
   const [rollpeDetail, setRollpeDetail] = useState<Rollpe | null>();
+  const [selectedHeart, setSelectedHeart] = useState<number>(0);
   const [isHeartModalOpen, setIsHeartModalOpen] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
   const rollpeId = useParams().rollpeId;
@@ -43,6 +44,10 @@ const RollpeEnterPage: React.FC = () => {
       });
   }, [rollpeCode]);
 
+  useEffect(() => {
+    console.log("selectedHeart", selectedHeart);
+  }, [selectedHeart]);
+
   return isPending || !rollpeDetail ? (
     <Loading />
   ) : (
@@ -52,8 +57,16 @@ const RollpeEnterPage: React.FC = () => {
         data={rollpeDetail}
         isEditOpen={isHeartModalOpen}
         isEditOpenHandler={setIsHeartModalOpen}
+        selectedHeart={selectedHeart}
+        setSelectedHeart={setSelectedHeart}
       />
-      {isHeartModalOpen && <HeartModal />}
+      {isHeartModalOpen && (
+        <HeartModal
+          paperFk={rollpeDetail.id}
+          location={selectedHeart}
+          setModalState={setIsHeartModalOpen}
+        />
+      )}
     </RollpeEnterPageWrapper>
   );
 };

@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { Heart } from "@/public/utils/types";
 import { COLORS } from "@/public/styles/colors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface HeartPaperProps {
   deg: number;
@@ -12,6 +12,8 @@ interface HeartPaperProps {
   isExpend: boolean;
   isEditOpen?: boolean;
   isEditOpenHandler?: React.Dispatch<React.SetStateAction<boolean>>;
+  index: number;
+  setSelectedHeart?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const HeartPaper: React.FC<HeartPaperProps> = ({
@@ -22,12 +24,17 @@ export const HeartPaper: React.FC<HeartPaperProps> = ({
   isExpend,
   isEditOpen,
   isEditOpenHandler,
+  index,
+  setSelectedHeart,
 }) => {
   const { author, content, color } = data || {};
 
   const onClickHandler = () => {
-    if (isEditOpenHandler) {
-      isEditOpenHandler(!isEditOpen);
+    if (content === undefined) {
+      setSelectedHeart && setSelectedHeart(index);
+      isEditOpenHandler && isEditOpenHandler(!isEditOpen);
+    } else {
+      alert("이미 작성된 마음입니다. 다른 위치를 선택해주세요.");
     }
   };
 
@@ -57,7 +64,7 @@ const HeartPaperWrapper = styled.button<{ isExpend: boolean }>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 90%;
+  height: 100%;
   ${(props) => (props.isExpend ? "cursor: pointer;" : "")};
 
   &:hover {
@@ -84,10 +91,11 @@ const HeartPaperPreviewContainer = styled.div<{
     max-height: 15em;
   }
 
-  max-height: ${(props) => (props.vertical ? "12em" : "4em")};
+  /* max-height: ${(props) => (props.vertical ? "15em" : "4em")}; */
 
   transform: rotate(${(props) => props.deg}deg);
-  background: ${(props) => (props.isActive ? props.color : COLORS.ROLLPE_GRAY)};
+  background: ${(props) =>
+    props.isActive ? `#${props.color}` : COLORS.ROLLPE_GRAY};
   ${(props) => (props.isActive ? "border: none" : `border: 1px dashed black`)};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   font-family: var(--font-hakgyoanshim);
@@ -118,9 +126,11 @@ const ContentsWrapper = styled.div`
     align-items: center;
     gap: 0.05em;
     font-family: var(--font-nanumpen);
+
     @media (min-width: 768px) {
       font-size: 1.25em;
     }
+
     font-size: 0.00125em;
     color: ${COLORS.ROLLPE_SECONDARY};
     line-height: auto;

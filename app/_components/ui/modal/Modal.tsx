@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
 import Close from "@/public/images/icons/icon_close.svg";
-import React from "react";
 
 interface ModalProps {
   title: string;
@@ -48,56 +47,7 @@ export const BottomModal: React.FC<ModalProps> = ({
   );
 };
 
-export const HeartModal: React.FC = () => {
-  const onCloseHandler = () => {
-    console.log("close");
-  };
-
-  return (
-    <HeartModalWrapper>
-      <HeartModalHeader>
-        <button className={"close-button"} onClick={onCloseHandler}>
-          <Image src={Close} alt={"닫기"} layout="responsive" />
-        </button>
-      </HeartModalHeader>
-      <HeartEditWrapper>
-        <HeartWrapper></HeartWrapper>
-        <HeartColorPicker>
-          <div className={"yellow"}></div>
-          <div className={"blue"}></div>
-          <div className={"pink"}></div>
-        </HeartColorPicker>
-      </HeartEditWrapper>
-    </HeartModalWrapper>
-  );
-};
-
-const HeartModalHeader = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-
-  .close-button {
-    all: unset;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 2rem;
-    height: 2rem;
-    cursor: pointer;
-  }
-`;
-
-const HeartWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 22rem;
-  height: 24rem;
-  background-color: white;
-`;
-
-const ModalWrapper = styled.div`
+export const ModalWrapper = styled.div`
   position: absolute;
   z-index: 10;
   top: 0;
@@ -106,48 +56,6 @@ const ModalWrapper = styled.div`
   height: calc(100% - 20rem);
   background-color: rgba(0, 0, 0, 0.5);
   font-family: var(--font-hakgyoansim);
-`;
-
-const HeartModalWrapper = styled(ModalWrapper)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6.25rem;
-  padding: 1rem;
-  width: calc(100% - 2rem);
-
-  height: 100svh;
-`;
-
-const HeartEditWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
-`;
-
-const HeartColorPicker = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-
-  & > div {
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-  }
-
-  & > .yellow {
-    background-color: yellow;
-  }
-
-  & > .blue {
-    background-color: blue;
-  }
-
-  & > .pink {
-    background-color: pink;
-  }
 `;
 
 const ModalContainer = styled.div`
