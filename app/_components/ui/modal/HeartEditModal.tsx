@@ -6,10 +6,7 @@ import { ModalWrapper } from "./Modal";
 import CloseWhite from "@/public/images/icons/icon_close_white.svg";
 import Image from "next/image";
 import { HeartCreateRequestBody } from "@/public/utils/types";
-import { request } from "http";
 import { postCreateHeart } from "@/app/api/rollpe/heart/route";
-import { axiosInstanceAuth } from "@/public/axios/axiosInstance";
-import { Router } from "next/router";
 
 interface HeartModalProps {
   paperFk: number;
@@ -72,15 +69,16 @@ const HeartModal: React.FC<HeartModalProps> = ({
           })
           .catch((err) => {
             console.log(err);
+            //TODO: 에러 핸들링
           });
       });
     }
   };
 
-  useEffect(() => {
-    // test log
-    console.log(requestBody);
-  }, [requestBody]);
+  // useEffect(() => {
+  //   // test log
+  //   console.log(requestBody);
+  // }, [requestBody]);
 
   return (
     <HeartModalWrapper>
