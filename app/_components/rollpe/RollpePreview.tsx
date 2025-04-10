@@ -33,7 +33,7 @@ const RollpePreview: React.FC<Rollpe> = (rollpeData: Rollpe) => {
   };
 
   return ratio === "가로" ? (
-    <RollpePreviewWrapper>
+    <RollpePreviewWrapper onClick={previewOnClickHandler}>
       <RollpePreviewContainer>
         <HorizontalRow>
           <HeartPaperPreview

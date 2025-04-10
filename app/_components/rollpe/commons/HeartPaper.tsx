@@ -32,12 +32,10 @@ export const HeartPaperPreview: React.FC<{
         color={color ? color : COLORS.ROLLPE_GRAY}
         style={{ margin: margin }}
       >
-        <ContentsWrapper>
-          <p className={"content"}>
-            {content}
-            <span>{heartData ? `-${author?.name}` : ""}</span>
-          </p>
-        </ContentsWrapper>
+        <PreviewContentWrapper>
+          <p className={"content"}>{content}</p>
+          <p className={"author"}>{heartData ? `-${author?.name}` : ""}</p>
+        </PreviewContentWrapper>
       </PreviewContainer>
     </PreviewWrapper>
   );
@@ -76,6 +74,28 @@ const PreviewContainer = styled.div<{ deg: number; color: string }>`
   font-family: var(--font-nanumpen);
 `;
 
+const PreviewContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  width: calc(100% - 1rem);
+  height: calc(80% - 1rem);
+
+  & > p {
+    width: 100%;
+    text-align: center;
+    font-size: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+  }
+
+  & > .content {
+    height: 90%;
+  }
+`;
+
 export const HeartPaper: React.FC<HeartPaperProps> = ({
   deg,
   margin,
@@ -107,12 +127,10 @@ export const HeartPaper: React.FC<HeartPaperProps> = ({
         style={{ margin: margin }}
         vertical={vertical}
       >
-        <ContentsWrapper>
-          <p className={"content"}>
-            {content}
-            <span>{data ? `-${author?.name}` : ""}</span>
-          </p>
-        </ContentsWrapper>
+        <PreviewContentWrapper>
+          <p className={"content"}>{content}</p>
+          <p className={"author"}>{data ? `-${author?.name}` : ""}</p>
+        </PreviewContentWrapper>
       </HeartPaperPreviewContainer>
     </HeartPaperWrapper>
   );
