@@ -12,6 +12,7 @@ export const getRollpeList = async (queryParam: "invited" | "main") => {
 
 }
 
+//TODO: 리팩토링 필요 - 쿼리파람
 export const getHotRollpeList = async () => {
   return await axiosInstance.get(`/api/paper/user?type=hot`).then((response) => {
     console.log(response.data);
@@ -22,8 +23,18 @@ export const getHotRollpeList = async () => {
   });
 }
 
+export const getUserRollpeList = async (queryParam: "my" | "main" | "hot") => {
+  return await axiosInstanceAuth.get(`/api/paper/user?type=${queryParam}`).then((response) => {
+    console.log(response.data);
+    return Promise.resolve(response.data.data.results);
+  }).catch((error) => {
+    return Promise.reject(error);
+  })
+}
+
 export const getUserRollpe = async (queryParam: "my" | "main" | "invited" | "hot") => {
   return await axiosInstanceAuth.get(`/api/paper/mypage?type=${queryParam}`).then((response) => {
+    console.log(response.data);
     return Promise.resolve(response.data.data);
   }).catch((error) => {
     return Promise.reject(error);

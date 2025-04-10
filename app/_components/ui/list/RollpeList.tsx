@@ -11,30 +11,25 @@ import {
 import { RollpeListItem, RollpeSearchListItem } from "./RollpeListItem";
 import Image from "next/image";
 import NoneList from "@/public/images/icons/icon_non_list.svg";
+import { useEffect } from "react";
 
-export const RollpeList: React.FC<RollpeListProps> = ({
-  rollpeList,
+export const RollpeList: React.FC<{ list: Rollpe[]; resultText: string }> = ({
+  list,
   resultText,
 }) => {
+  useEffect(() => {
+    console.log(list);
+  }, [list]);
   return (
     <RollpeListWrapper>
       <div className={"count-wrapper"}>
         <em>
-          총 {rollpeList.length}개{resultText}
+          총 {list.length}개{resultText}
         </em>
       </div>
       <RollpeListContainer>
-        {rollpeList.map((rollpe: RollpeListItemProps, _: number) => (
-          <RollpeListItem
-            key={rollpe.rollpeId}
-            rollpeId={rollpe.rollpeId}
-            rollpeTitle={rollpe.rollpeTitle}
-            rollpeOwner={rollpe.rollpeOwner}
-            createdAt={rollpe.createdAt}
-            dDay={rollpe.dDay}
-            isPublic={rollpe.isPublic}
-            thumbnail={rollpe.thumbnail}
-          />
+        {list.map((rollpe: Rollpe, _: number) => (
+          <RollpeListItem key={rollpe.code} {...rollpe} />
         ))}
       </RollpeListContainer>
     </RollpeListWrapper>

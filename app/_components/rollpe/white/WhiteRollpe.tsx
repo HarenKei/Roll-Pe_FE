@@ -14,6 +14,7 @@ interface RollpeExpend {
   setSelectedHeart?: React.Dispatch<React.SetStateAction<number>>;
 }
 
+
 export const WhiteRollpe: React.FC<RollpeExpend> = ({
   data,
   isExpend,
@@ -30,8 +31,8 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
   };
 
   useEffect(() => {
-    console.log(hearts);
-  }, [hearts]);
+    console.log(data);
+  }, [data]);
 
   return ratio === "세로" ? (
     <VerticalWrapper isExpend={isExpend} onClick={rollpeClickedHandler}>
@@ -46,7 +47,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               margin={"0em 0em 0.5em 0em"}
               vertical={true}
               data={
-                hearts && hearts.data.filter((heart) => heart.index === 0)[0]
+                hearts.count > 0
+                  ? hearts.data.filter((heart) => heart.index === 0)[0]
+                  : undefined
               }
               index={0}
               isExpend={isExpend}
@@ -59,7 +62,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               margin={"0.5em 0em 0em 0em"}
               vertical={true}
               data={
-                hearts && hearts.data.filter((heart) => heart.index === 1)[0]
+                hearts.count > 0
+                  ? hearts.data.filter((heart) => heart.index === 1)[0]
+                  : undefined
               }
               index={1}
               isExpend={isExpend}
@@ -72,7 +77,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               margin={"0em 0em 0.5em 0em"}
               vertical={true}
               data={
-                hearts && hearts.data.filter((heart) => heart.index === 2)[0]
+                hearts.count > 0
+                  ? hearts.data.filter((heart) => heart.index === 2)[0]
+                  : undefined
               }
               index={2}
               isExpend={isExpend}
@@ -85,7 +92,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               margin={"1em 0em 0em 0em"}
               vertical={true}
               data={
-                hearts && hearts.data.filter((heart) => heart.index === 3)[0]
+                hearts.count > 0
+                  ? hearts.data.filter((heart) => heart.index === 3)[0]
+                  : undefined
               }
               index={3}
               isExpend={isExpend}
@@ -100,7 +109,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               margin={"0em 0em 0em 0em"}
               vertical={true}
               data={
-                hearts && hearts.data.filter((heart) => heart.index === 4)[0]
+                hearts.count > 0
+                  ? hearts.data.filter((heart) => heart.index === 4)[0]
+                  : undefined
               }
               index={4}
               isExpend={isExpend}
@@ -113,7 +124,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               margin={"1em 0em 0em 0em"}
               vertical={true}
               data={
-                hearts && hearts.data.filter((heart) => heart.index === 5)[0]
+                hearts.count > 0
+                  ? hearts.data.filter((heart) => heart.index === 5)[0]
+                  : undefined
               }
               index={5}
               isExpend={isExpend}
@@ -126,7 +139,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               margin={"0em 0em 0em 0em"}
               vertical={true}
               data={
-                hearts && hearts.data.filter((heart) => heart.index === 6)[0]
+                hearts.count > 0
+                  ? hearts.data.filter((heart) => heart.index === 6)[0]
+                  : undefined
               }
               index={6}
               isExpend={isExpend}
@@ -139,7 +154,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               margin={"1em 0em 0em 0em"}
               vertical={true}
               data={
-                hearts && hearts.data.filter((heart) => heart.index === 7)[0]
+                hearts.count > 0
+                  ? hearts.data.filter((heart) => heart.index === 7)[0]
+                  : undefined
               }
               index={7}
               isExpend={isExpend}
@@ -154,7 +171,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               margin={"1em 0em 0em 0em"}
               vertical={true}
               data={
-                hearts && hearts.data.filter((heart) => heart.index === 8)[0]
+                hearts.count > 0
+                  ? hearts.data.filter((heart) => heart.index === 8)[0]
+                  : undefined
               }
               index={8}
               isExpend={isExpend}
@@ -167,7 +186,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               margin={"0em 0em 0em 0em"}
               vertical={true}
               data={
-                hearts && hearts.data.filter((heart) => heart.index === 9)[0]
+                hearts.count > 0
+                  ? hearts.data.filter((heart) => heart.index === 9)[0]
+                  : undefined
               }
               index={9}
               isExpend={isExpend}
@@ -180,7 +201,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               margin={"1em 0em 0em 0em"}
               vertical={true}
               data={
-                hearts && hearts.data.filter((heart) => heart.index === 10)[0]
+                hearts.count > 0
+                  ? hearts.data.filter((heart) => heart.index === 10)[0]
+                  : undefined
               }
               index={10}
               isExpend={isExpend}
@@ -193,7 +216,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
               margin={"0em 0em 0em 0em"}
               vertical={true}
               data={
-                hearts && hearts.data.filter((heart) => heart.index === 11)[0]
+                hearts.count > 0
+                  ? hearts.data.filter((heart) => heart.index === 11)[0]
+                  : undefined
               }
               index={11}
               isExpend={isExpend}
@@ -213,7 +238,11 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={-2.72}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
-            data={hearts && hearts.data.filter((heart) => heart.index === 0)[0]}
+            data={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 0)[0]
+                : undefined
+            }
             index={0}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
@@ -224,7 +253,11 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={0}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
-            data={hearts && hearts.data.filter((heart) => heart.index === 1)[0]}
+            data={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 1)[0]
+                : undefined
+            }
             index={1}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
@@ -235,7 +268,11 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={5.39}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
-            data={hearts && hearts.data.filter((heart) => heart.index === 2)[0]}
+            data={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 2)[0]
+                : undefined
+            }
             index={2}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
@@ -246,7 +283,11 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={0.22}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
-            data={hearts && hearts.data.filter((heart) => heart.index === 3)[0]}
+            data={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 3)[0]
+                : undefined
+            }
             index={3}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
@@ -257,7 +298,11 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={-1.6}
             margin={"0em 0em 0.3em 0em"}
             vertical={false}
-            data={hearts && hearts.data.filter((heart) => heart.index === 4)[0]}
+            data={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 4)[0]
+                : undefined
+            }
             index={4}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
@@ -270,7 +315,11 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={2.78}
             margin={"0em 0em 0.6em 0em"}
             vertical={false}
-            data={hearts && hearts.data.filter((heart) => heart.index === 5)[0]}
+            data={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 5)[0]
+                : undefined
+            }
             index={5}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
@@ -284,7 +333,11 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={3.1}
             margin={"0em 0em 0.98em 0em"}
             vertical={false}
-            data={hearts && hearts.data.filter((heart) => heart.index === 6)[0]}
+            data={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 6)[0]
+                : undefined
+            }
             index={6}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
@@ -297,7 +350,11 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={-1.98}
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
-            data={hearts && hearts.data.filter((heart) => heart.index === 7)[0]}
+            data={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 7)[0]
+                : undefined
+            }
             index={7}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
@@ -308,7 +365,11 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={4.03}
             margin={"0.3em 0em 0em 0em"}
             vertical={false}
-            data={hearts && hearts.data.filter((heart) => heart.index === 8)[0]}
+            data={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 8)[0]
+                : undefined
+            }
             index={8}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
@@ -319,7 +380,11 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             deg={-1.98}
             margin={"0em 0em 0.6em 0em"}
             vertical={false}
-            data={hearts && hearts.data.filter((heart) => heart.index === 9)[0]}
+            data={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 9)[0]
+                : undefined
+            }
             index={9}
             isExpend={isExpend}
             isEditOpen={isEditOpen}
@@ -331,7 +396,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             margin={"0rem 0rem 0rem 0rem"}
             vertical={false}
             data={
-              hearts && hearts.data.filter((heart) => heart.index === 10)[0]
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 10)[0]
+                : undefined
             }
             index={10}
             isExpend={isExpend}
@@ -344,7 +411,9 @@ export const WhiteRollpe: React.FC<RollpeExpend> = ({
             margin={"0em 0em 0em 0.28em"}
             vertical={false}
             data={
-              hearts && hearts.data.filter((heart) => heart.index === 11)[0]
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 11)[0]
+                : undefined
             }
             index={11}
             isExpend={isExpend}

@@ -3,11 +3,18 @@ import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { Rollpe } from "@/public/utils/types";
+import { getUserRollpeList } from "@/app/api/rollpe/route";
 
 interface ButtonProps {
   text: string;
   onClickHandler?: () => void;
   route?: string;
+}
+
+interface MoreButtonProps extends ButtonProps {
+  nextLink: string;
+  setList: React.Dispatch<React.SetStateAction<Rollpe[]>>;
 }
 
 interface SubmitProps {
@@ -53,6 +60,11 @@ export const ButtonSecondary: React.FC<ButtonProps> = ({
       {text}
     </StyledButtonSecondary>
   );
+};
+
+export const ButtonMore: React.FC<ButtonProps> = ({ text, onClickHandler }) => {
+
+  return <StyledMore>{text}</StyledMore>;
 };
 
 export const ButtonSubmit: React.FC<SubmitProps> = ({ text, isDisabled }) => {
@@ -118,6 +130,12 @@ const StyledButton = styled.button`
     color: ${COLORS.ROLLPE_MAIN};
     transition: all 0.2s ease;
   }
+`;
+
+const StyledMore = styled(StyledButton)`
+  border: 2px solid ${COLORS.ROLLPE_SECONDARY};
+  background-color: ${COLORS.ROLLPE_PRIMARY};
+  color: ${COLORS.ROLLPE_SECONDARY};
 `;
 
 export const StyledButtonSecondary = styled(StyledButton)`

@@ -8,13 +8,73 @@ interface HeartPaperProps {
   deg: number;
   margin: React.CSSProperties["margin"];
   vertical: boolean;
-  data: Heart;
+  data?: Heart;
   isExpend: boolean;
   isEditOpen?: boolean;
   isEditOpenHandler?: React.Dispatch<React.SetStateAction<boolean>>;
   index: number;
   setSelectedHeart?: React.Dispatch<React.SetStateAction<number>>;
 }
+
+export const HeartPaperPreview: React.FC<{
+  deg: number;
+  heartData: Heart | undefined;
+  margin: React.CSSProperties["margin"];
+}> = ({ deg, heartData, margin }) => {
+  //deg는 고정이지만 heartData는 undefined일 수 있지...?
+  //heartData가 undefined일 때를 고려한 디스트럭쳐링.
+  const { content, author, color } = heartData || {};
+
+  return (
+    <PreviewWrapper>
+      <PreviewContainer
+        deg={deg}
+        color={color ? color : COLORS.ROLLPE_GRAY}
+        style={{ margin: margin }}
+      >
+        <ContentsWrapper>
+          <p className={"content"}>
+            {content}
+            <span>{heartData ? `-${author?.name}` : ""}</span>
+          </p>
+        </ContentsWrapper>
+      </PreviewContainer>
+    </PreviewWrapper>
+  );
+};
+
+const PreviewWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+`;
+
+const PreviewContainer = styled.div<{ deg: number; color: string }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 90%;
+  min-width: 3.5rem;
+  height: 90%;
+  max-height: 4rem;
+
+  background: ${(props) =>
+    props.color === `${COLORS.ROLLPE_GRAY}`
+      ? COLORS.ROLLPE_GRAY
+      : `#${props.color}`};
+  //props로 넘어오는 컬러는 #가 없는 string임....
+  ${(props) =>
+    props.color === `${COLORS.ROLLPE_GRAY}`
+      ? `border: 1px dashed ${COLORS.ROLLPE_SECONDARY};`
+      : `border: none;`}
+  transform: rotate(${(props) => props.deg}deg);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: var(--font-nanumpen);
+`;
 
 export const HeartPaper: React.FC<HeartPaperProps> = ({
   deg,
@@ -50,7 +110,7 @@ export const HeartPaper: React.FC<HeartPaperProps> = ({
         <ContentsWrapper>
           <p className={"content"}>
             {content}
-            <span>{data && `-${author.name}`}</span>
+            <span>{data ? `-${author?.name}` : ""}</span>
           </p>
         </ContentsWrapper>
       </HeartPaperPreviewContainer>
@@ -75,7 +135,7 @@ const HeartPaperWrapper = styled.button<{ isExpend: boolean }>`
 
 const HeartPaperPreviewContainer = styled.div<{
   isActive: boolean;
-  color: string;
+  color?: string;
   deg: number;
   vertical: boolean;
 }>`

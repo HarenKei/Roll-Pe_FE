@@ -6,22 +6,23 @@ import DUMMY from "@/public/images/image/image_dummy_thumb.png";
 import { Rollpe, RollpeListItemProps } from "@/public/utils/types";
 import { useRouter } from "next/navigation";
 
-export const RollpeListItem: React.FC<RollpeListItemProps> = ({
-  rollpeId,
-  rollpeTitle,
-  rollpeOwner,
-  createdAt,
-  dDay,
-  isPublic,
-  thumbnail,
-}) => {
+export const RollpeListItem: React.FC<Rollpe> = (data: Rollpe) => {
+  const { viewStat, receive, title, host, createdAt } = data;
+  const today = new Date();
+  const targetDate = new Date(receive.receivingDate);
+  const timeDifference = targetDate.getTime() - today.getTime();
+  const dDay = Math.ceil(timeDifference / (1000 * 3600 * 24));
+  const createdDate = new Date(createdAt).toLocaleDateString();
+
   return (
     <RollpeListItemWrapper>
       <div className={"badge-container"}>
-        <span className={`badge-item ${isPublic ? "public" : "private"}`}>
-          {isPublic ? "공개" : "비공개"}
+        <span className={`badge-item ${viewStat ? "private" : "public"}`}>
+          {viewStat ? "비공개" : "공개"}
         </span>
-        <span className={"badge-item d-day"}>D-{dDay}</span>
+        <span className={"badge-item d-day"}>
+          {dDay < 0 ? `D+${Math.abs(dDay)}` : `D-${dDay}`}
+        </span>
       </div>
       <div className={"info-wrapper"}>
         <div className={"thumb-wrapper"}>
@@ -34,9 +35,9 @@ export const RollpeListItem: React.FC<RollpeListItemProps> = ({
           />
         </div>
         <div className={"title-wrappper"}>
-          <p className={"title"}>{rollpeTitle}</p>
+          <p className={"title"}>{title}</p>
           <p className={"desc"}>
-            {rollpeOwner} 주최 | {createdAt} 생성
+            {host.name} 주최 | {createdDate} 생성
           </p>
         </div>
       </div>

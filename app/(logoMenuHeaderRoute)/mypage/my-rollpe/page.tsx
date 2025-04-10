@@ -3,8 +3,9 @@ import { COLORS } from "@/public/styles/colors";
 import styled from "styled-components";
 import { RollpeListItemProps } from "@/public/utils/types";
 import { RollpeList } from "@/app/_components/ui/list/RollpeList";
+import { Rollpe } from "@/public/utils/types";
 import { useEffect, useState, useTransition } from "react";
-import { getUserRollpe } from "@/app/api/rollpe/route";
+import { getUserRollpeList } from "@/app/api/rollpe/route";
 import Loading from "@/app/_components/ui/loading/Loading";
 
 const DUMMY_ROLLPE_LIST: RollpeListItemProps[] = [
@@ -57,17 +58,17 @@ const DUMMY_ROLLPE_LIST: RollpeListItemProps[] = [
 
 const MyRollpePage: React.FC = () => {
   const [isPending, startTransition] = useTransition();
-  const [myRollpeList, setMyRollpeList] = useState<RollpeListItemProps[]>([]);
+  const [myRollpeList, setMyRollpeList] = useState<Rollpe[]>();
 
   const getMyRollpeList = () => {
     startTransition(async () => {
-      await getUserRollpe("my")
+      await getUserRollpeList("my")
         .then((res) => {
-          console.log(res);
+          // console.log(res);
+          setMyRollpeList(res);
         })
         .catch((error) => {
           console.error(error);
-          throw new Error();
         });
     });
   };
@@ -75,6 +76,10 @@ const MyRollpePage: React.FC = () => {
   useEffect(() => {
     getMyRollpeList();
   }, []);
+
+  useEffect(() => {
+    console.log(myRollpeList);
+  }, [myRollpeList]);
 
   return isPending ? (
     <Loading />
@@ -84,7 +89,7 @@ const MyRollpePage: React.FC = () => {
         <div className={"title-wrapper"}>
           <h1>내 롤페</h1>
         </div>
-        <RollpeList rollpeList={DUMMY_ROLLPE_LIST} resultText={""} />
+        {myRollpeList && <RollpeList list={myRollpeList} resultText={""} />}
       </MyRollpeContainer>
     </MyRollpeWrapper>
   );
@@ -93,6 +98,7 @@ const MyRollpePage: React.FC = () => {
 const MyRollpeWrapper = styled.main`
   padding: 5rem 1.25rem;
   width: calc(100% - 2.5rem);
+  height: 100%;
   font-family: var(--font-hakgyoansim);
 `;
 
@@ -103,6 +109,7 @@ const MyRollpeContainer = styled.div`
   gap: 2rem;
 
   width: 100%;
+  height: 100%;
 
   & > .title-wrapper > h1 {
     color: ${COLORS.ROLLPE_SECONDARY};

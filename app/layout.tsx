@@ -52,14 +52,15 @@ export default function RootLayout({
                 style={{
                   flex: "1",
                   width: "100%",
+                  height: "100%",
                   position: "relative",
                 }}
               >
                 <SlideMenu />
 
                 {children}
-                <Footer />
               </div>
+              <Footer />
             </div>
           </StyledComponentsRegistry>
         </ReduxProvider>
