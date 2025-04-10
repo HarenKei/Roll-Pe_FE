@@ -19,24 +19,38 @@ interface HeartPaperProps {
 export const HeartPaperPreview: React.FC<{
   deg: number;
   heartData: Heart | undefined;
+  isVertical: boolean;
   margin: React.CSSProperties["margin"];
-}> = ({ deg, heartData, margin }) => {
+}> = ({ deg, heartData, margin, isVertical }) => {
   //deg는 고정이지만 heartData는 undefined일 수 있지...?
   //heartData가 undefined일 때를 고려한 디스트럭쳐링.
   const { content, author, color } = heartData || {};
 
   return (
     <PreviewWrapper>
-      <PreviewContainer
-        deg={deg}
-        color={color ? color : COLORS.ROLLPE_GRAY}
-        style={{ margin: margin }}
-      >
-        <PreviewContentWrapper>
-          <p className={"content"}>{content}</p>
-          <p className={"author"}>{heartData ? `-${author?.name}` : ""}</p>
-        </PreviewContentWrapper>
-      </PreviewContainer>
+      {isVertical ? (
+        <PreviewVerticalContainer
+          deg={deg}
+          color={color ? color : COLORS.ROLLPE_GRAY}
+          style={{ margin: margin }}
+        >
+          <PreviewContentWrapper>
+            <p className={"content"}>{content}</p>
+            <p className={"author"}>{heartData ? `-${author?.name}` : ""}</p>
+          </PreviewContentWrapper>
+        </PreviewVerticalContainer>
+      ) : (
+        <PreviewContainer
+          deg={deg}
+          color={color ? color : COLORS.ROLLPE_GRAY}
+          style={{ margin: margin }}
+        >
+          <PreviewContentWrapper>
+            <p className={"content"}>{content}</p>
+            <p className={"author"}>{heartData ? `-${author?.name}` : ""}</p>
+          </PreviewContentWrapper>
+        </PreviewContainer>
+      )}
     </PreviewWrapper>
   );
 };
@@ -72,6 +86,11 @@ const PreviewContainer = styled.div<{ deg: number; color: string }>`
   transform: rotate(${(props) => props.deg}deg);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   font-family: var(--font-nanumpen);
+`;
+
+const PreviewVerticalContainer = styled(PreviewContainer)`
+  height: 100%;
+  max-height: 6rem;
 `;
 
 const PreviewContentWrapper = styled.div`
