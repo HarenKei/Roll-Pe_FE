@@ -1,6 +1,5 @@
 "use client";
 import styled from "styled-components";
-import { WhiteRollpe } from "@/app/_components/rollpe/white/WhiteRollpe";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { getRollpeDetail } from "@/app/api/rollpe/route";
@@ -85,16 +84,8 @@ const RollpeEnterPage: React.FC = () => {
 };
 
 const RollpeEnterPageWrapper = styled.main`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-  /* gap: 2rem; */
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
-`;
-
-const RollpeContainer = styled.div`
+  /* width: 100%; */
+  height: 100svh;
   overflow: scroll;
 `;
 

@@ -175,7 +175,7 @@ const HeartPaperWrapper = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 90%;
   height: 100%;
   cursor: pointer;
 
@@ -198,10 +198,12 @@ const HeartPaperPreviewContainer = styled.div<{
   width: 90%;
   height: 90%;
   min-width: 10rem;
+  min-height: 13rem;
+  max-height: 15rem;
 
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     max-height: 15em;
-  }
+  } */
 
   /* max-height: ${(props) => (props.vertical ? "15em" : "4em")}; */
 
@@ -210,7 +212,7 @@ const HeartPaperPreviewContainer = styled.div<{
     props.isActive ? `#${props.color}` : COLORS.ROLLPE_GRAY};
   ${(props) => (props.isActive ? "border: none" : `border: 1px dashed black`)};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  font-family: var(--font-hakgyoanshim);
+  font-family: var(--font-nanumpen);
   opacity: ${(props) => (props.isActive ? 1 : 0.5)};
 `;
 

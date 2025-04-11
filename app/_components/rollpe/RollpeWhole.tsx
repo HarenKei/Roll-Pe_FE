@@ -58,16 +58,17 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
   selectedHeart,
   setSelectedHeart,
 }) => {
-  const { theme, code, hearts, title } = rollpeData;
+  const { ratio, theme, code, hearts, title } = rollpeData;
+  const isVertical = ratio === "가로" ? false : true;
 
-  return (
+  return ratio === "가로" ? (
     <RollpeWholeWrapper>
       <RollpeWholeContainer>
         <HorizontalRow>
           <HeartPaper
             deg={HORIZONTAL_DEG[0]}
             margin={HORIZONTAL_MARGIN[0]}
-            isVertical={false}
+            isVertical={isVertical}
             heartData={
               hearts.count > 0
                 ? hearts.data.filter((heart) => heart.index === 0)[0]
@@ -81,7 +82,7 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
           <HeartPaper
             deg={HORIZONTAL_DEG[1]}
             margin={HORIZONTAL_MARGIN[1]}
-            isVertical={false}
+            isVertical={isVertical}
             heartData={
               hearts.count > 0
                 ? hearts.data.filter((heart) => heart.index === 1)[0]
@@ -95,7 +96,7 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
           <HeartPaper
             deg={HORIZONTAL_DEG[2]}
             margin={HORIZONTAL_MARGIN[2]}
-            isVertical={false}
+            isVertical={isVertical}
             heartData={
               hearts.count > 0
                 ? hearts.data.filter((heart) => heart.index === 2)[0]
@@ -109,7 +110,7 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
           <HeartPaper
             deg={HORIZONTAL_DEG[3]}
             margin={HORIZONTAL_MARGIN[3]}
-            isVertical={false}
+            isVertical={isVertical}
             heartData={
               hearts.count > 0
                 ? hearts.data.filter((heart) => heart.index === 3)[0]
@@ -123,7 +124,7 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
           <HeartPaper
             deg={HORIZONTAL_DEG[4]}
             margin={HORIZONTAL_MARGIN[4]}
-            isVertical={false}
+            isVertical={isVertical}
             heartData={
               hearts.count > 0
                 ? hearts.data.filter((heart) => heart.index === 4)[0]
@@ -139,7 +140,7 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
           <HeartPaper
             deg={HORIZONTAL_DEG[5]}
             margin={HORIZONTAL_MARGIN[5]}
-            isVertical={false}
+            isVertical={isVertical}
             heartData={
               hearts.count > 0
                 ? hearts.data.filter((heart) => heart.index === 5)[0]
@@ -156,7 +157,7 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
           <HeartPaper
             deg={HORIZONTAL_DEG[6]}
             margin={HORIZONTAL_MARGIN[6]}
-            isVertical={false}
+            isVertical={isVertical}
             heartData={
               hearts.count > 0
                 ? hearts.data.filter((heart) => heart.index === 6)[0]
@@ -172,7 +173,7 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
           <HeartPaper
             deg={HORIZONTAL_DEG[7]}
             margin={HORIZONTAL_MARGIN[7]}
-            isVertical={false}
+            isVertical={isVertical}
             heartData={
               hearts.count > 0
                 ? hearts.data.filter((heart) => heart.index === 7)[0]
@@ -186,7 +187,7 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
           <HeartPaper
             deg={HORIZONTAL_DEG[8]}
             margin={HORIZONTAL_MARGIN[8]}
-            isVertical={false}
+            isVertical={isVertical}
             heartData={
               hearts.count > 0
                 ? hearts.data.filter((heart) => heart.index === 8)[0]
@@ -200,7 +201,7 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
           <HeartPaper
             deg={HORIZONTAL_DEG[9]}
             margin={HORIZONTAL_MARGIN[9]}
-            isVertical={false}
+            isVertical={isVertical}
             heartData={
               hearts.count > 0
                 ? hearts.data.filter((heart) => heart.index === 9)[0]
@@ -214,7 +215,7 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
           <HeartPaper
             deg={HORIZONTAL_DEG[10]}
             margin={HORIZONTAL_MARGIN[10]}
-            isVertical={false}
+            isVertical={isVertical}
             heartData={
               hearts.count > 0
                 ? hearts.data.filter((heart) => heart.index === 10)[0]
@@ -228,7 +229,7 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
           <HeartPaper
             deg={HORIZONTAL_DEG[11]}
             margin={HORIZONTAL_MARGIN[11]}
-            isVertical={false}
+            isVertical={isVertical}
             heartData={
               hearts.count > 0
                 ? hearts.data.filter((heart) => heart.index === 11)[0]
@@ -242,6 +243,188 @@ const RollpeWhole: React.FC<RollpeWholeProps> = ({
         </HorizontalRow>
       </RollpeWholeContainer>
     </RollpeWholeWrapper>
+  ) : (
+    <RollpeWholeVerticalWrapper>
+      <RollpeWholeContainer>
+        <VerticalTitleRow>
+          <h1>{title}</h1>
+        </VerticalTitleRow>
+        <VerticalRow>
+          <HeartPaper
+            deg={VERTICAL_DEG[0]}
+            margin={VERTICAL_MARGIN[0]}
+            isVertical={isVertical}
+            heartData={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 0)[0]
+                : undefined
+            }
+            index={0}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
+            setSelectedHeart={setSelectedHeart}
+          />
+          <HeartPaper
+            deg={VERTICAL_DEG[1]}
+            margin={VERTICAL_MARGIN[1]}
+            isVertical={isVertical}
+            heartData={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 1)[0]
+                : undefined
+            }
+            index={1}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
+            setSelectedHeart={setSelectedHeart}
+          />
+          <HeartPaper
+            deg={VERTICAL_DEG[2]}
+            margin={VERTICAL_MARGIN[2]}
+            isVertical={isVertical}
+            heartData={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 2)[0]
+                : undefined
+            }
+            index={2}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
+            setSelectedHeart={setSelectedHeart}
+          />
+          <HeartPaper
+            deg={VERTICAL_DEG[3]}
+            margin={VERTICAL_MARGIN[3]}
+            isVertical={isVertical}
+            heartData={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 3)[0]
+                : undefined
+            }
+            index={3}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
+            setSelectedHeart={setSelectedHeart}
+          />
+        </VerticalRow>
+        <VerticalRow>
+          <HeartPaper
+            deg={VERTICAL_DEG[4]}
+            margin={VERTICAL_MARGIN[4]}
+            isVertical={isVertical}
+            heartData={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 4)[0]
+                : undefined
+            }
+            index={4}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
+            setSelectedHeart={setSelectedHeart}
+          />
+          <HeartPaper
+            deg={VERTICAL_DEG[5]}
+            margin={VERTICAL_MARGIN[5]}
+            isVertical={isVertical}
+            heartData={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 5)[0]
+                : undefined
+            }
+            index={5}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
+            setSelectedHeart={setSelectedHeart}
+          />
+          <HeartPaper
+            deg={VERTICAL_DEG[6]}
+            margin={VERTICAL_MARGIN[6]}
+            isVertical={isVertical}
+            heartData={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 6)[0]
+                : undefined
+            }
+            index={6}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
+            setSelectedHeart={setSelectedHeart}
+          />
+          <HeartPaper
+            deg={VERTICAL_DEG[7]}
+            margin={VERTICAL_MARGIN[7]}
+            isVertical={isVertical}
+            heartData={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 7)[0]
+                : undefined
+            }
+            index={7}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
+            setSelectedHeart={setSelectedHeart}
+          />
+        </VerticalRow>
+        <VerticalRow>
+          <HeartPaper
+            deg={VERTICAL_DEG[8]}
+            margin={VERTICAL_MARGIN[8]}
+            isVertical={isVertical}
+            heartData={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 8)[0]
+                : undefined
+            }
+            index={8}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
+            setSelectedHeart={setSelectedHeart}
+          />
+          <HeartPaper
+            deg={VERTICAL_DEG[9]}
+            margin={VERTICAL_MARGIN[9]}
+            isVertical={isVertical}
+            heartData={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 9)[0]
+                : undefined
+            }
+            index={9}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
+            setSelectedHeart={setSelectedHeart}
+          />
+          <HeartPaper
+            deg={VERTICAL_DEG[10]}
+            margin={VERTICAL_MARGIN[10]}
+            isVertical={isVertical}
+            heartData={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 10)[0]
+                : undefined
+            }
+            index={10}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
+            setSelectedHeart={setSelectedHeart}
+          />
+          <HeartPaper
+            deg={VERTICAL_DEG[11]}
+            margin={VERTICAL_MARGIN[11]}
+            isVertical={isVertical}
+            heartData={
+              hearts.count > 0
+                ? hearts.data.filter((heart) => heart.index === 11)[0]
+                : undefined
+            }
+            index={11}
+            isEditOpen={isEditOpen}
+            setIsEditOpen={setIsEditOpen}
+            setSelectedHeart={setSelectedHeart}
+          />
+        </VerticalRow>
+      </RollpeWholeContainer>
+    </RollpeWholeVerticalWrapper>
   );
 };
 
@@ -251,8 +434,12 @@ const RollpeWholeWrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  /* width: 100%; */
   height: 100%;
+`;
+
+const RollpeWholeVerticalWrapper = styled(RollpeWholeWrapper)`
+  aspect-ratio: 210 / 297;
+  gap: 3.125rem;
 `;
 
 const RollpeWholeContainer = styled.div`
@@ -265,11 +452,36 @@ const RollpeWholeContainer = styled.div`
   height: calc(100% - 1rem);
 `;
 
+const VerticalRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.313rem;
+  margin: 3rem 0rem;
+  width: 100%;
+  height: 15rem;
+`;
+
 const HorizontalRow = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   width: 100%;
   height: 12rem;
+`;
+
+const VerticalTitleRow = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 3rem 0rem;
+  /* width: calc(100% - 6rem); */
+
+  & > h1 {
+    width: 70%;
+    font-size: 3.25rem;
+    font-family: var(--font-jalnan);
+    text-align: center;
+  }
 `;
 
 const HorizontalTitleRow = styled(HorizontalRow)`

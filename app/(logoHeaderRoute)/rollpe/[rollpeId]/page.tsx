@@ -19,7 +19,6 @@ import { User, Rollpe } from "@/public/utils/types";
 import { getRollpeDetail } from "@/app/api/rollpe/route";
 import Loading from "@/app/_components/ui/loading/Loading";
 import { useRouter } from "next/navigation";
-import { WhiteRollpe } from "@/app/_components/rollpe/white/WhiteRollpe";
 import RollpePreview from "@/app/_components/rollpe/RollpePreview";
 
 const RollpeDetailPage: React.FC = () => {

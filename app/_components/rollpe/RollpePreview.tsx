@@ -187,7 +187,7 @@ const RollpePreview: React.FC<Rollpe> = (rollpeData: Rollpe) => {
       </RollpePreviewContainer>
     </RollpePreviewWrapper>
   ) : (
-    <RollpePreviewVerticalWrapper>
+    <RollpePreviewVerticalWrapper onClick={previewOnClickHandler}>
       <RollpePreviewContainer>
         <VerticalTitleRow>
           <h1>{title}</h1>
