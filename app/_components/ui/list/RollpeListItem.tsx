@@ -2,12 +2,21 @@
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
 import Image from "next/image";
-import DUMMY from "@/public/images/image/image_dummy_thumb.png";
+import CONGRATS from "@/public/images/image/image_congrats.png";
+import RIP from "@/public/images/image/image_rip.png";
+import WHITE from "@/public/images/image/image_white.png";
 import { Rollpe, RollpeListItemProps } from "@/public/utils/types";
 import { useRouter } from "next/navigation";
+import { StaticImageData } from "next/image";
+
+const THEME_THUMBNAIL: Record<string, StaticImageData> = {
+  축하: CONGRATS,
+  추모: RIP,
+  화이트: WHITE,
+};
 
 export const RollpeListItem: React.FC<Rollpe> = (data: Rollpe) => {
-  const { viewStat, receive, title, host, createdAt } = data;
+  const { viewStat, receive, title, host, createdAt, theme } = data;
   const today = new Date();
   const targetDate = new Date(receive.receivingDate);
   const timeDifference = targetDate.getTime() - today.getTime();
@@ -27,7 +36,7 @@ export const RollpeListItem: React.FC<Rollpe> = (data: Rollpe) => {
       <div className={"info-wrapper"}>
         <div className={"thumb-wrapper"}>
           <Image
-            src={DUMMY}
+            src={THEME_THUMBNAIL[theme] || CONGRATS}
             alt={"썸네일"}
             layout="responsive"
             width={48}
@@ -46,7 +55,7 @@ export const RollpeListItem: React.FC<Rollpe> = (data: Rollpe) => {
 };
 
 export const RollpeSearchListItem: React.FC<Rollpe> = (data: Rollpe) => {
-  const { code, receive, host, title, createdAt } = data;
+  const { code, receive, host, title, createdAt, theme } = data;
   const today = new Date();
   const targetDate = new Date(receive.receivingDate);
   const timeDifference = targetDate.getTime() - today.getTime();
@@ -64,7 +73,7 @@ export const RollpeSearchListItem: React.FC<Rollpe> = (data: Rollpe) => {
       <div className={"info-wrapper"}>
         <div className={"thumb-wrapper"}>
           <Image
-            src={DUMMY}
+            src={THEME_THUMBNAIL[theme] || CONGRATS}
             alt={"썸네일"}
             layout="responsive"
             width={48}
@@ -141,6 +150,7 @@ const RollpeListItemWrapper = styled.li`
       width: 3rem;
       height: 3rem;
       border-radius: 50%;
+      border: 1px solid ${COLORS.ROLLPE_SECONDARY};
       overflow: hidden;
 
       & > img {
