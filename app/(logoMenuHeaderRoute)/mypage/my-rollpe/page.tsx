@@ -8,54 +8,6 @@ import { useEffect, useState, useTransition } from "react";
 import { getUserRollpeList } from "@/app/api/rollpe/route";
 import Loading from "@/app/_components/ui/loading/Loading";
 
-const DUMMY_ROLLPE_LIST: RollpeListItemProps[] = [
-  {
-    rollpeId: "r01",
-    rollpeTitle: "롤페 제목",
-    rollpeOwner: "김테스트1",
-    createdAt: "2025.2.1",
-    dDay: 365,
-    isPublic: true,
-    thumbnail: "",
-  },
-  {
-    rollpeId: "r02",
-    rollpeTitle: "롤페 제목",
-    rollpeOwner: "김테스트1",
-    createdAt: "2025.2.1",
-    dDay: 365,
-    isPublic: false,
-    thumbnail: "",
-  },
-  {
-    rollpeId: "r03",
-    rollpeTitle: "롤페 제목",
-    rollpeOwner: "김테스트1",
-    createdAt: "2025.2.1",
-    dDay: 365,
-    isPublic: false,
-    thumbnail: "",
-  },
-  {
-    rollpeId: "r04",
-    rollpeTitle: "롤페 제목",
-    rollpeOwner: "김테스트1",
-    createdAt: "2025.2.1",
-    dDay: 365,
-    isPublic: true,
-    thumbnail: "",
-  },
-  {
-    rollpeId: "r05",
-    rollpeTitle: "롤페 제목",
-    rollpeOwner: "김테스트1",
-    createdAt: "2025.2.1",
-    dDay: 365,
-    isPublic: false,
-    thumbnail: "",
-  },
-];
-
 const MyRollpePage: React.FC = () => {
   const [isPending, startTransition] = useTransition();
   const [myRollpeList, setMyRollpeList] = useState<Rollpe[]>();
