@@ -40,7 +40,8 @@ export default function RootLayout({
                 alignContent: "center",
                 width: "100%",
                 maxWidth: "768px",
-                height: "100svh",
+                height: "100%",
+                // maxHeight: "100svh",
                 border: `1px solid ${COLORS.ROLLPE_GRAY}`,
                 overflowX: "hidden",
                 overflowY: "auto",
@@ -60,7 +61,7 @@ export default function RootLayout({
 
                 {children}
               </div>
-              <Footer />
+              {/* <Footer /> */}
             </div>
           </StyledComponentsRegistry>
         </ReduxProvider>

@@ -26,7 +26,7 @@ export const getHotRollpeList = async () => {
 export const getUserRollpeList = async (queryParam: "my" | "main" | "hot") => {
   return await axiosInstanceAuth.get(`/api/paper/user?type=${queryParam}`).then((response) => {
     console.log(response.data);
-    return Promise.resolve(response.data.data.results);
+    return Promise.resolve(response.data.data);
   }).catch((error) => {
     return Promise.reject(error);
   })
