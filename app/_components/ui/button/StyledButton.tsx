@@ -4,7 +4,7 @@ import { COLORS } from "@/public/styles/colors";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Rollpe } from "@/public/utils/types";
-import { getUserRollpeList } from "@/app/api/rollpe/route";
+import { getUserRollpeList } from "@/public/utils/apis/rollpe";
 
 interface ButtonProps {
   text: string;

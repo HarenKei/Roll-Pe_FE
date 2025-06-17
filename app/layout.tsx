@@ -10,9 +10,8 @@ import {
   nanumpen,
   nanummyeongjo,
 } from "@/public/fonts/fonts";
-import Footer from "./_components/ui/layouts/Footer";
 import ReduxProvider from "./_components/redux-provider/ReduxProvider";
-import SlideMenu from "./_components/ui/layouts/SlideMenu";
+// import SlideMenu from "./_components/ui/layouts/SlideMenu";
 
 export const metadata: Metadata = {
   title: "롤페 | Roll-Pe",
@@ -32,7 +31,7 @@ export default function RootLayout({
       <body>
         <ReduxProvider>
           <StyledComponentsRegistry>
-            <div
+            <main
               style={{
                 position: "fixed",
                 display: "flex",
@@ -57,12 +56,9 @@ export default function RootLayout({
                   position: "relative",
                 }}
               >
-                <SlideMenu />
-
                 {children}
               </div>
-              {/* <Footer /> */}
-            </div>
+            </main>
           </StyledComponentsRegistry>
         </ReduxProvider>
       </body>

@@ -1,6 +1,6 @@
 "use client";
 import { useSelector } from "react-redux";
-import { getUserRollpe } from "@/app/api/rollpe/route";
+import { getUserRollpe } from "@/public/utils/apis/rollpe";
 import { useEffect, useState, useTransition } from "react";
 import { persistor, RootState } from "@/public/redux/store";
 import Loading from "@/app/_components/ui/loading/Loading";

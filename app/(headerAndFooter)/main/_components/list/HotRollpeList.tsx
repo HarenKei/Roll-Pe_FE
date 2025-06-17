@@ -1,6 +1,6 @@
 "use client";
 import { useTransition, useEffect, useState } from "react";
-import { getHotRollpeList } from "@/app/api/rollpe/route";
+import { getHotRollpeList } from "@/public/utils/apis/rollpe";
 import MainRollpeCard from "@/app/_components/ui/card/main-rollpe-list/MainRollpeCard";
 import styled from "styled-components";
 import { useSelector } from "react-redux";

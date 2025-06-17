@@ -16,7 +16,7 @@ import RollpeEditForm from "@/app/_components/ui/modal/modal-contents/rollpe-edi
 import ShareRollpe from "@/app/_components/ui/modal/modal-contents/share-rollpe/ShareRollpe";
 import Marquee from "react-fast-marquee";
 import { User, Rollpe } from "@/public/utils/types";
-import { getRollpeDetail } from "@/app/api/rollpe/route";
+import { getRollpeDetail } from "@/public/utils/apis/rollpe";
 import Loading from "@/app/_components/ui/loading/Loading";
 import { useRouter } from "next/navigation";
 import RollpePreview from "@/app/_components/rollpe/RollpePreview";
