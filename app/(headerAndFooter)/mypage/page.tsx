@@ -8,11 +8,11 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/public/redux/store";
 import { useTransition } from "react";
-import { logOutOk } from "@/app/api/auth/log-out/route";
+import { logOutOk } from "@/public/utils/apis/logOut";
 import Loading from "@/app/_components/ui/loading/Loading";
 import { persistor } from "@/public/redux/store";
 import { useRouter } from "next/navigation";
-import { getUserRollpe } from "@/app/api/rollpe/route";
+import { getUserRollpe } from "@/public/utils/apis/rollpe";
 import { userIntroResponse } from "@/public/utils/types";
 
 const MyPage: React.FC = () => {

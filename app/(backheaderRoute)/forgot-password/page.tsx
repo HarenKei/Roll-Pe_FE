@@ -6,7 +6,7 @@ import Image from "next/image";
 import Logo from "@/public/images/logos/logo.korean.png";
 import { COLORS } from "@/public/styles/colors";
 import { useState, useTransition } from "react";
-import { postForgotPassword } from "@/public/utils/api/forgotPassword";
+import { postForgotPassword } from "@/public/utils/apis/forgotPassword";
 
 const ForgotPasswordPage: React.FC = () => {
   const [, startTransition] = useTransition();
