@@ -13,7 +13,7 @@ import {
   IntroWrapper,
 } from "../page";
 import { useParams, useRouter } from "next/navigation";
-import { patchChangePassword } from "@/app/api/auth/forgot-password/route";
+import { patchChangePassword } from "@/public/utils/api/forgotPassword";
 import Loading from "@/app/_components/ui/loading/Loading";
 
 interface ChangePasswordInputs {
