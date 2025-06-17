@@ -4,6 +4,7 @@ import { COLORS } from "@/public/styles/colors";
 
 export const MainPageWrapper = styled.main`
   width: 100%;
+  min-height: 100%;
   position: relative;
 `;
 
