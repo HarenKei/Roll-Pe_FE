@@ -72,6 +72,7 @@ export const RecentRollpeWrapper = styled.section`
 
     padding: 2.5rem 1.25rem;
     width: calc(100% - 2.5rem);
+    height: 100%;
 
     & > h2 {
       font-size: 1.5rem;

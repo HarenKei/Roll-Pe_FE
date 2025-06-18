@@ -1,38 +1,55 @@
 "use client";
 import {
-  MainPageWrapper,
-  MainPageContainer,
-  DashboardWrapper,
-  RecentRollpeWrapper,
-} from "./_components/styles/MainPageStyles";
-import {
   Button,
   ButtonSecondary,
 } from "@/app/_components/ui/button/StyledButton";
-import HotRollpeList from "./_components/list/HotRollpeList";
-import UserIntro from "./_components/dashboard/UserIntro";
+import HotRollpeList from "@/app/_components/ui/list/Hot/HotRollpeList";
+import UserIntroSection from "./_components/dashboard/UserIntro";
+import styled from "styled-components";
+import { useTransition } from "react";
+import Loading from "@/app/_components/ui/loading/Loading";
+import { getHotRollpeList } from "@/public/utils/apis/rollpe";
+
+import React, { useEffect, useState } from "react";
 
 const Main: React.FC = () => {
-  return (
-    <MainPageWrapper>
-      <MainPageContainer>
-        <DashboardWrapper>
-          <UserIntro />
-          <div className={"button-wrapper"}>
-            <Button text={"초대받은 롤페"} route={"/mypage/invited-rollpe"} />
-            <ButtonSecondary text={"롤페 만들기"} route={"/rollpe/create"} />
-          </div>
-        </DashboardWrapper>
+  const [hotRollpeList, setHotRollpeList] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-        <RecentRollpeWrapper>
-          <div className={"contents"}>
-            <h2>지금 뜨고 있는 롤페</h2>
-            <HotRollpeList />
-          </div>
-        </RecentRollpeWrapper>
-      </MainPageContainer>
+  useEffect(() => {
+    getHotRollpeList()
+      .then((res) => {
+        setHotRollpeList(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  return isLoading ? (
+    <Loading />
+  ) : (
+    <MainPageWrapper>
+      {/**대시보드 및 롤페 쓰러 가기 섹션 */}
+      <UserIntroSection />
+      {/**지금 뜨고 있는 롤페 섹션 */}
+      <section>
+        {/*리스트 */}
+        <h2>지금 뜨고 있는 롤페</h2>
+        <HotRollpeList hotRollpeList={hotRollpeList} />
+        {/**리스트 공통으로 뽑을 수 있지 않을까? */}
+      </section>
     </MainPageWrapper>
   );
 };
+
+const MainPageWrapper = styled.div`
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+`;
 
 export default Main;
