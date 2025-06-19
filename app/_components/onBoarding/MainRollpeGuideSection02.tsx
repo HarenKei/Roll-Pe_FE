@@ -1,11 +1,7 @@
 "use client";
 import styled from "styled-components";
 import Image from "next/image";
-import {
-  MainContentSectionWrapper,
-  GuideContainer,
-  GuideSectionTitle,
-} from "../../ui/sections/MainSection";
+import { MainContentSectionWrapper, GuideContainer, GuideSectionTitle } from "../ui/sections/MainSection";
 import { COLORS } from "@/public/styles/colors";
 import sectionImage from "@/public/images/image/image_section_2.png";
 

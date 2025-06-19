@@ -5,7 +5,7 @@ import {
   MainContentSectionWrapper,
   GuideContainer,
   GuideSectionTitle,
-} from "../../ui/sections/MainSection";
+} from "../ui/sections/MainSection";
 import sectionImage from "@/public/images/image/image_section_1.png";
 
 const MainRollpeGuideSection01: React.FC = () => {
