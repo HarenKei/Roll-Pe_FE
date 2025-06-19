@@ -14,7 +14,6 @@ const RecentHotRollpeSection: React.FC<{ list: Rollpe[] }> = ({ list }) => {
       {/*리스트 */}
       <h1>지금 뜨고 있는 롤페</h1>
       <HotRollpeList hotRollpeList={list} />
-      {/**리스트 공통으로 뽑을 수 있지 않을까? */}
     </RecentHotRollpeSectionWrapper>
   );
 };
