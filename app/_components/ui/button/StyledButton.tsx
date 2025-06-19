@@ -4,7 +4,6 @@ import { COLORS } from "@/public/styles/colors";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Rollpe } from "@/public/utils/types";
-import { getUserRollpeList } from "@/public/utils/apis/rollpe";
 
 interface ButtonProps {
   text: string;
@@ -22,6 +21,7 @@ interface SubmitProps {
   isDisabled?: boolean;
 }
 
+// Basic General Button Component
 export const Button: React.FC<ButtonProps> = ({
   text,
   onClickHandler,
@@ -41,6 +41,7 @@ export const Button: React.FC<ButtonProps> = ({
   );
 };
 
+// Secondary General Button Component
 export const ButtonSecondary: React.FC<ButtonProps> = ({
   text,
   onClickHandler,
@@ -63,7 +64,6 @@ export const ButtonSecondary: React.FC<ButtonProps> = ({
 };
 
 export const ButtonMore: React.FC<ButtonProps> = ({ text, onClickHandler }) => {
-
   return <StyledMore>{text}</StyledMore>;
 };
 

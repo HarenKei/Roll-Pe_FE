@@ -44,8 +44,8 @@ const UserIntroSection: React.FC = () => {
       </div>
       <div className={"button-wrapper"}>
         {/** 버튼 컨테이너 */}
-        <Button text="초대받은 롤페" />
-        <ButtonSecondary text="롤페 만들기" />
+        <Button text="초대받은 롤페" route={"/mypage/invited-rollpe"} />
+        <ButtonSecondary text="롤페 만들기" route={"/rollpe/create"} />
       </div>
     </SectionWrapper>
   );
