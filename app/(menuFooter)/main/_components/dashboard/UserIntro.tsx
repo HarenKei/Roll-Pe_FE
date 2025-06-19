@@ -4,42 +4,35 @@ import { useSelector } from "react-redux";
 import { getUserRollpe } from "@/public/utils/apis/rollpe";
 import { useEffect, useState, useTransition } from "react";
 import { persistor, RootState } from "@/public/redux/store";
-import Loading from "@/app/_components/ui/loading/Loading";
 import { userIntroResponse } from "@/public/utils/types";
 import { useRouter } from "next/navigation";
 import {
   Button,
   ButtonSecondary,
 } from "@/app/_components/ui/button/StyledButton";
+import { GeneralSection } from "@/public/styles/styled-components/main/main.style";
 
 const UserIntroSection: React.FC = () => {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
   const [userIntroInfo, setUserIntroInfo] = useState<userIntroResponse>({
     host: 0,
     heart: 0,
   });
   const user = useSelector((state: RootState) => state.simpleUser);
 
-  const getUserIntroInfo = () => {
-    startTransition(async () => {
-      await getUserRollpe("main")
-        .then((res) => {
-          setUserIntroInfo(res);
-        })
-        .catch((error) => {
-          persistor.purge();
-          alert("시간이 경과되어 로그아웃 되었습니다.\n다시 로그인해주세요.");
-          setTimeout(() => {
-            router.push("/sign-in");
-          }, 500);
-        });
-    });
-  };
-
   useEffect(() => {
-    getUserIntroInfo();
-  }, []);
+    getUserRollpe("main")
+      .then((res) => {
+        setUserIntroInfo(res);
+      })
+      .catch((error) => {
+        persistor.purge();
+        alert("시간이 경과되어 로그아웃 되었습니다.\n다시 로그인해주세요.");
+        setTimeout(() => {
+          router.push("/sign-in");
+        }, 500);
+      });
+  }, [user, router]);
 
   return (
     <SectionWrapper>
@@ -58,14 +51,7 @@ const UserIntroSection: React.FC = () => {
   );
 };
 
-const SectionWrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
-  padding: 2.5rem 1.25rem 2.188rem 1.25rem;
-  width: calc(100% - 2.5rem);
-
+const SectionWrapper = styled(GeneralSection)`
   & > div {
     width: 100%;
     font-family: var(--font-hakgyoansim);
