@@ -15,8 +15,19 @@ export default function BackHeaderLayout({
   return (
     <>
       <HeaderDefault />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignContent: "center",
+          width: "100%",
+          minHeight: "100%",
+          position: "relative",
+        }}
+      >
         {children}
-      <Footer />
+        <Footer />
+      </div>
     </>
   );
 }

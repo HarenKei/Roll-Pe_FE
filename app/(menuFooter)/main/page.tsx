@@ -1,32 +1,37 @@
 "use client";
-import {
-  Button,
-  ButtonSecondary,
-} from "@/app/_components/ui/button/StyledButton";
-import HotRollpeList from "@/app/_components/ui/list/Hot/HotRollpeList";
-import UserIntroSection from "./_components/dashboard/UserIntro";
 import styled from "styled-components";
-import { useTransition } from "react";
+
+import { useEffect, useState } from "react";
+
+import UserIntroSection from "@/app/_components/MainPage/UserIntroSection";
+import RecentHotRollpeSection from "@/app/_components/MainPage/RecentHotRollpeSection";
 import Loading from "@/app/_components/ui/loading/Loading";
+
 import { getHotRollpeList } from "@/public/utils/apis/rollpe";
+import { Rollpe } from "@/public/utils/types";
 
-import React, { useEffect, useState } from "react";
-
+// Main 페이지 컴포넌트
 const Main: React.FC = () => {
-  const [hotRollpeList, setHotRollpeList] = useState<any[]>([]);
+  const [hotRollpeList, setHotRollpeList] = useState<Rollpe[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    getHotRollpeList()
+  // 로그인되지 않았을 때는 어차피 못불러오지? 아마도....
+  const getRecentHotRollpeList = async () => {
+    await getHotRollpeList()
       .then((res) => {
         setHotRollpeList(res);
       })
       .catch((err) => {
-        console.error(err);
+        // TODO
+        //에러 메시지 태은이가 작성해둔 것 참고하여 작성.
       })
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  useEffect(() => {
+    getRecentHotRollpeList();
   }, []);
 
   return isLoading ? (
@@ -36,20 +41,19 @@ const Main: React.FC = () => {
       {/**대시보드 및 롤페 쓰러 가기 섹션 */}
       <UserIntroSection />
       {/**지금 뜨고 있는 롤페 섹션 */}
-      <section>
-        {/*리스트 */}
-        <h2>지금 뜨고 있는 롤페</h2>
-        <HotRollpeList hotRollpeList={hotRollpeList} />
-        {/**리스트 공통으로 뽑을 수 있지 않을까? */}
-      </section>
+      <RecentHotRollpeSection list={hotRollpeList} />
     </MainPageWrapper>
   );
 };
 
 const MainPageWrapper = styled.div`
-  width: 100%;
-  min-height: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+
+  width: 100%;
+  height: 100%;
 `;
 
 export default Main;
