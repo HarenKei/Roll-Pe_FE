@@ -1,41 +1,15 @@
 "use client";
-import { useTransition, useEffect, useState } from "react";
-import { getHotRollpeList } from "@/public/utils/apis/rollpe";
 import MainRollpeCard from "@/app/_components/ui/card/main-rollpe-list/MainRollpeCard";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { RootState } from "@/public/redux/store";
 import { Rollpe } from "@/public/utils/types";
+
+// 25.06.20
+// 최근 뜨고 있는 롤페 리스트 받아서 출력만 하도록 리팩토링 완료
+// by HarenKei
 
 const HotRollpeList: React.FC<{ hotRollpeList: Rollpe[] }> = ({
   hotRollpeList,
 }) => {
-  const [isPending, startTransition] = useTransition();
-  // const [hotRollpeList, setHotRollpeList] = useState<Rollpe[]>([]);
-  const user = useSelector((state: RootState) => state.simpleUser);
-
-  const notLoginHandler = () => {
-    if (user.name) {
-      getList();
-    }
-  };
-
-  const getList = () => {
-    startTransition(async () => {
-      await getHotRollpeList()
-        .then((res) => {
-          setHotRollpeList(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
-  };
-
-  useEffect(() => {
-    notLoginHandler();
-  }, []);
-
   return (
     <ListContainer>
       {hotRollpeList &&
