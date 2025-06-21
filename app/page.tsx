@@ -1,7 +1,7 @@
 "use client";
-import MainIntroSection from "./_components/onBoarding/MainIntroSection";
-import MainRollpeGuideSection01 from "./_components/onBoarding/MainRollpeGuideSection01";
-import MainRollpeGuideSection02 from "./_components/onBoarding/MainRollpeGuideSection02";
+import MainIntroSection from "./_components/Pages/onBoarding/MainIntroSection";
+import MainRollpeGuideSection01 from "./_components/Pages/onBoarding/MainRollpeGuideSection01";
+import MainRollpeGuideSection02 from "./_components/Pages/onBoarding/MainRollpeGuideSection02";
 import styled from "styled-components";
 import Footer from "./_components/ui/layouts/Footer";
 

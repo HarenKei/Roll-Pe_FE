@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import styled from "styled-components";
-import { Button } from "../ui/button/StyledButton";
-import { MainContentSectionWrapper } from "../ui/sections/MainSection";
+import { Button } from "../../ui/button/StyledButton";
+import { MainContentSectionWrapper } from "../../ui/sections/MainSection";
 import { COLORS } from "@/public/styles/colors";
 import logo from "@/public/images/logos/logo.korean.png";
 import arrowDown from "@/public/images/icons/icon_arrow_down.svg";

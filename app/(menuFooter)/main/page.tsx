@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import { useEffect, useState } from "react";
 
-import UserIntroSection from "@/app/_components/MainPage/UserIntroSection";
-import RecentHotRollpeSection from "@/app/_components/MainPage/RecentHotRollpeSection";
+import UserIntroSection from "@/app/_components/Pages/MainPage/UserIntroSection";
+import RecentHotRollpeSection from "@/app/_components/Pages/MainPage/RecentHotRollpeSection";
 import Loading from "@/app/_components/ui/loading/Loading";
 
 import { getHotRollpeList } from "@/public/utils/apis/rollpe";
@@ -31,6 +31,7 @@ const Main: React.FC = () => {
   };
 
   useEffect(() => {
+    //리스트 어차피 불러와서 고정 길이로 렌더링하는데 서버컴포넌트로 쓰는게 낫지 않나?
     getRecentHotRollpeList();
   }, []);
 

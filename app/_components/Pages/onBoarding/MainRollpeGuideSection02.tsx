@@ -5,17 +5,18 @@ import {
   MainContentSectionWrapper,
   GuideContainer,
   GuideSectionTitle,
-} from "../ui/sections/MainSection";
-import sectionImage from "@/public/images/image/image_section_1.png";
+} from "../../ui/sections/MainSection";
+import { COLORS } from "@/public/styles/colors";
+import sectionImage from "@/public/images/image/image_section_2.png";
 
-const MainRollpeGuideSection01: React.FC = () => {
+const MainRollpeGuideSection02: React.FC = () => {
   return (
-    <MainRollpeGuideSection01Wrapper>
+    <MainRollpeGuideSection02Wrapper>
       <GuideContainer>
         <GuideSectionTitle>
-          쉽게 만드는
+          함께 나누었던 추억,
           <br />
-          우리만의 롤페
+          언제 어디서나
         </GuideSectionTitle>
         <div className={"main-image-wrapper"}>
           <Image
@@ -27,14 +28,15 @@ const MainRollpeGuideSection01: React.FC = () => {
           />
         </div>
       </GuideContainer>
-    </MainRollpeGuideSection01Wrapper>
+    </MainRollpeGuideSection02Wrapper>
   );
 };
 
-const MainRollpeGuideSection01Wrapper = styled(MainContentSectionWrapper)`
+const MainRollpeGuideSection02Wrapper = styled(MainContentSectionWrapper)`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${COLORS.ROLLPE_SECTION_BACKGROUND};
 `;
 
-export default MainRollpeGuideSection01;
+export default MainRollpeGuideSection02;
