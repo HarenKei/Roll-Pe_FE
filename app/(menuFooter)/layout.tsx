@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { HeaderDefault } from "../_components/ui/layouts/Header";
-import Footer from "../_components/ui/layouts/Footer";
+import { HeaderDefault } from "../_components/Commons/UI/Layouts/Header/Header";
+import Footer from "../_components/Commons/UI/Layouts/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "롤페 | Roll-Pe",

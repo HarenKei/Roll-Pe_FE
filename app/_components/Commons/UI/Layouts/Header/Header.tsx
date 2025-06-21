@@ -9,7 +9,7 @@ import { AppDispatch } from "@/public/redux/store";
 import { RootState } from "@/public/redux/store";
 import { setSlide } from "@/public/redux/redux";
 import { useRouter } from "next/navigation";
-import SlideMenu from "./SlideMenu";
+import SlideMenu from "../SlideMenu/SlideMenu";
 import { useState } from "react";
 
 export const HeaderDefault: React.FC = () => {
