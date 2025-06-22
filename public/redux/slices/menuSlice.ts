@@ -17,5 +17,5 @@ const menuSlice = createSlice({
 })
 
 
-
 export const { openMenu, closeMenu } = menuSlice.actions;
+export default menuSlice.reducer;

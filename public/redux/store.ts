@@ -1,4 +1,4 @@
-import slideMenuReducer from "./redux";
+import menuReducer from "./slices/menuSlice";
 import simpleUserReducer from "./slices/userSlice";
 import {
   configureStore,
@@ -25,7 +25,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
   simpleUser: simpleUserReducer,
-  slideMenu: slideMenuReducer,
+  menu: menuReducer,
 });
 
 
@@ -34,7 +34,7 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: { // 이부분 추가
+    serializableCheck: { 
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
